@@ -13,14 +13,18 @@ module.exports = {
         test: /\.jsx$/,
         exclude: /node_modules/,
         loaders: [
-            'babel-loader?presets[]=es2015&presets[]=react',
-            'eslint-loader'
+          'babel-loader?presets[]=es2015&presets[]=react'
+          // 'eslint-loader'
         ]
       }
     ]
   },
 
-  eslint: {
-    configFile: './.eslintrc.js'
-  }
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
+
+  // eslint: {
+  //   configFile: './.eslintrc.js'
+  // }
 }

@@ -1,6 +1,4 @@
 // endpoints
-
-
 /* user actions */
 // /signup
 // /signin
@@ -19,3 +17,12 @@
   // takes: eventId
   // returns: array of auction objects
 // /buyTickets -> will de-list auction
+
+
+const routes = (app, express) => {
+
+  // app.get('/searchTrips', tripController.searchTrips);
+  app.get('*', (req, res) => res.sendStatus(404) );
+
+};
+module.exports = routes;

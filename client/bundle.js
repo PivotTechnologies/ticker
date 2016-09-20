@@ -23906,7 +23906,25 @@
 
 	  switch (action.type) {
 	    case _index.SEARCH_EVENTS:
-	      return state.concat(action.payload); // change when receiving list from axios
+	      return [{
+	        id: 1,
+	        name: 'Beyonce',
+	        datetime: '10/10/16 8:00pm',
+	        venue: 'Hollywood Bowl',
+	        city: 'Los Angeles, CA'
+	      }, {
+	        id: 2,
+	        name: 'The Beatles',
+	        datetime: '04/14/1960 7:00pm',
+	        venue: 'The Echo',
+	        city: 'Los Angeles, CA'
+	      }, {
+	        id: 3,
+	        name: 'Goatwhore',
+	        datetime: '9/25/16 10:00pm',
+	        venue: 'The Fonda',
+	        city: 'Los Angeles, CA'
+	      }]; // change to action.payload.data when receiving list from axios
 
 	    default:
 	      return state;
@@ -23977,12 +23995,11 @@
 	    eventID: eventID
 	  };
 
-	  var request = _axios2.default.post('/fetchAuctions', data);
+	  // const request = axios.post('/fetchAuctions', data);
 
 	  return {
 	    type: FETCH_AUCTIONS,
-	    payload: request
-	  };
+	    payload: data };
 	}
 
 	function selectAuction(auction) {
@@ -25442,7 +25459,16 @@
 
 	  switch (action.type) {
 	    case _index.FETCH_AUCTIONS:
-	      return action.payload.data;
+	      return [{
+	        num_tickets: 2,
+	        price: '$48'
+	      }, {
+	        num_tickets: 2,
+	        price: '$60'
+	      }, {
+	        num_tickets: 3,
+	        price: '$90'
+	      }]; // change to action.payload.data when receiving list from axios
 
 	    default:
 	      return state;
@@ -25519,18 +25545,24 @@
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _Signin = __webpack_require__(234);
+	var _BuyerView = __webpack_require__(234);
 
-	var _Signin2 = _interopRequireDefault(_Signin);
+	var _BuyerView2 = _interopRequireDefault(_BuyerView);
+
+	var _EventView = __webpack_require__(238);
+
+	var _EventView2 = _interopRequireDefault(_EventView);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// import Signin from './generalUser/Signin.jsx';
 	var App = function App() {
 	  return _react2.default.createElement(
 	    'div',
 	    null,
 	    _react2.default.createElement(_NavBar2.default, null),
-	    _react2.default.createElement(_Signin2.default, null)
+	    _react2.default.createElement(_BuyerView2.default, null),
+	    _react2.default.createElement(_EventView2.default, null)
 	  );
 	};
 
@@ -25572,6 +25604,41 @@
 	  value: true
 	});
 
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BuyerSearchBar = __webpack_require__(235);
+
+	var _BuyerSearchBar2 = _interopRequireDefault(_BuyerSearchBar);
+
+	var _EventList = __webpack_require__(236);
+
+	var _EventList2 = _interopRequireDefault(_EventList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var BuyerView = function BuyerView() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_BuyerSearchBar2.default, null),
+	    _react2.default.createElement(_EventList2.default, null)
+	  );
+	};
+
+	exports.default = BuyerView;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -25592,41 +25659,48 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Signin = function (_React$Component) {
-	  _inherits(Signin, _React$Component);
+	var BuyerSearchBar = function (_React$Component) {
+	  _inherits(BuyerSearchBar, _React$Component);
 
-	  function Signin(props) {
-	    _classCallCheck(this, Signin);
+	  function BuyerSearchBar(props) {
+	    _classCallCheck(this, BuyerSearchBar);
 
-	    var _this = _possibleConstructorReturn(this, (Signin.__proto__ || Object.getPrototypeOf(Signin)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (BuyerSearchBar.__proto__ || Object.getPrototypeOf(BuyerSearchBar)).call(this, props));
 
 	    _this.state = {
-	      username: '',
-	      password: ''
+	      query: '',
+	      date: '',
+	      city: ''
 	    };
 
-	    _this.onUsernameChange = _this.onUsernameChange.bind(_this);
-	    _this.onPasswordChange = _this.onPasswordChange.bind(_this);
+	    _this.onQueryChange = _this.onQueryChange.bind(_this);
+	    _this.onDateChange = _this.onDateChange.bind(_this);
+	    _this.onCityChange = _this.onCityChange.bind(_this);
 	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
 	    return _this;
 	  }
 
-	  _createClass(Signin, [{
-	    key: 'onUsernameChange',
-	    value: function onUsernameChange(event) {
-	      this.setState({ username: event.target.value });
+	  _createClass(BuyerSearchBar, [{
+	    key: 'onQueryChange',
+	    value: function onQueryChange(event) {
+	      this.setState({ query: event.target.value });
 	    }
 	  }, {
-	    key: 'onPasswordChange',
-	    value: function onPasswordChange(event) {
-	      this.setState({ password: event.target.value });
+	    key: 'onDateChange',
+	    value: function onDateChange(event) {
+	      this.setState({ date: event.target.value });
+	    }
+	  }, {
+	    key: 'onCityChange',
+	    value: function onCityChange(event) {
+	      this.setState({ city: event.target.value });
 	    }
 	  }, {
 	    key: 'onFormSubmit',
 	    value: function onFormSubmit(event) {
 	      event.preventDefault();
-	      this.props.signin(this.state.username, this.state.password);
-	      this.setState({ username: '', password: '' });
+	      this.props.searchEvents(this.state.query, this.state.date, this.state.city);
+	      this.setState({ query: '' });
 	    }
 	  }, {
 	    key: 'render',
@@ -25635,34 +25709,425 @@
 	        'form',
 	        { onSubmit: this.onFormSubmit },
 	        _react2.default.createElement('input', {
-	          type: 'text',
-	          onChange: this.onUsernameChange,
-	          value: this.state.username,
-	          placeholder: 'username'
+	          onChange: this.onQueryChange,
+	          value: this.state.query,
+	          placeholder: 'Search for Events'
 	        }),
 	        _react2.default.createElement('input', {
-	          type: 'password',
-	          onChange: this.onPasswordChange,
-	          value: this.state.password,
-	          placeholder: 'password'
+	          type: 'date',
+	          onChange: this.onDateChange,
+	          value: this.state.date
+	        }),
+	        _react2.default.createElement('input', {
+	          onChange: this.onCityChange,
+	          value: this.state.city,
+	          placeholder: 'City'
 	        }),
 	        _react2.default.createElement(
 	          'button',
 	          { type: 'submit' },
-	          'Sign In'
+	          'Search'
 	        )
 	      );
 	    }
 	  }]);
 
-	  return Signin;
+	  return BuyerSearchBar;
 	}(_react2.default.Component);
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ signin: _index.signin }, dispatch);
+	  return (0, _redux.bindActionCreators)({ searchEvents: _index.searchEvents }, dispatch);
 	}
 
-	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Signin);
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(BuyerSearchBar);
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(172);
+
+	var _EventListItem = __webpack_require__(237);
+
+	var _EventListItem2 = _interopRequireDefault(_EventListItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EventList = function (_React$Component) {
+	  _inherits(EventList, _React$Component);
+
+	  function EventList() {
+	    _classCallCheck(this, EventList);
+
+	    return _possibleConstructorReturn(this, (EventList.__proto__ || Object.getPrototypeOf(EventList)).apply(this, arguments));
+	  }
+
+	  _createClass(EventList, [{
+	    key: 'renderEventList',
+	    value: function renderEventList() {
+	      return this.props.events.map(function (event, idx) {
+	        return _react2.default.createElement(_EventListItem2.default, { key: idx, event: event });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.renderEventList()
+	      );
+	    }
+	  }]);
+
+	  return EventList;
+	}(_react2.default.Component);
+
+	function mapStateToProps(state) {
+	  return {
+	    events: state.events
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(EventList);
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(172);
+
+	var _redux = __webpack_require__(179);
+
+	var _index = __webpack_require__(205);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EventListItem = function (_React$Component) {
+	  _inherits(EventListItem, _React$Component);
+
+	  function EventListItem(props) {
+	    _classCallCheck(this, EventListItem);
+
+	    var _this = _possibleConstructorReturn(this, (EventListItem.__proto__ || Object.getPrototypeOf(EventListItem)).call(this, props));
+
+	    _this.handleClick = _this.handleClick.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(EventListItem, [{
+	    key: 'handleClick',
+	    value: function handleClick() {
+	      this.props.selectEvent(this.props.event);
+	      this.props.fetchAuctions(this.props.event.id);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'list-item', onClick: this.handleClick },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          ' Name: ',
+	          this.props.event.name,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          ' Date/Time: ',
+	          this.props.event.datetime,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          ' Venue: ',
+	          this.props.event.venue,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          ' City: ',
+	          this.props.event.city,
+	          ' '
+	        )
+	      );
+	    }
+	  }]);
+
+	  return EventListItem;
+	}(_react2.default.Component);
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ selectEvent: _index.selectEvent, fetchAuctions: _index.fetchAuctions }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(EventListItem);
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _EventDetails = __webpack_require__(239);
+
+	var _EventDetails2 = _interopRequireDefault(_EventDetails);
+
+	var _AuctionList = __webpack_require__(240);
+
+	var _AuctionList2 = _interopRequireDefault(_AuctionList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var EventView = function EventView() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_EventDetails2.default, null),
+	    _react2.default.createElement(_AuctionList2.default, null)
+	  );
+	};
+
+	exports.default = EventView;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(172);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var EventDetails = function EventDetails(_ref) {
+	  var activeEvent = _ref.activeEvent;
+
+	  if (activeEvent) {
+	    // won't need this if when we use react router!!
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'You are viewing the event: ',
+	      activeEvent.name
+	    );
+	  }
+
+	  return _react2.default.createElement('div', null);
+	};
+
+	function mapStateToProps(state) {
+	  return {
+	    activeEvent: state.activeEvent
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(EventDetails);
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(172);
+
+	var _AuctionListItem = __webpack_require__(241);
+
+	var _AuctionListItem2 = _interopRequireDefault(_AuctionListItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AuctionList = function (_React$Component) {
+	  _inherits(AuctionList, _React$Component);
+
+	  function AuctionList() {
+	    _classCallCheck(this, AuctionList);
+
+	    return _possibleConstructorReturn(this, (AuctionList.__proto__ || Object.getPrototypeOf(AuctionList)).apply(this, arguments));
+	  }
+
+	  _createClass(AuctionList, [{
+	    key: 'renderAuctionList',
+	    value: function renderAuctionList() {
+	      return this.props.auctions.map(function (auction, idx) {
+	        return _react2.default.createElement(_AuctionListItem2.default, { key: idx, auction: auction });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.renderAuctionList()
+	      );
+	    }
+	  }]);
+
+	  return AuctionList;
+	}(_react2.default.Component);
+
+	function mapStateToProps(state) {
+	  return {
+	    auctions: state.auctions
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(AuctionList);
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(172);
+
+	var _redux = __webpack_require__(179);
+
+	var _index = __webpack_require__(205);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AuctionListItem = function (_React$Component) {
+	  _inherits(AuctionListItem, _React$Component);
+
+	  function AuctionListItem(props) {
+	    _classCallCheck(this, AuctionListItem);
+
+	    var _this = _possibleConstructorReturn(this, (AuctionListItem.__proto__ || Object.getPrototypeOf(AuctionListItem)).call(this, props));
+
+	    _this.handleClick = _this.handleClick.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(AuctionListItem, [{
+	    key: 'handleClick',
+	    value: function handleClick() {
+	      this.props.selectAuction(this.props.auction);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'list-item', onClick: this.handleClick },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          ' Number of Tickets: ',
+	          this.props.auction.num_tickets,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          ' Total Price: ',
+	          this.props.auction.price,
+	          ' '
+	        )
+	      );
+	    }
+	  }]);
+
+	  return AuctionListItem;
+	}(_react2.default.Component);
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ selectAuction: _index.selectAuction }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(AuctionListItem);
 
 /***/ }
 /******/ ]);

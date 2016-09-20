@@ -37,11 +37,11 @@ export function fetchAuctions(eventID) {
     eventID,
   };
 
-  const request = axios.post('/fetchAuctions', data);
+  // const request = axios.post('/fetchAuctions', data);
 
   return {
     type: FETCH_AUCTIONS,
-    payload: request,
+    payload: data, // change to request when axios call added
   };
 }
 

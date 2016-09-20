@@ -12,57 +12,57 @@ export const FETCH_PROFILE = 'FETCH_PROFILE';
 
 export function searchEvents(city, date, query) {
   const data = {
-    city: city,
-    date: date,
-    query: query
+    city,
+    date,
+    query,
   };
 
   const request = axios.post('/buyerSearch', data);
 
   return {
     type: SEARCH_EVENTS,
-    payload: request
+    payload: request,
   };
 }
 
 export function selectEvent(event) {
   return {
     type: SELECT_EVENT,
-    payload: event
+    payload: event,
   };
 }
 
 export function fetchAuctions(eventID) {
   const data = {
-    eventID: eventID
+    eventID,
   };
 
   const request = axios.post('/fetchAuctions', data);
 
   return {
     type: FETCH_AUCTIONS,
-    payload: request
+    payload: request,
   };
 }
 
 export function selectAuction(auction) {
   return {
     type: SELECT_AUCTION,
-    payload: auction
+    payload: auction,
   };
 }
 
 export function purchaseTickets(userID, auctionID) {
   const data = {
-    userID: userID,
-    auctionID: auctionID
+    userID,
+    auctionID,
   };
 
   const request = axios.post('/purchaseTickets', data);
 
   return {
     type: PURCHASE_TICKETS,
-    payload: request
+    payload: request,
   };
 }
 
@@ -74,7 +74,7 @@ export function submitForm() {
 
   return {
     type: SUBMIT_FORM,
-    payload: request
+    payload: request,
   };
 }
 
@@ -87,8 +87,8 @@ export function signUp() {
 
   return {
     type: SIGN_UP,
-    payload: request
-  }
+    payload: request,
+  };
 }
 
 export function signIn() {
@@ -100,19 +100,19 @@ export function signIn() {
 
   return {
     type: SIGN_IN,
-    payload: request
-  }
+    payload: request,
+  };
 }
 
 export function fetchProfile(userID) {
   const data = {
-    userID: userID
+    userID,
   };
 
-  const request = axios.post('/fetchProfile', data)
+  const request = axios.post('/fetchProfile', data);
 
   return {
     type: FETCH_PROFILE,
-    payload: request
+    payload: request,
   };
 }

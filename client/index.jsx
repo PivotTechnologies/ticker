@@ -1,4 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App.jsx';
+// import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 
-ReactDOM.render((<h1> Hello </h1>), document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));

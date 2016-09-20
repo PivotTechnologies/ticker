@@ -5,6 +5,7 @@ module.exports = {
 
     signup: (req, res) => {
       const newUser = User.build({
+        //username
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: req.body.password,

@@ -1,40 +1,60 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { signin } from '../../actions/index';
 
-const Signin = () => (
-  <div>
-    <input
-      type="text"
-      placeholder="Enter username"
-    />
+class Signin extends React.Component {
+  constructor(props) {
+    super(props);
 
-    <input
-      type="password"
-      placeholder="Enter password"
-    />
-  </div>
-);
+    this.state = {
+      username: '',
+      password: '',
+    };
 
-// class Signin extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {};
-//   }
-//
-//   render() {
-//     return (
-//       <div>
-//         <input
-//           type="text"
-//           placeholder="Enter username"
-//         />
-//
-//         <input
-//           type="password"
-//           placeholder="Enter password"
-//         />
-//       </div>
-//     );
-//   }
-// }
+    this.onUsernameChange = this.onUsernameChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
 
-export default Signin;
+  onUsernameChange(event) {
+    this.setState({ username: event.target.value });
+  }
+
+  onPasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  onFormSubmit(event) {
+    event.preventDefault();
+    this.props.signin(this.state.username, this.state.password);
+    this.setState({ username: '', password: '' });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.onFormSubmit}>
+        <input
+          type="text"
+          onChange={this.onUsernameChange}
+          value={this.state.username}
+          placeholder="username"
+        />
+
+        <input
+          type="password"
+          onChange={this.onPasswordChange}
+          value={this.state.password}
+          placeholder="password"
+        />
+        <button type="submit">Sign In</button>
+      </form>
+    );
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ signin }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Signin);

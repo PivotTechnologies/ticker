@@ -1,11 +1,11 @@
 import React from 'react';
 import NavBar from './NavBar.jsx';
-import BuyerView from './buyer/BuyerView.jsx';
+import Signin from './generalUser/Signin.jsx';
 
 const App = () => (
   <div>
     <NavBar />
-    <BuyerView />
+    <Signin />
   </div>
 );
 

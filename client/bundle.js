@@ -23874,13 +23874,18 @@
 
 	var _reducer_active_auction2 = _interopRequireDefault(_reducer_active_auction);
 
+	var _reducer_user = __webpack_require__(239);
+
+	var _reducer_user2 = _interopRequireDefault(_reducer_user);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
 	  events: _reducer_events2.default,
 	  activeEvent: _reducer_active_event2.default,
 	  auctions: _reducer_auctions2.default,
-	  activeAuction: _reducer_active_auction2.default
+	  activeAuction: _reducer_active_auction2.default,
+	  user: _reducer_user2.default
 	});
 
 	exports.default = rootReducer;
@@ -23901,7 +23906,7 @@
 
 	  switch (action.type) {
 	    case _index.SEARCH_EVENTS:
-	      return action.payload.data;
+	      return state.concat(action.payload); // change when receiving list from axios
 
 	    default:
 	      return state;
@@ -23919,15 +23924,15 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.FETCH_PROFILE = exports.SIGN_IN = exports.SIGN_UP = exports.SUBMIT_FORM = exports.PURCHASE_TICKETS = exports.SELECT_AUCTION = exports.FETCH_AUCTIONS = exports.SELECT_EVENT = exports.SEARCH_EVENTS = undefined;
+	exports.FETCH_PROFILE = exports.SIGNIN = exports.SIGNUP = exports.SUBMIT_FORM = exports.PURCHASE_TICKETS = exports.SELECT_AUCTION = exports.FETCH_AUCTIONS = exports.SELECT_EVENT = exports.SEARCH_EVENTS = undefined;
 	exports.searchEvents = searchEvents;
 	exports.selectEvent = selectEvent;
 	exports.fetchAuctions = fetchAuctions;
 	exports.selectAuction = selectAuction;
 	exports.purchaseTickets = purchaseTickets;
 	exports.submitForm = submitForm;
-	exports.signUp = signUp;
-	exports.signIn = signIn;
+	exports.signup = signup;
+	exports.signin = signin;
 	exports.fetchProfile = fetchProfile;
 
 	var _axios = __webpack_require__(206);
@@ -23942,23 +23947,22 @@
 	var SELECT_AUCTION = exports.SELECT_AUCTION = 'SELECT_AUCTION';
 	var PURCHASE_TICKETS = exports.PURCHASE_TICKETS = 'PURCHASE_TICKETS';
 	var SUBMIT_FORM = exports.SUBMIT_FORM = 'SUBMIT_FORM';
-	var SIGN_UP = exports.SIGN_UP = 'SIGN_UP';
-	var SIGN_IN = exports.SIGN_IN = 'SIGN_IN';
+	var SIGNUP = exports.SIGNUP = 'SIGNUP';
+	var SIGNIN = exports.SIGNIN = 'SIGNIN';
 	var FETCH_PROFILE = exports.FETCH_PROFILE = 'FETCH_PROFILE';
 
-	function searchEvents(city, date, query) {
+	function searchEvents(query, date, city) {
 	  var data = {
-	    city: city,
+	    query: query,
 	    date: date,
-	    query: query
+	    city: city
 	  };
-
-	  var request = _axios2.default.post('/buyerSearch', data);
+	  //
+	  // const request = axios.post('/buyerSearch', data);
 
 	  return {
 	    type: SEARCH_EVENTS,
-	    payload: request
-	  };
+	    payload: data };
 	}
 
 	function selectEvent(event) {
@@ -24014,7 +24018,7 @@
 	  };
 	}
 
-	function signUp() {
+	function signup() {
 	  var data = {
 	    // ADD FORM DATA
 	  };
@@ -24022,22 +24026,22 @@
 	  var request = _axios2.default.post('/signUp', data);
 
 	  return {
-	    type: SIGN_UP,
+	    type: SIGNUP,
 	    payload: request
 	  };
 	}
 
-	function signIn() {
+	function signin(username, password) {
 	  var data = {
-	    // ADD FORM DATA
+	    username: username,
+	    password: password
 	  };
 
-	  var request = _axios2.default.post('/signIn', data);
+	  // const request = axios.post('/signIn', data);
 
 	  return {
-	    type: SIGN_IN,
-	    payload: request
-	  };
+	    type: SIGNIN,
+	    payload: data };
 	}
 
 	function fetchProfile(userID) {
@@ -25490,9 +25494,9 @@
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _BuyerView = __webpack_require__(235);
+	var _Signin = __webpack_require__(237);
 
-	var _BuyerView2 = _interopRequireDefault(_BuyerView);
+	var _Signin2 = _interopRequireDefault(_Signin);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25501,7 +25505,7 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(_NavBar2.default, null),
-	    _react2.default.createElement(_BuyerView2.default, null)
+	    _react2.default.createElement(_Signin2.default, null)
 	  );
 	};
 
@@ -25534,7 +25538,11 @@
 	exports.default = NavBar;
 
 /***/ },
-/* 233 */
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25551,9 +25559,9 @@
 
 	var _reactRedux = __webpack_require__(172);
 
-	var _EventListItem = __webpack_require__(234);
+	var _redux = __webpack_require__(179);
 
-	var _EventListItem2 = _interopRequireDefault(_EventListItem);
+	var _index = __webpack_require__(205);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25563,46 +25571,81 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var EventList = function (_React$Component) {
-	  _inherits(EventList, _React$Component);
+	var Signin = function (_React$Component) {
+	  _inherits(Signin, _React$Component);
 
-	  function EventList() {
-	    _classCallCheck(this, EventList);
+	  function Signin(props) {
+	    _classCallCheck(this, Signin);
 
-	    return _possibleConstructorReturn(this, (EventList.__proto__ || Object.getPrototypeOf(EventList)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Signin.__proto__ || Object.getPrototypeOf(Signin)).call(this, props));
+
+	    _this.state = {
+	      username: '',
+	      password: ''
+	    };
+
+	    _this.onUsernameChange = _this.onUsernameChange.bind(_this);
+	    _this.onPasswordChange = _this.onPasswordChange.bind(_this);
+	    _this.onFormSubmit = _this.onFormSubmit.bind(_this);
+	    return _this;
 	  }
 
-	  _createClass(EventList, [{
-	    key: 'renderEventList',
-	    value: function renderEventList() {
-	      return this.props.events.map(function (event, idx) {
-	        return _react2.default.createElement(_EventListItem2.default, { key: idx, event: event });
-	      });
+	  _createClass(Signin, [{
+	    key: 'onUsernameChange',
+	    value: function onUsernameChange(event) {
+	      this.setState({ username: event.target.value });
+	    }
+	  }, {
+	    key: 'onPasswordChange',
+	    value: function onPasswordChange(event) {
+	      this.setState({ password: event.target.value });
+	    }
+	  }, {
+	    key: 'onFormSubmit',
+	    value: function onFormSubmit(event) {
+	      event.preventDefault();
+	      this.props.signin(this.state.username, this.state.password);
+	      this.setState({ username: '', password: '' });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        this.renderEventList()
+	        'form',
+	        { onSubmit: this.onFormSubmit },
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          onChange: this.onUsernameChange,
+	          value: this.state.username,
+	          placeholder: 'username'
+	        }),
+	        _react2.default.createElement('input', {
+	          type: 'password',
+	          onChange: this.onPasswordChange,
+	          value: this.state.password,
+	          placeholder: 'password'
+	        }),
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit' },
+	          'Sign In'
+	        )
 	      );
 	    }
 	  }]);
 
-	  return EventList;
+	  return Signin;
 	}(_react2.default.Component);
 
-	function mapStateToProps(state) {
-	  return {
-	    events: state.events
-	  };
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ signin: _index.signin }, dispatch);
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(EventList);
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Signin);
 
 /***/ },
-/* 234 */
+/* 238 */,
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25611,102 +25654,20 @@
 	  value: true
 	});
 
-	var _react = __webpack_require__(1);
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var action = arguments[1];
 
-	var _react2 = _interopRequireDefault(_react);
+	  switch (action.type) {
+	    case _index.SIGNIN:
+	      return action.payload; // change when we add an axios request
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var EventListItem = function EventListItem(_ref) {
-	  var event = _ref.event;
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    event
-	  );
+	    default:
+	      return state;
+	  }
 	};
 
-	exports.default = EventListItem;
-
-/***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _BuyerSearchBar = __webpack_require__(236);
-
-	var _BuyerSearchBar2 = _interopRequireDefault(_BuyerSearchBar);
-
-	var _EventList = __webpack_require__(233);
-
-	var _EventList2 = _interopRequireDefault(_EventList);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var BuyerView = function BuyerView() {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(_BuyerSearchBar2.default, null),
-	    _react2.default.createElement(_EventList2.default, null)
-	  );
-	};
-
-	exports.default = BuyerView;
-
-/***/ },
-/* 236 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var BuyerSearchBar = function BuyerSearchBar() {
-	  return _react2.default.createElement(
-	    "div",
-	    null,
-	    _react2.default.createElement("input", {
-	      placeholder: "Search for Events"
-	    })
-	  );
-	};
-
-	// class BuyerSearchBar extends React.Component {
-	//   constructor() {
-	//     super();
-	//     this.state = {};
-	//   }
-	//
-	//   render() {
-	//     return (
-	//       <div>
-	//         <input
-	//           placeholder="Search for Events"
-	//         />
-	//       </div>
-	//     );
-	//   }
-	// }
-
-	exports.default = BuyerSearchBar;
+	var _index = __webpack_require__(205);
 
 /***/ }
 /******/ ]);

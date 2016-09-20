@@ -6,22 +6,22 @@ export const FETCH_AUCTIONS = 'FETCH_AUCTIONS';
 export const SELECT_AUCTION = 'SELECT_AUCTION';
 export const PURCHASE_TICKETS = 'PURCHASE_TICKETS';
 export const SUBMIT_FORM = 'SUBMIT_FORM';
-export const SIGN_UP = 'SIGN_UP';
-export const SIGN_IN = 'SIGN_IN';
+export const SIGNUP = 'SIGNUP';
+export const SIGNIN = 'SIGNIN';
 export const FETCH_PROFILE = 'FETCH_PROFILE';
 
-export function searchEvents(city, date, query) {
+export function searchEvents(query, date, city) {
   const data = {
-    city,
-    date,
     query,
+    date,
+    city,
   };
-
-  const request = axios.post('/buyerSearch', data);
+  //
+  // const request = axios.post('/buyerSearch', data);
 
   return {
     type: SEARCH_EVENTS,
-    payload: request,
+    payload: data, // change to request when axios call added
   };
 }
 
@@ -78,7 +78,7 @@ export function submitForm() {
   };
 }
 
-export function signUp() {
+export function signup() {
   const data = {
     // ADD FORM DATA
   };
@@ -86,21 +86,22 @@ export function signUp() {
   const request = axios.post('/signUp', data);
 
   return {
-    type: SIGN_UP,
+    type: SIGNUP,
     payload: request,
   };
 }
 
-export function signIn() {
+export function signin(username, password) {
   const data = {
-    // ADD FORM DATA
+    username,
+    password,
   };
 
-  const request = axios.post('/signIn', data);
+  // const request = axios.post('/signIn', data);
 
   return {
-    type: SIGN_IN,
-    payload: request,
+    type: SIGNIN,
+    payload: data, //request,
   };
 }
 

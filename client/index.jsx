@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
+// import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import ReduxPromise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';

@@ -1,11 +1,11 @@
 import React from 'react';
-import EventDetails from './EventDetails.jsx';
-import AuctionList from './AuctionList.jsx';
+import { connect } from 'react-redux';
 
-const EventListItem = () => (
+const EventListItem = ({ event }) => (
   <div>
-    <EventDetails />
-    <AuctionList />
+    <p> Query: { event.query } </p>
+    <p> Date: { event.date } </p>
+    <p> City: { event.city } </p>
   </div>
 );
 

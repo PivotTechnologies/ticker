@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Test = () => <div>this.props</div>;
+const Test = props => <div>{props.event}</div>;
 
 function mapStateToProps(state) {
   return {

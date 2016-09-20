@@ -10,11 +10,11 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx$/,
+        test: /\.jsx$|\.js$/,
         exclude: /node_modules/,
         loaders: [
-            'babel-loader?presets[]=es2015&presets[]=react',
-            'eslint-loader'
+          'babel-loader?presets[]=es2015&presets[]=react',
+          'eslint-loader'
         ]
       }
     ]

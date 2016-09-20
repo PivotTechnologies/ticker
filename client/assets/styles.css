@@ -1,3 +1,8 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
 .list-item {
   border: 1px solid black;
 }

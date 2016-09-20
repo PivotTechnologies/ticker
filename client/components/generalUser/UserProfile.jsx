@@ -5,7 +5,11 @@ const UserProfile = ({ userActivity }) => {
   if (userActivity) { // won't need this if when we use react router!!
     return (
       <div>
-        You are viewing the profile of user: {userActivity.userID}
+        <h1>My Profile</h1>
+        <h3>Buyer History</h3>
+        {userActivity.buyerHistory.map(auction => (<p key={auction}>{auction}</p>))}
+        <h3>Seller History</h3>
+        {userActivity.sellerHistory.map(auction => (<p key={auction}>{auction}</p>))}
       </div>
     );
   }

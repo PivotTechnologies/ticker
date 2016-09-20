@@ -66,7 +66,11 @@
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	var _App = __webpack_require__(231);
+=======
+	var _App = __webpack_require__(232);
+>>>>>>> [fix] - removes test component
 
 	var _App2 = _interopRequireDefault(_App);
 
@@ -21637,7 +21641,11 @@
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	var _hoistNonReactStatics = __webpack_require__(193);
+=======
+	var _hoistNonReactStatics = __webpack_require__(194);
+>>>>>>> [fix] - removes test component
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
@@ -22064,6 +22072,7 @@
 
 	var _createStore2 = _interopRequireDefault(_createStore);
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	var _combineReducers = __webpack_require__(188);
 
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
@@ -22081,6 +22090,25 @@
 	var _compose2 = _interopRequireDefault(_compose);
 
 	var _warning = __webpack_require__(189);
+=======
+	var _combineReducers = __webpack_require__(189);
+
+	var _combineReducers2 = _interopRequireDefault(_combineReducers);
+
+	var _bindActionCreators = __webpack_require__(191);
+
+	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
+
+	var _applyMiddleware = __webpack_require__(192);
+
+	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
+
+	var _compose = __webpack_require__(193);
+
+	var _compose2 = _interopRequireDefault(_compose);
+
+	var _warning = __webpack_require__(190);
+>>>>>>> [fix] - removes test component
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -22809,7 +22837,11 @@
 	}
 
 /***/ },
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 /* 191 */
+=======
+/* 192 */
+>>>>>>> [fix] - removes test component
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23067,7 +23099,11 @@
 	module.exports = exports['default'];
 
 /***/ },
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 /* 196 */
+=======
+/* 197 */
+>>>>>>> [fix] - removes test component
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23846,7 +23882,11 @@
 
 	var _reducer_active_auction2 = _interopRequireDefault(_reducer_active_auction);
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	var _reducer_user = __webpack_require__(230);
+=======
+	var _reducer_user = __webpack_require__(231);
+>>>>>>> [fix] - removes test component
 
 	var _reducer_user2 = _interopRequireDefault(_reducer_user);
 
@@ -23990,7 +24030,11 @@
 	  };
 	}
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	function signup(firstName, lastName, username, email, password) {
+=======
+	function signup() {
+>>>>>>> [fix] - removes test component
 	  var data = {
 	    firstName: firstName,
 	    lastName: lastName,
@@ -24003,7 +24047,12 @@
 
 	  return {
 	    type: SIGNUP,
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	    payload: data };
+=======
+	    payload: request
+	  };
+>>>>>>> [fix] - removes test component
 	}
 
 	function signin(username, password) {
@@ -24740,12 +24789,20 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 /* 214 */
+=======
+/* 215 */
+>>>>>>> [fix] - removes test component
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	var utils = __webpack_require__(207);
+=======
+	var utils = __webpack_require__(208);
+>>>>>>> [fix] - removes test component
 
 	/**
 	 * Transform the data for a request or a response
@@ -25402,7 +25459,11 @@
 	var _index = __webpack_require__(204);
 
 /***/ },
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 /* 228 */
+=======
+/* 229 */
+>>>>>>> [fix] - removes test component
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25462,6 +25523,34 @@
 	});
 
 	exports.default = function () {
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
+=======
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _index.SELECT_AUCTION:
+	      return action.payload;
+
+	    default:
+	      return state;
+	  }
+	};
+
+	var _index = __webpack_require__(205);
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+>>>>>>> [fix] - removes test component
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
 
@@ -25469,18 +25558,28 @@
 	    case _index.SIGNIN:
 	      return action.payload; // change when we add an axios request
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	    case _index.SIGNUP:
 	      return action.payload; // change when we add an axios request
 
+=======
+>>>>>>> [fix] - removes test component
 	    default:
 	      return state;
 	  }
 	};
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	var _index = __webpack_require__(204);
 
 /***/ },
 /* 231 */
+=======
+	var _index = __webpack_require__(205);
+
+/***/ },
+/* 232 */
+>>>>>>> [fix] - removes test component
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25493,6 +25592,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	var _NavBar = __webpack_require__(232);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
@@ -25500,6 +25600,15 @@
 	var _Signup = __webpack_require__(233);
 
 	var _Signup2 = _interopRequireDefault(_Signup);
+=======
+	var _NavBar = __webpack_require__(233);
+
+	var _NavBar2 = _interopRequireDefault(_NavBar);
+
+	var _Signin = __webpack_require__(234);
+
+	var _Signin2 = _interopRequireDefault(_Signin);
+>>>>>>> [fix] - removes test component
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25508,14 +25617,22 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(_NavBar2.default, null),
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	    _react2.default.createElement(_Signup2.default, null)
+=======
+	    _react2.default.createElement(_Signin2.default, null)
+>>>>>>> [fix] - removes test component
 	  );
 	};
 
 	exports.default = App;
 
 /***/ },
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 /* 232 */
+=======
+/* 233 */
+>>>>>>> [fix] - removes test component
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25541,7 +25658,11 @@
 	exports.default = NavBar;
 
 /***/ },
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 /* 233 */
+=======
+/* 234 */
+>>>>>>> [fix] - removes test component
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25682,10 +25803,17 @@
 	}(_react2.default.Component);
 
 	function mapDispatchToProps(dispatch) {
+<<<<<<< 11e7ecf20d52bfaf8697d6a4499d2e54cea540d6
 	  return (0, _redux.bindActionCreators)({ signup: _index.signup }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Signup);
+=======
+	  return (0, _redux.bindActionCreators)({ signin: _index.signin }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Signin);
+>>>>>>> [fix] - removes test component
 
 /***/ }
 /******/ ]);

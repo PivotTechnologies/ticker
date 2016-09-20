@@ -60,7 +60,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
+	//import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 
 	_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
 

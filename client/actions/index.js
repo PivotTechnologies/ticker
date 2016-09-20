@@ -78,16 +78,20 @@ export function submitForm() {
   };
 }
 
-export function signup() {
+export function signup(firstName, lastName, username, email, password) {
   const data = {
-    // ADD FORM DATA
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
   };
 
-  const request = axios.post('/signUp', data);
+  // const request = axios.post('/signUp', data);
 
   return {
     type: SIGNUP,
-    payload: request,
+    payload: data, // request
   };
 }
 
@@ -101,7 +105,7 @@ export function signin(username, password) {
 
   return {
     type: SIGNIN,
-    payload: data, //request,
+    payload: data, // request,
   };
 }
 

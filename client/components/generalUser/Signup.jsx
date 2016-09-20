@@ -1,70 +1,105 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { signup } from '../../actions/index';
 
-const Signup = () => (
-  <div>
-    <input
-      type="text"
-      placeholder="Enter first name"
-    />
+class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: '',
+      lastName: '',
+      username: '',
+      email: '',
+      password: '',
+    };
 
-    <input
-      type="text"
-      placeholder="Enter last name"
-    />
+    this.onFirstnameChange = this.onFirstnameChange.bind(this);
+    this.onLastnameChange = this.onLastnameChange.bind(this);
+    this.onUsernameChange = this.onUsernameChange.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
 
-    <input
-      type="text"
-      placeholder="Create username"
-    />
+  onFirstnameChange(event) {
+    this.setState({ firstName: event.target.value });
+  }
 
-    <input
-      type="email"
-      placeholder="Enter email"
-    />
+  onLastnameChange(event) {
+    this.setState({ lastName: event.target.value });
+  }
 
-    <input
-      type="password"
-      placeholder="Create password"
-    />
-  </div>
-);
+  onUsernameChange(event) {
+    this.setState({ username: event.target.value });
+  }
 
-// class Signup extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {};
-//   }
-//
-//   render() {
-//     return (
-//       <div>
-//         <input
-//           type="text"
-//           placeholder="Enter first name"
-//         />
-//
-//         <input
-//           type="text"
-//           placeholder="Enter last name"
-//         />
-//
-//         <input
-//           type="text"
-//           placeholder="Create username"
-//         />
-//
-//         <input
-//           type="email"
-//           placeholder="Enter email"
-//         />
-//
-//         <input
-//           type="password"
-//           placeholder="Create password"
-//         />
-//       </div>
-//     );
-//   }
-// }
+  onEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
 
-export default Signup;
+  onPasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  onFormSubmit(event) {
+    event.preventDefault();
+    this.props.signup(this.state.firstName, this.state.lastName, this.state.username,
+      this.state.email, this.state.password);
+    this.setState({
+      firstName: '',
+      lastName: '',
+      username: '',
+      email: '',
+      password: '',
+    });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.onFormSubmit}>
+        <input
+          type="text"
+          onChange={this.onFirstnameChange}
+          value={this.state.firstName}
+          placeholder="First Name"
+        />
+
+        <input
+          type="text"
+          onChange={this.onLastnameChange}
+          value={this.state.lastName}
+          placeholder="Last Name"
+        />
+
+        <input
+          type="text"
+          onChange={this.onUsernameChange}
+          value={this.state.username}
+          placeholder="Username"
+        />
+
+        <input
+          type="email"
+          onChange={this.onEmailChange}
+          value={this.state.email}
+          placeholder="Email"
+        />
+
+        <input
+          type="password"
+          onChange={this.onPasswordChange}
+          value={this.state.password}
+          placeholder="Password"
+        />
+        <button type="submit">Sign Up</button>
+      </form>
+    );
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ signup }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Signup);

@@ -14,19 +14,23 @@ const Event = connection.define('event', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  address: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
+  // address: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false
+  // },
   city: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  zip: {
+  // zip: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false
+  // },
+  time: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  time: {
+  date: {
     type: Sequelize.STRING,
     allowNull: false
   },

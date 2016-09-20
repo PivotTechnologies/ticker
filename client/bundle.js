@@ -54,13 +54,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _App = __webpack_require__(172);
+
+	var _App2 = _interopRequireDefault(_App);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(
-	  'h1',
-	  null,
-	  ' Hello '
-	), document.getElementById('app'));
+	// import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
+
+	_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21432,6 +21434,626 @@
 
 	module.exports = ReactDOMNullInputValuePropHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _NavBar = __webpack_require__(173);
+
+	var _NavBar2 = _interopRequireDefault(_NavBar);
+
+	var _EventList = __webpack_require__(181);
+
+	var _EventList2 = _interopRequireDefault(_EventList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var App = function App() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_NavBar2.default, null),
+	    _react2.default.createElement(_EventList2.default, null)
+	  );
+	};
+
+	exports.default = App;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BuyerSearchBar = __webpack_require__(174);
+
+	var _BuyerSearchBar2 = _interopRequireDefault(_BuyerSearchBar);
+
+	var _UserAuth = __webpack_require__(175);
+
+	var _UserAuth2 = _interopRequireDefault(_UserAuth);
+
+	var _UserProfile = __webpack_require__(178);
+
+	var _UserProfile2 = _interopRequireDefault(_UserProfile);
+
+	var _SellerForm = __webpack_require__(179);
+
+	var _SellerForm2 = _interopRequireDefault(_SellerForm);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var NavBar = function NavBar() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_BuyerSearchBar2.default, null),
+	    _react2.default.createElement(_UserAuth2.default, null),
+	    _react2.default.createElement(_UserProfile2.default, null),
+	    _react2.default.createElement(_SellerForm2.default, null)
+	  );
+	};
+
+	exports.default = NavBar;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var BuyerSearchBar = function BuyerSearchBar() {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("input", {
+	      placeholder: "Search for Events"
+	    })
+	  );
+	};
+
+	// class BuyerSearchBar extends React.Component {
+	//   constructor() {
+	//     super();
+	//     this.state = {};
+	//   }
+	//
+	//   render() {
+	//     return (
+	//       <div>
+	//         <input
+	//           placeholder="Search for Events"
+	//         />
+	//       </div>
+	//     );
+	//   }
+	// }
+
+	exports.default = BuyerSearchBar;
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Signin = __webpack_require__(176);
+
+	var _Signin2 = _interopRequireDefault(_Signin);
+
+	var _Signup = __webpack_require__(177);
+
+	var _Signup2 = _interopRequireDefault(_Signup);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UserAuth = function UserAuth() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_Signin2.default, null),
+	    _react2.default.createElement(_Signup2.default, null)
+	  );
+	};
+
+	exports.default = UserAuth;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Signin = function Signin() {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("input", {
+	      type: "text",
+	      placeholder: "Enter username"
+	    }),
+	    _react2.default.createElement("input", {
+	      type: "password",
+	      placeholder: "Enter password"
+	    })
+	  );
+	};
+
+	// class Signin extends React.Component {
+	//   constructor() {
+	//     super();
+	//     this.state = {};
+	//   }
+	//
+	//   render() {
+	//     return (
+	//       <div>
+	//         <input
+	//           type="text"
+	//           placeholder="Enter username"
+	//         />
+	//
+	//         <input
+	//           type="password"
+	//           placeholder="Enter password"
+	//         />
+	//       </div>
+	//     );
+	//   }
+	// }
+
+	exports.default = Signin;
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Signup = function Signup() {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("input", {
+	      type: "text",
+	      placeholder: "Enter first name"
+	    }),
+	    _react2.default.createElement("input", {
+	      type: "text",
+	      placeholder: "Enter last name"
+	    }),
+	    _react2.default.createElement("input", {
+	      type: "text",
+	      placeholder: "Create username"
+	    }),
+	    _react2.default.createElement("input", {
+	      type: "email",
+	      placeholder: "Enter email"
+	    }),
+	    _react2.default.createElement("input", {
+	      type: "password",
+	      placeholder: "Create password"
+	    })
+	  );
+	};
+
+	// class Signup extends React.Component {
+	//   constructor() {
+	//     super();
+	//     this.state = {};
+	//   }
+	//
+	//   render() {
+	//     return (
+	//       <div>
+	//         <input
+	//           type="text"
+	//           placeholder="Enter first name"
+	//         />
+	//
+	//         <input
+	//           type="text"
+	//           placeholder="Enter last name"
+	//         />
+	//
+	//         <input
+	//           type="text"
+	//           placeholder="Create username"
+	//         />
+	//
+	//         <input
+	//           type="email"
+	//           placeholder="Enter email"
+	//         />
+	//
+	//         <input
+	//           type="password"
+	//           placeholder="Create password"
+	//         />
+	//       </div>
+	//     );
+	//   }
+	// }
+
+	exports.default = Signup;
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var UserProfile = function UserProfile() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    'User Profile Page'
+	  );
+	};
+
+	exports.default = UserProfile;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _SellerSearchBar = __webpack_require__(180);
+
+	var _SellerSearchBar2 = _interopRequireDefault(_SellerSearchBar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SellerForm = function SellerForm() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_SellerSearchBar2.default, null),
+	    _react2.default.createElement('input', {
+	      placeholder: 'Enter Starting Price'
+	    }),
+	    _react2.default.createElement('input', {
+	      placeholder: 'Enter Min Price'
+	    }),
+	    _react2.default.createElement('input', {
+	      placeholder: 'Enter number of tickets'
+	    })
+	  );
+	};
+
+	// class SellerForm extends Component {
+	//   constructor() {
+	//     super();
+	//     this.state = {};
+	//   }
+	//
+	//   render() {
+	//     return (
+	//       <div>
+	//         <SellerSearchBar />
+	//         <input
+	//           placeholder="Enter Starting Price"
+	//         />
+	//
+	//         <input
+	//           placeholder="Enter Min Price"
+	//         />
+	//
+	//         <input
+	//           placeholder="Enter number of tickets"
+	//         />
+	//       </div>
+	//     );
+	//   }
+	// }
+
+	exports.default = SellerForm;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SellerSearchBar = function SellerSearchBar() {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("input", {
+	      type: "text",
+	      placeholder: "Search for Event"
+	    })
+	  );
+	};
+
+	// class SellerSearchBar extends React.Component {
+	//   constructor() {
+	//     super();
+	//     this.state = {};
+	//   }
+	//
+	//   render() {
+	//     return (
+	//       <div>
+	//         <input
+	//           type="text"
+	//           placeholder="Search for Event"
+	//         />
+	//       </div>
+	//     );
+	//   }
+	// }
+
+	exports.default = SellerSearchBar;
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _EventListItem = __webpack_require__(182);
+
+	var _EventListItem2 = _interopRequireDefault(_EventListItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var EventList = function EventList() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_EventListItem2.default, null)
+	  );
+	};
+
+	// class EventList extends React.Component {
+	//   constructor() {
+	//     super();
+	//     this.state = {};
+	//   }
+	//
+	//   render() {
+	//     return (
+	//       <div>
+	//         <EventListItem />
+	//       </div>
+	//     );
+	//   }
+	// }
+
+	exports.default = EventList;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _EventDetails = __webpack_require__(183);
+
+	var _EventDetails2 = _interopRequireDefault(_EventDetails);
+
+	var _AuctionList = __webpack_require__(184);
+
+	var _AuctionList2 = _interopRequireDefault(_AuctionList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var EventListItem = function EventListItem() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_EventDetails2.default, null),
+	    _react2.default.createElement(_AuctionList2.default, null)
+	  );
+	};
+
+	exports.default = EventListItem;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var EventDetails = function EventDetails() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    'Event Details - Date - Venue'
+	  );
+	};
+
+	exports.default = EventDetails;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _AuctionDetails = __webpack_require__(185);
+
+	var _AuctionDetails2 = _interopRequireDefault(_AuctionDetails);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AuctionList = function AuctionList() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_AuctionDetails2.default, null)
+	  );
+	};
+
+	exports.default = AuctionList;
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AuctionDetails = function AuctionDetails() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    'Auction Details',
+	    _react2.default.createElement(
+	      'button',
+	      null,
+	      ' Buy Now '
+	    )
+	  );
+	};
+
+	// class AuctionDetails extends React.Component {
+	//   constructor() {
+	//     super();
+	//     this.state = {};
+	//   }
+	//
+	//   render() {
+	//     return (
+	//       <div>
+	//         Auction Details
+	//         <button> Buy Now </button>
+	//       </div>
+	//     );
+	//   }
+	// }
+
+	exports.default = AuctionDetails;
 
 /***/ }
 /******/ ]);

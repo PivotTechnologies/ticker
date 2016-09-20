@@ -1,26 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const AuctionDetails = () => (
-  <div>
-    Auction Details
-    <button> Buy Now </button>
-  </div>
-);
+const AuctionDetails = ({ activeAuction }) => {
+  if (activeAuction) { // won't need this if when we use react router!!
+    return (
+      <div>
+        You are viewing an auction for {activeAuction.num_tickets} ticket(s)
+        priced at {activeAuction.price}.
+        <button>Buy Tickets</button>
+      </div>
+    );
+  }
 
-// class AuctionDetails extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {};
-//   }
-//
-//   render() {
-//     return (
-//       <div>
-//         Auction Details
-//         <button> Buy Now </button>
-//       </div>
-//     );
-//   }
-// }
+  return <div />;
+};
 
-export default AuctionDetails;
+function mapStateToProps(state) {
+  return {
+    activeAuction: state.activeAuction,
+  };
+}
+
+export default connect(mapStateToProps)(AuctionDetails);

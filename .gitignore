@@ -10,4 +10,4 @@ node_modules
 .env
 
 # Webpack bundle
-client/bundle.js
+/client/bundle.js

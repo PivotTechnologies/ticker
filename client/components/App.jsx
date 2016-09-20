@@ -1,11 +1,11 @@
 import React from 'react';
 import NavBar from './NavBar.jsx';
-import EventList from './buyer/EventList.jsx';
+import BuyerView from './buyer/BuyerView.jsx';
 
 const App = () => (
   <div>
     <NavBar />
-    <EventList />
+    <BuyerView />
   </div>
 );
 

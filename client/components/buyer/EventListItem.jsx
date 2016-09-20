@@ -1,11 +1,8 @@
 import React from 'react';
-import EventDetails from './EventDetails.jsx';
-import AuctionList from './AuctionList.jsx';
 
-const EventListItem = () => (
+const EventListItem = ({ event }) => (
   <div>
-    <EventDetails />
-    <AuctionList />
+    { event }
   </div>
 );
 

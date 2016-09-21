@@ -17,12 +17,14 @@ class EventListItem extends React.Component {
 
   render() {
     return (
-      <div className="list-item" onClick={this.handleClick}>
-        <p> Name: { this.props.event.name } </p>
-        <p> Date/Time: { this.props.event.datetime } </p>
-        <p> Venue: { this.props.event.venue } </p>
-        <p> City: { this.props.event.city } </p>
-      </div>
+      //<a href=`/event/${this.props.event.id.toString()}` onClick={this.handleClick}>
+        <div className="list-item">
+          <p> Name: { this.props.event.name } </p>
+          <p> Date/Time: { this.props.event.datetime } </p>
+          <p> Venue: { this.props.event.venue } </p>
+          <p> City: { this.props.event.city } </p>
+        </div>
+      //</a>
     );
   }
 }

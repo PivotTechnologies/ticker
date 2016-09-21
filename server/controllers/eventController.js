@@ -3,7 +3,7 @@ const Event = require('../models/eventModel');
 module.exports = {
     buyerSearch: (req, res) => {
       const results = [];
-      
+
       where = {};
       if(req.query.query){
         where = {

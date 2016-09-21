@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const connection = require('../config/db');
+const Event = require('../models/eventModel');
 
 const Auction = connection.define('auction', {
   sellerId: {
@@ -18,6 +19,8 @@ const Auction = connection.define('auction', {
     type: Sequelize.INTEGER
   }
 });
+
+Auction.hasOne(Event, {as: 'Event'});
 
 connection
   .sync()

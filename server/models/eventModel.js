@@ -27,11 +27,11 @@ const Event = connection.define('event', {
   //   allowNull: false
   // },
   time: {
-    type: Sequelize.STRING,
+    type: Sequelize.TIME,
     allowNull: false
   },
   date: {
-    type: Sequelize.STRING,
+    type: Sequelize.DATEONLY,
     allowNull: false
   },
 });

@@ -101,11 +101,11 @@ export function signin(username, password) {
     password,
   };
 
-  // const request = axios.post('/signIn', data);
+  const request = axios.post('/api/user/signin', data);
 
   return {
     type: SIGNIN,
-    payload: data, // request,
+    payload: request,
   };
 }
 

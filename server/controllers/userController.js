@@ -10,6 +10,7 @@ module.exports = {
         lastName: req.body.lastName,
         password: req.body.password,
         email: req.body.email,
+        username: req.body.username
       });
 
       newUser
@@ -30,17 +31,17 @@ module.exports = {
     },
 
     signin: (req, res) => {
-      if (!req.body.email) {
-        res.status(500).send('Email address required.');
+      if (!req.body.username) {
+        res.status(500).send('Username required.');
       }
       if (!req.body.password) {
         res.status(500).send('Password required.');
       }
       User.findOne({
           where: {
-            email: req.body.email
+            username: req.body.username
           },
-          attributes: ['id', 'email', 'password']
+          attributes: ['id', 'email', 'username', 'password']
         })
         .then( user => {
           password.compare(req.body.password, user.password)

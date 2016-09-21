@@ -3,15 +3,19 @@ const connection = require('../config/db');
 const password = require('../config/passwordHelper');
 
 const User = connection.define('user', {
-  // username 
   email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
-    // validate: {
-    //   isEmail: true,
-    //   len: [1, 255]
-    // }
+    validate: {
+      isEmail: true,
+      len: [1, 255]
+    }
+  },
+  username: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
   },
   password: {
     type: Sequelize.STRING,

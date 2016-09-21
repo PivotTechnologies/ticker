@@ -39,7 +39,7 @@ class BuyerSearchBar extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
+      <form className="search-bar" onSubmit={this.onFormSubmit}>
         <input
           onChange={this.onQueryChange}
           value={this.state.query}

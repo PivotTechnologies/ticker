@@ -23,3 +23,7 @@ nav {
 .list-item {
   border: 1px solid black;
 }
+
+.list-item:hover {
+  cursor: pointer;
+}

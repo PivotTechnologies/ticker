@@ -20,11 +20,11 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={BuyerView} />
-        <Route path="event/:event" component={EventView} />
-        <Route path="auction/:auction" component={AuctionView} />
+        <Route path="event/:eventID" component={EventView} />
+        <Route path="auction/:auctionID" component={AuctionView} />
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
-        <Route path="account" component={UserProfile} />
+        <Route path="account/:userID" component={UserProfile} />
       </Route>
     </Router>
   </Provider>

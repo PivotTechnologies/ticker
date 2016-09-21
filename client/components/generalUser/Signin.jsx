@@ -33,8 +33,9 @@ class Signin extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
+      <form className="auth" onSubmit={this.onFormSubmit}>
         <input
+          className="auth-input"
           type="text"
           onChange={this.onUsernameChange}
           value={this.state.username}
@@ -42,6 +43,7 @@ class Signin extends React.Component {
         />
 
         <input
+          className="auth-input"
           type="password"
           onChange={this.onPasswordChange}
           value={this.state.password}

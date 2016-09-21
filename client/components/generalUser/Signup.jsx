@@ -57,8 +57,9 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
+      <form className="auth" onSubmit={this.onFormSubmit}>
         <input
+          className="auth-input"
           type="text"
           onChange={this.onFirstnameChange}
           value={this.state.firstName}
@@ -66,6 +67,7 @@ class Signup extends React.Component {
         />
 
         <input
+          className="auth-input"
           type="text"
           onChange={this.onLastnameChange}
           value={this.state.lastName}
@@ -73,6 +75,7 @@ class Signup extends React.Component {
         />
 
         <input
+          className="auth-input"
           type="text"
           onChange={this.onUsernameChange}
           value={this.state.username}
@@ -80,6 +83,7 @@ class Signup extends React.Component {
         />
 
         <input
+          className="auth-input"
           type="email"
           onChange={this.onEmailChange}
           value={this.state.email}
@@ -87,6 +91,7 @@ class Signup extends React.Component {
         />
 
         <input
+          className="auth-input"
           type="password"
           onChange={this.onPasswordChange}
           value={this.state.password}

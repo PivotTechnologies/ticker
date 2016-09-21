@@ -21,6 +21,7 @@
 const userController = require('../controllers/userController');
 const eventController = require('../controllers/eventController');
 const auctionController = require('../controllers/auctionController');
+const path = require('path');
 
 const routes = (app, express) => {
 
@@ -41,6 +42,9 @@ const routes = (app, express) => {
   app.get('/api/auction/buy', auctionController.buy );
 
   /* Other Endpoints */
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve('./', 'client', 'index.html'))
+  })
   app.get('*', (req, res) => res.sendStatus(404) );
 };
 

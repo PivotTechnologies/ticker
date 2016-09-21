@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import { selectAuction } from '../../actions/index';
 
 class AuctionListItem extends React.Component {
@@ -12,6 +13,7 @@ class AuctionListItem extends React.Component {
 
   handleClick() {
     this.props.selectAuction(this.props.auction);
+    browserHistory.push(`/auction/${this.props.auction.id}`);
   }
 
   render() {

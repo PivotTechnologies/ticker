@@ -8,7 +8,7 @@ var event = Event.create({
   venue: "Hollywood Bowl",
   city: "Los Angeles",
   time: '8:00 pm',
-  date: '9/25/2016',
+  date: '2016-09-25',
 });
 
  event = Event.create({
@@ -17,7 +17,7 @@ var event = Event.create({
   venue: "Wiltern",
   city: "Los Angeles",
   time: '9:00 pm',
-  date: '9/20/2016',
+  date: '2016-09-20',
 });
 
  event = Event.create({
@@ -26,7 +26,7 @@ var event = Event.create({
   venue: "Echo",
   city: "Los Angeles",
   time: '6:00 pm',
-  date: '9/12/2016',
+  date: '2016-09-12',
 });
 
  event = Event.create({
@@ -35,7 +35,7 @@ var event = Event.create({
   venue: "Paladium",
   city: "Los Angeles",
   time: '5:00 pm',
-  date: '9/18/2016',
+  date: '2016-09-18',
 });
 
  event = Event.create({
@@ -44,7 +44,7 @@ var event = Event.create({
   venue: "Orpheum",
   city: "Los Angeles",
   time: '6:00pm',
-  date: '9/19/2016',
+  date: '2016-09-19',
 });
 
  event = Event.create({
@@ -53,7 +53,7 @@ var event = Event.create({
   venue: "Fonda",
   city: "Los Angeles",
   time: '7:00 pm',
-  date: '9/20/2016',
+  date: '2016-09-20',
 });
 
  event = Event.create({
@@ -62,5 +62,5 @@ var event = Event.create({
   venue: "Forum",
   city: "Los Angeles",
   time: '9:00 pm',
-  date: '9/20/2016',
+  date: '2016-09-20',
 });

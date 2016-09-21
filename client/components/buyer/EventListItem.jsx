@@ -21,7 +21,8 @@ class EventListItem extends React.Component {
     return (
       <div className="list-item" onClick={this.handleClick}>
         <p> Name: { this.props.event.name } </p>
-        <p> Date/Time: { this.props.event.datetime } </p>
+        <p> Date: { this.props.event.date } </p>
+        <p> Time: { this.props.event.time } </p>
         <p> Venue: { this.props.event.venue } </p>
         <p> City: { this.props.event.city } </p>
       </div>

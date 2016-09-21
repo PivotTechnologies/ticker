@@ -10,6 +10,12 @@ class EventList extends React.Component {
   }
 
   render() {
+    if (!this.props.events) {
+      return (
+        <div>No events match this search.</div>
+      );
+    }
+    
     return (
       <div>
         { this.renderEventList() }

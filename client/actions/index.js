@@ -12,16 +12,17 @@ export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
 
 export function searchEvents(query, date, city) {
   const data = {
-    query,
-    date,
-    city,
+    params: { query,
+      date,
+      city,
+    },
   };
-  //
-  // const request = axios.post('/buyerSearch', data);
+
+  const request = axios.get('api/event/buyerSearch', data);
 
   return {
     type: SEARCH_EVENTS,
-    payload: data, // change to request when axios call added
+    payload: request,
   };
 }
 

@@ -5,14 +5,17 @@ export default function (state = [], action) {
     case FETCH_AUCTIONS:
       return [
         {
+          id: 1,
           num_tickets: 2,
           price: '$48',
         },
         {
+          id: 2,
           num_tickets: 2,
           price: '$60',
         },
         {
+          id: 3,
           num_tickets: 3,
           price: '$90',
         },

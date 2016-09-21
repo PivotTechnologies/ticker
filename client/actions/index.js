@@ -12,16 +12,17 @@ export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
 
 export function searchEvents(query, date, city) {
   const data = {
-    query,
-    date,
-    city,
+    params: { query,
+      date,
+      city,
+    },
   };
-  //
-  // const request = axios.post('/buyerSearch', data);
+
+  const request = axios.get('api/event/buyerSearch', data);
 
   return {
     type: SEARCH_EVENTS,
-    payload: data, // change to request when axios call added
+    payload: request,
   };
 }
 
@@ -87,11 +88,11 @@ export function signup(firstName, lastName, username, email, password) {
     password,
   };
 
-  // const request = axios.post('/signUp', data);
+  const request = axios.post('/api/user/signup', data);
 
   return {
     type: SIGNUP,
-    payload: data, // request
+    payload: request,
   };
 }
 
@@ -101,11 +102,11 @@ export function signin(username, password) {
     password,
   };
 
-  // const request = axios.post('/signIn', data);
+  const request = axios.post('/api/user/signin', data);
 
   return {
     type: SIGNIN,
-    payload: data, // request,
+    payload: request,
   };
 }
 
@@ -114,10 +115,10 @@ export function fetchUserActivity(userID) {
     userID,
   };
 
-  // const request = axios.post('/fetchProfile', data);
+  const request = axios.post('/api/user/fetch', data);
 
   return {
     type: FETCH_USER_ACTIVITY,
-    payload: data, //request,
+    payload: request,
   };
 }

@@ -6,7 +6,7 @@ const User = connection.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
     validate: {
       isEmail: true,
       len: [1, 255]

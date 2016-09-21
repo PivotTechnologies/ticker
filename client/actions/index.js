@@ -87,11 +87,11 @@ export function signup(firstName, lastName, username, email, password) {
     password,
   };
 
-  // const request = axios.post('/signUp', data);
+  const request = axios.post('/api/user/signup', data);
 
   return {
     type: SIGNUP,
-    payload: data, // request
+    payload: request,
   };
 }
 
@@ -101,11 +101,11 @@ export function signin(username, password) {
     password,
   };
 
-  // const request = axios.post('/signIn', data);
+  const request = axios.post('/api/user/signin', data);
 
   return {
     type: SIGNIN,
-    payload: data, // request,
+    payload: request,
   };
 }
 
@@ -114,10 +114,10 @@ export function fetchUserActivity(userID) {
     userID,
   };
 
-  // const request = axios.post('/fetchProfile', data);
+  const request = axios.post('/api/user/fetch', data);
 
   return {
     type: FETCH_USER_ACTIVITY,
-    payload: data, //request,
+    payload: request,
   };
 }

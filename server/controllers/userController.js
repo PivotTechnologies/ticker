@@ -5,7 +5,6 @@ module.exports = {
 
     signup: (req, res) => {
       const newUser = User.build({
-        //username
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: req.body.password,
@@ -44,14 +43,19 @@ module.exports = {
           attributes: ['id', 'email', 'username', 'password']
         })
         .then( user => {
-          password.compare(req.body.password, user.password)
-            .then( result => {
-              console.log('\033[34mUser logged in. \033[0m');
-              res.send('Logged in.');
-            })
-            .catch( error => {
-              res.status(500).send('Password incorrect.');
-            })
+          if(!user){
+            res.status(500).send('User not found.');
+          }
+          else {
+            password.compare(req.body.password, user.password)
+              .then( result => {
+                console.log('\033[34mUser logged in. \033[0m');
+                res.send('Logged in.');
+              })
+              .catch( error => {
+                res.status(500).send('Password incorrect.');
+              })
+          }
         })
         .catch( err => {
           console.log('Error:', err);

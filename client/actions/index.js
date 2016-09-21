@@ -8,7 +8,7 @@ export const PURCHASE_TICKETS = 'PURCHASE_TICKETS';
 export const SUBMIT_FORM = 'SUBMIT_FORM';
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
-export const FETCH_PROFILE = 'FETCH_PROFILE';
+export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
 
 export function searchEvents(query, date, city) {
   const data = {
@@ -109,15 +109,15 @@ export function signin(username, password) {
   };
 }
 
-export function fetchProfile(userID) {
+export function fetchUserActivity(userID) {
   const data = {
     userID,
   };
 
-  const request = axios.post('/fetchProfile', data);
+  // const request = axios.post('/fetchProfile', data);
 
   return {
-    type: FETCH_PROFILE,
-    payload: request,
+    type: FETCH_USER_ACTIVITY,
+    payload: data, //request,
   };
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
@@ -19,13 +20,15 @@ class EventListItem extends React.Component {
 
   render() {
     return (
-      <div className="list-item" onClick={this.handleClick}>
-        <p> Name: { this.props.event.name } </p>
-        <p> Date: { this.props.event.date } </p>
-        <p> Time: { this.props.event.time } </p>
-        <p> Venue: { this.props.event.venue } </p>
-        <p> City: { this.props.event.city } </p>
-      </div>
+      <Card className="list-item" onClick={this.handleClick}>
+        <CardTitle
+          title={this.props.event.name}
+          subtitle={<div>
+                      <div>{this.props.event.venue}, {this.props.event.city}</div>
+                      <div>{this.props.event.date} - {this.props.event.time}</div>
+                    </div>}
+        />
+      </Card>
     );
   }
 }

@@ -1,8 +1,10 @@
 const Event = require('../models/eventModel');
+const seatgeek = require('../config/seatgeekHelper');
 
 module.exports = {
     buyerSearch: (req, res) => {
       const results = [];
+
       where = {};
       if(req.query.query){
         where = {
@@ -37,8 +39,13 @@ module.exports = {
     },
 
     sellerSearch: (req, res) => {
-      res.send('sellerSearch');
-    },
+      // make a call to seatgeekAPI
+      //console.log("req.query.query", req.query.query);
+      seatgeek.getEvents(req.query.query)
+        .then(function(results) {
+        console.log("results :", results);
+      res.json(results);
+    })},
 
     fetch: (req, res) => {
 

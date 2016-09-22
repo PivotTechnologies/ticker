@@ -4,7 +4,7 @@ const Event = require('../models/eventModel');
 module.exports = {
 
     create: (req, res) => {
-
+      // query for valid sellerId
       Event.findOne({
           where: {
             id: req.body.eventId
@@ -24,9 +24,7 @@ module.exports = {
             });
           }
         })
-        .catch( err => {
-          console.log('Error:', err);
-        });
+        .catch( err => console.log('Error:', err) );
     },
 
     cancel: (req, res) => {

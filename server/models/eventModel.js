@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const connection = require('../config/db');
+const Auction = require('../models/auctionModel');
 
 const Event = connection.define('event', {
   name: {
@@ -35,6 +36,8 @@ const Event = connection.define('event', {
     allowNull: false
   },
 });
+
+Event.hasMany(Auction, {as: 'Auctions'});
 
 connection
   .sync()

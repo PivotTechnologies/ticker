@@ -4,23 +4,27 @@ const Event = require('../models/eventModel');
 module.exports = {
 
     create: (req, res) => {
-      // query for valid sellerId
       Event.findOne({
           where: {
-            id: req.body.eventId
+            id: req.body.eventID
           }
         })
         .then( event => {
           if(!event){
-            res.send("Invalid eventId.")
+            // NEED TO CREATE NEW EVENT IF WE DON'T HAVE IT ALREADY
+            // ALSO NEED TO DO EVERYTHING IN THE ELSE (CREATE THE AUCTION)
+            res.send("Invalid eventID.")
           }
           else {
             const newAuction = Auction.create({
-              sellerId: req.body.sellerId,
-              eventId: req.body.eventId,
+              sellerID: req.body.sellerID,
+              buyerID: '',
+              eventID: req.body.eventID,
               startPrice: req.body.startPrice,
+              currentPrice: req.body.startPrice,
               minPrice: req.body.minPrice,
               numTickets: req.body.numTickets,
+              status: 'On Sale',
             })
             .then( (auction) => {
               console.log('New auction created: ', auction.dataValues);

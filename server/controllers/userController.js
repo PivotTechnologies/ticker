@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const Auction = require('../models/auctionModel');
 const password = require('../config/passwordHelper');
 
 module.exports = {
@@ -63,7 +64,50 @@ module.exports = {
         });
     },
 
-    fetch: (req, res) => {
-      res.send('fetch');
+    fetchUserActivity: (req, res) => {
+      const results = {
+        buyerActivity: [],
+        sellerActivity: {
+          on_sale: [],
+          sold: [],
+          expired: [],
+        },
+      };
+
+      Auction.findAll({
+        where: {
+          $or: [
+            {
+              buyerId: req.query.userID,
+            },
+            {
+              sellerId: req.query.userID,
+            }
+          ]
+        }
+      })
+      .then( auctions => {
+        auctions.forEach( auction => {
+          if (auction.dataValues.buyerID === req.query.userID) {
+            results.buyerActivity.push(auction.dataValues);
+          }
+          if (auction.dataValues.sellerID === req.query.userID) {
+            if (auction.dataValues.status === 'On Sale') {
+              results.sellerActivity.on_sale.push(auction.dataValues);
+            }
+            if (auction.dataValues.status === 'Sold') {
+              results.sellerActivity.sold.push(auction.dataValues);
+            }
+            if (auction.dataValues.status === 'Expired') {
+              results.sellerActivity.expired.push(auction.dataValues);
+            }
+          }
+        });
+        res.json(results);
+      })
+      .catch( err => {
+        console.log('Error:', err.message);
+        res.send(err.message);
+      });
     }
 }

@@ -3,7 +3,7 @@ import BuyerSearchBar from './BuyerSearchBar.jsx';
 import EventList from './EventList.jsx';
 
 const BuyerView = () => (
-  <div>
+  <div className="main-content">
     <BuyerSearchBar />
     <EventList />
   </div>

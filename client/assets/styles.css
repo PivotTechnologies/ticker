@@ -1,8 +1,21 @@
+/**************** NAV ****************/
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+/**************** MAIN CONTENT ****************/
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/**************** AUTH ****************/
 
 .auth {
   display: flex;
@@ -14,10 +27,30 @@ nav {
   width: 20%;
 }
 
+/**************** BUYER SEARCH ****************/
+
 .search-bar {
+  width: 70%;
+}
+
+.search-bar-form {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.search-field-border {
+  border-right: 1px solid #E0E0E0;
+}
+
+.search-field-text {
+  padding-left: 10px;
+}
+
+/**************** RESULTS ****************/
+
+.list {
+  width: 70%
 }
 
 .list-item {

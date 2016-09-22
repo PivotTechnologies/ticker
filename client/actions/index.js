@@ -115,7 +115,7 @@ export function fetchUserActivity(userID) {
     userID,
   };
 
-  const request = axios.post('/api/user/fetch', data);
+  const request = axios.get('/api/user/fetchUserActivity', data);
 
   return {
     type: FETCH_USER_ACTIVITY,

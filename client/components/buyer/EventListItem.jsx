@@ -23,10 +23,12 @@ class EventListItem extends React.Component {
       <Card className="list-item" onClick={this.handleClick}>
         <CardTitle
           title={this.props.event.name}
-          subtitle={<div>
-                      <div>{this.props.event.venue}, {this.props.event.city}</div>
-                      <div>{this.props.event.date} - {this.props.event.time}</div>
-                    </div>}
+          subtitle={
+            <div>
+              <div>{this.props.event.venue}, {this.props.event.city}</div>
+              <div>{this.props.event.date} - {this.props.event.time}</div>
+            </div>
+          }
         />
       </Card>
     );

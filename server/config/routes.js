@@ -28,7 +28,7 @@ const routes = (app, express) => {
   /* User Endpoints */
   app.post('/api/user/signup', userController.signup );
   app.post('/api/user/signin', userController.signin );
-  app.get('/api/user/fetch', userController.fetch );
+  app.get('/api/user/fetchUserActivity', userController.fetchUserActivity );
 
   /* Event Endpoints */
   app.get('/api/event/buyerSearch', eventController.buyerSearch );

@@ -1,3 +1,4 @@
+const axios = require('axios');
 const Auction = require('../models/auctionModel');
 const Event = require('../models/eventModel');
 
@@ -6,20 +7,20 @@ module.exports = {
     create: (req, res) => {
       Event.findOne({
           where: {
-            id: req.body.eventID
+            id: req.body.eventId
           }
         })
         .then( event => {
           if(!event){
             // NEED TO CREATE NEW EVENT IF WE DON'T HAVE IT ALREADY
             // ALSO NEED TO DO EVERYTHING IN THE ELSE (CREATE THE AUCTION)
-            res.send("Invalid eventID.")
+            res.send("Invalid eventId.")
           }
           else {
             const newAuction = Auction.create({
-              sellerID: req.body.sellerID,
-              buyerID: '',
-              eventID: req.body.eventID,
+              sellerId: req.body.sellerId,
+              buyerId: '',
+              eventId: req.body.eventId,
               startPrice: req.body.startPrice,
               currentPrice: req.body.startPrice,
               minPrice: req.body.minPrice,
@@ -44,7 +45,7 @@ module.exports = {
       const results = [];
       Auction.findAll({
         where: {
-          eventId: req.query.eventID,
+          eventId: req.query.eventId,
         }
       })
       .then( auctions => {

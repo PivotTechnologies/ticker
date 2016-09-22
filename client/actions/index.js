@@ -33,9 +33,9 @@ export function selectEvent(event) {
   };
 }
 
-export function fetchAuctions(eventID) {
+export function fetchAuctions(eventId) {
   const data = {
-    eventID,
+    eventId,
   };
 
   // const request = axios.post('/fetchAuctions', data);
@@ -53,10 +53,10 @@ export function selectAuction(auction) {
   };
 }
 
-export function purchaseTickets(userID, auctionID) {
+export function purchaseTickets(userId, auctionId) {
   const data = {
-    userID,
-    auctionID,
+    userId,
+    auctionId,
   };
 
   const request = axios.post('/purchaseTickets', data);
@@ -110,9 +110,9 @@ export function signin(username, password) {
   };
 }
 
-export function fetchUserActivity(userID) {
+export function fetchUserActivity(userId) {
   const data = {
-    userID,
+    userId,
   };
 
   const request = axios.get('/api/user/fetchUserActivity', data);

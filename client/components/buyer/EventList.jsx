@@ -15,9 +15,9 @@ class EventList extends React.Component {
         <div>No events match this search.</div>
       );
     }
-    
+
     return (
-      <div>
+      <div className="list">
         { this.renderEventList() }
       </div>
     );

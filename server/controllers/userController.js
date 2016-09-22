@@ -65,6 +65,9 @@ module.exports = {
     },
 
     fetchUserActivity: (req, res) => {
+      console.log(req.query)
+      const userId = parseInt(req.query.userId);
+
       const results = {
         buyerActivity: [],
         sellerActivity: {
@@ -78,20 +81,20 @@ module.exports = {
         where: {
           $or: [
             {
-              buyerId: req.query.userID,
+              buyerId: userId,
             },
             {
-              sellerId: req.query.userID,
+              sellerId: userId,
             }
           ]
         }
       })
       .then( auctions => {
         auctions.forEach( auction => {
-          if (auction.dataValues.buyerID === req.query.userID) {
+          if (auction.dataValues.buyerId === userId) {
             results.buyerActivity.push(auction.dataValues);
           }
-          if (auction.dataValues.sellerID === req.query.userID) {
+          if (auction.dataValues.sellerId === userId) {
             if (auction.dataValues.status === 'On Sale') {
               results.sellerActivity.on_sale.push(auction.dataValues);
             }

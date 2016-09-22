@@ -43,7 +43,7 @@ module.exports = {
           attributes: ['id', 'email', 'username', 'password']
         })
         .then( user => {
-          if(!user){
+          if(!user) {
             res.status(500).send('User not found.');
           }
           else {

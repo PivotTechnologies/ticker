@@ -19,6 +19,7 @@ const Auction = connection.define('auction', {
   }
 });
 
+
 connection
   .sync()
   .then( err => console.log('\033[34mAuction model sync() successful. \033[0m') )

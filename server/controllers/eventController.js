@@ -2,6 +2,46 @@ const Event = require('../models/eventModel');
 const seatgeek = require('../config/seatgeekHelper');
 
 module.exports = {
+
+    findOrMake: (req, res) => {
+
+      Event.findOne({
+          where: {
+            name: {
+              $iLike: req.body.event.name
+            },
+            venue: {
+              $iLike: req.body.event.venue
+            },
+            date: {
+              $iLike: req.body.event.date
+            },
+          }
+        })
+        .then( event => {
+          if(!event){
+            const newEvent = Event.create({
+              name: req.body.event.name,
+              venue: req.body.event.venue,
+              city: req.body.event.city,
+              time: req.body.event.time,
+              category: req.body.event.category,
+              date: req.body.event.date
+            })
+            .then( (event) => {
+              console.log('New event created: ', event.dataValues);
+              res.send(event.dataValues);
+            })
+            .catch( err => console.log('Error:', err) );
+          }
+          else {
+            console.log('found it!');
+            res.send(event.dataValues);
+          }
+        })
+        .catch( err => console.log('Error:', err) );
+    },
+
     buyerSearch: (req, res) => {
       const results = [];
 

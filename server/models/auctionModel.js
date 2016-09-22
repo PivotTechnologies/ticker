@@ -2,13 +2,19 @@ const Sequelize = require('sequelize');
 const connection = require('../config/db');
 
 const Auction = connection.define('auction', {
-  sellerId: {
+  sellerID: {
     type: Sequelize.STRING
   },
-  eventId: {
+  buyerID: {
+    type: Sequelize.STRING
+  },
+  eventID: {
     type: Sequelize.STRING
   },
   startPrice: {
+    type: Sequelize.INTEGER
+  },
+  currentPrice: {
     type: Sequelize.INTEGER
   },
   minPrice: {
@@ -16,6 +22,9 @@ const Auction = connection.define('auction', {
   },
   numTickets: {
     type: Sequelize.INTEGER
+  },
+  status: {
+    type: Sequelize.STRING
   }
 });
 

@@ -21,7 +21,12 @@ module.exports = {
               startPrice: req.body.startPrice,
               minPrice: req.body.minPrice,
               numTickets: req.body.numTickets,
-            });
+            })
+            .then( (auction) => {
+              console.log('New auction created: ', auction.dataValues);
+              res.send(auction.dataValues);
+            })
+            .catch( err => console.log('Error:', err) );
           }
         })
         .catch( err => console.log('Error:', err) );
@@ -32,7 +37,22 @@ module.exports = {
     },
 
     fetch: (req, res) => {
-      res.send('fetch');
+      const results = [];
+      Auction.findAll({
+        where: {
+          eventId: req.query.eventID,
+        }
+      })
+      .then( auctions => {
+        auctions.forEach( auction => results.push(auction.dataValues) );
+        console.log('\033[34mSending data: \033[0m');
+        console.log(results);
+        res.json(results);
+      })
+      .catch( err => {
+        console.log('Error:', err.message);
+        res.send(err.message);
+      });
     },
 
     buy: (req, res) => {

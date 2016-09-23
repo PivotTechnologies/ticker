@@ -65,7 +65,6 @@ module.exports = {
     },
 
     fetchUserActivity: (req, res) => {
-      console.log(req.query)
       const userId = parseInt(req.query.userId);
 
       const results = {

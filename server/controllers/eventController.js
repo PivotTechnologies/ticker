@@ -56,7 +56,7 @@ module.exports = {
         }
       }
       if(req.query.date){
-        where.date = { $iLike: req.query.date };
+        where.date = { $eq: req.query.date };
       }
       if(req.query.city){
         where.city = { $iLike: req.query.city }

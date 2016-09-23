@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createAuction } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 
 class SellerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: localStorage.getItem('userId'),
       startPrice: '',
       minPrice: '',
       numTickets: '',
@@ -20,8 +22,9 @@ class SellerForm extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+    console.log('this.state.userId', this.state.userId);
     this.props.createAuction(this.props.activeEvent, this.state.startPrice, this.state.minPrice,
-      this.state.numTickets, this.props.userId);
+      this.state.numTickets, this.state.userId);
     this.setState({
       startPrice: '',
       minPrice: '',
@@ -41,12 +44,19 @@ class SellerForm extends React.Component {
     this.setState({ numTickets: event.target.value });
   }
 
+  onClick(event) {
+    browserHistory.push(`/sell`);
+  }
+
 
   render() {
     return (
       <div>
         <div>
-          <h3>Event</h3>
+          <h3>Event
+              <button onClick={this.onClick}> Go back to search </button>
+          </h3>
+
           <p> Name: { this.props.activeEvent.name } </p>
           <p> Date: { this.props.activeEvent.datetime_local }, &nbsp;
             Timezone: { this.props.activeEvent.timezone } </p>
@@ -60,18 +70,21 @@ class SellerForm extends React.Component {
         <form onSubmit={this.onFormSubmit}>
           <input
             type="integer"
+            required="required"
             onChange={this.onStartPriceChange}
             value={this.state.startPrice}
-            placeholder="Start Price"
+            placeholder="Start Price $"
           />
           <input
             type="integer"
+            required="required"
             onChange={this.onMinPriceChange}
             value={this.state.minPrice}
-            placeholder="Minimum Price"
+            placeholder="Minimum Price $"
           />
           <input
             type="integer"
+            required="required"
             onChange={this.onNumTicketsChange}
             value={this.state.numTickets}
             placeholder="Number of Tickets"
@@ -86,7 +99,6 @@ class SellerForm extends React.Component {
 function mapStateToProps(state) {
   return {
     activeEvent: state.activeEvent,
-    userId: state.userId,
   };
 }
 

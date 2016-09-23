@@ -5,6 +5,7 @@ import AuctionsReducer from './reducer_auctions';
 import ActiveAuctionReducer from './reducer_active_auction';
 import UserReducer from './reducer_user';
 import UserActivityReducer from './reducer_user_activity';
+import CreateAuctionReducer from './reducer_create_auction';
 
 const rootReducer = combineReducers({
   events: EventsReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   activeAuction: ActiveAuctionReducer,
   user: UserReducer,
   userActivity: UserActivityReducer,
+  newAuction: CreateAuctionReducer,
 });
 
 export default rootReducer;

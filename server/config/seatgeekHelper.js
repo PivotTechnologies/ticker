@@ -31,7 +31,7 @@ function getEvents(query) {
             longitude: event.venue.location.lon
           });
         });
-        console.log(filteredBody);
+        // console.log(filteredBody);
         resolve(filteredBody);
       } else {
         console.log(error);

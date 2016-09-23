@@ -83,9 +83,10 @@ module.exports = {
       //console.log("req.query.query", req.query.query);
       seatgeek.getEvents(req.query.query)
         .then(function(results) {
-        console.log("results :", results);
+        //console.log("results :", results);
       res.json(results);
-    })},
+      });
+    },
 
     fetch: (req, res) => {
 

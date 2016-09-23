@@ -12,7 +12,8 @@ export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
 
 export function searchEvents(query, date, city) {
   const data = {
-    params: { query,
+    params: {
+      query,
       date,
       city,
     },
@@ -112,9 +113,11 @@ export function signin(username, password) {
 
 export function fetchUserActivity(userId) {
   const data = {
-    userId,
+    params: {
+      userId,
+    },
   };
-
+  
   const request = axios.get('/api/user/fetchUserActivity', data);
 
   return {

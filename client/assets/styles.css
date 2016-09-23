@@ -44,7 +44,7 @@ nav {
 }
 
 .search-field-text {
-  padding-left: 10px;
+  text-indent: 10px;
 }
 
 /**************** RESULTS ****************/
@@ -59,4 +59,10 @@ nav {
 
 .list-item:hover {
   cursor: pointer;
+}
+
+/**************** USER PROFILE ****************/
+
+.activity-item {
+  border: 1px solid black;
 }

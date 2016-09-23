@@ -24,7 +24,7 @@ ReactDOM.render(
         <Route path="auction/:auctionId" component={AuctionView} />
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
-        <Route path="account/:userId" component={UserProfile} />
+        <Route path="account" component={UserProfile} />
       </Route>
     </Router>
   </Provider>

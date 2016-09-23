@@ -16,6 +16,9 @@ export default function (state = {}, action) {
       return action.payload; // change when we get data from axios request
 
     default:
-      return state;
+      return {
+        id: 123,
+        username: 'carsugar',
+      };
   }
 }

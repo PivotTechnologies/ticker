@@ -14,7 +14,7 @@ class SellerEventItem extends React.Component {
   handleClick() {
     this.props.selectEvent(this.props.event);
     console.log('this.props.event:', this.props.event);
-    browserHistory.push(`/sell/${this.props.event}`);
+    browserHistory.push(`/sell/form`);
   }
 
   render() {

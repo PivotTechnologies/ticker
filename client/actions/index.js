@@ -69,15 +69,15 @@ export function purchaseTickets(userId, auctionId) {
   };
 }
 
-export function createAuction(selectedEvent, startPrice, minPrice, numTickets, userID) {
+export function createAuction(event, startPrice, minPrice, numTickets, userID) {
   const data = {
-    selectedEvent,
+    event,
     startPrice,
     minPrice,
     numTickets,
     userID,
   };
-
+  console.log('inside of createAuction:', data);
   const request = axios.post('/api/auction/create', data);
 
   return {

@@ -7,11 +7,9 @@ class SellerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectEvent: '',
       startPrice: '',
       minPrice: '',
       numTickets: '',
-      userID: '',
     };
 
     this.onStartPriceChange = this.onStartPriceChange.bind(this);
@@ -20,20 +18,14 @@ class SellerForm extends React.Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  // need to set selectedEvent
-  // need to set userID
-
   onFormSubmit(event) {
     event.preventDefault();
-    console.log('this.state: ', this.state);
-    this.props.createAuction(this.state.selectEvent, this.state.startPrice, this.state.minPrice,
-      this.state.numTickets, this.state.userId);
+    this.props.createAuction(this.props.activeEvent, this.state.startPrice, this.state.minPrice,
+      this.state.numTickets, this.props.userId);
     this.setState({
-      selectEvent: '',
       startPrice: '',
       minPrice: '',
       numTickets: '',
-      userID: '',
     });
   }
 
@@ -49,37 +41,44 @@ class SellerForm extends React.Component {
     this.setState({ numTickets: event.target.value });
   }
 
-  componentWillMount() {
-    this.setState({
-      selectEvent: this.props.activeEvent,
-      userID: this.props.userID,
-    });
-  }
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
-        Event Selected: {this.state.selectEvent}
-        <input
-          type="integer"
-          onChange={this.onStartPriceChange}
-          value={this.state.startPrice}
-          placeholder="Start Price"
-        />
-        <input
-          type="integer"
-          onChange={this.onMinPriceChange}
-          value={this.state.minPrice}
-          placeholder="Minimum Price"
-        />
-        <input
-          type="integer"
-          onChange={this.onNumTicketsChange}
-          value={this.state.numTickets}
-          placeholder="Number of Tickets"
-        />
-        <button type="submit">Submit</button>
-      </form>
+      <div>
+        <div>
+          <h3>Event</h3>
+          <p> Name: { this.props.activeEvent.name } </p>
+          <p> Date: { this.props.activeEvent.datetime_local }, &nbsp;
+            Timezone: { this.props.activeEvent.timezone } </p>
+          <p> Venue: { this.props.activeEvent.venue } </p>
+          <p> Address: { this.props.activeEvent.address }, &nbsp;
+            { this.props.activeEvent.city }, &nbsp;
+            {this.props.activeEvent.state } &nbsp;
+            {this.props.activeEvent.zip }
+          </p>
+        </div>
+        <form onSubmit={this.onFormSubmit}>
+          <input
+            type="integer"
+            onChange={this.onStartPriceChange}
+            value={this.state.startPrice}
+            placeholder="Start Price"
+          />
+          <input
+            type="integer"
+            onChange={this.onMinPriceChange}
+            value={this.state.minPrice}
+            placeholder="Minimum Price"
+          />
+          <input
+            type="integer"
+            onChange={this.onNumTicketsChange}
+            value={this.state.numTickets}
+            placeholder="Number of Tickets"
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     );
   }
 }
@@ -87,7 +86,7 @@ class SellerForm extends React.Component {
 function mapStateToProps(state) {
   return {
     activeEvent: state.activeEvent,
-    userID: state.userID,
+    userId: state.userId,
   };
 }
 
@@ -95,6 +94,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ createAuction }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SellerForm);
-
-// export default SellerForm;
+export default connect(mapStateToProps, mapDispatchToProps)(SellerForm);

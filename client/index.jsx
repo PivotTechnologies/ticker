@@ -12,8 +12,12 @@ import AuctionView from './components/buyer/AuctionView.jsx';
 import Signup from './components/generalUser/Signup.jsx';
 import Signin from './components/generalUser/Signin.jsx';
 import UserProfile from './components/generalUser/UserProfile.jsx';
+import SellerView from './components/seller/SellerView.jsx';
+import SellerForm from './components/seller/SellerForm.jsx';
+import createLogger from 'redux-logger';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const logger = createLogger();
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise, logger)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
@@ -25,11 +29,9 @@ ReactDOM.render(
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
         <Route path="account" component={UserProfile} />
+        <Route path="sell" component={SellerView} />
+        <Route path="sell/form" component={SellerForm} />
       </Route>
     </Router>
   </Provider>
   , document.getElementById('app'));
-
-
-// <Route path="sell" components={SellerSearchView} />
-// <Routh path="sell/:event" components={SellerFormView} />

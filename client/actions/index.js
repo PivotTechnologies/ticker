@@ -5,10 +5,11 @@ export const SELECT_EVENT = 'SELECT_EVENT';
 export const FETCH_AUCTIONS = 'FETCH_AUCTIONS';
 export const SELECT_AUCTION = 'SELECT_AUCTION';
 export const PURCHASE_TICKETS = 'PURCHASE_TICKETS';
-export const SUBMIT_FORM = 'SUBMIT_FORM';
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
 export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
+export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
+export const CREATE_AUCTION = 'CREATE_AUCTION';
 
 export function searchEvents(query, date, city) {
   const data = {
@@ -68,14 +69,19 @@ export function purchaseTickets(userId, auctionId) {
   };
 }
 
-export function submitForm() {
+export function createAuction(selectedEvent, startPrice, minPrice, numTickets, userID) {
   const data = {
-    // ADD FORM DATA
+    selectedEvent,
+    startPrice,
+    minPrice,
+    numTickets,
+    userID,
   };
-  const request = axios.post('/createAuction', data);
+
+  const request = axios.post('/api/auction/create', data);
 
   return {
-    type: SUBMIT_FORM,
+    type: CREATE_AUCTION,
     payload: request,
   };
 }
@@ -122,6 +128,21 @@ export function fetchUserActivity(userId) {
 
   return {
     type: FETCH_USER_ACTIVITY,
+    payload: request,
+  };
+}
+
+export function searchSeatGeek(query) {
+  const data = {
+    params: {
+      query,
+    },
+  };
+
+  const request = axios.get('/api/event/sellerSearch', data);
+
+  return {
+    type: SEARCH_SEATGEEK,
     payload: request,
   };
 }

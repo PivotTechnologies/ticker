@@ -20,9 +20,13 @@ module.exports = {
             .then( hash => {
               newUser.update({ password: hash });
               console.log("\033[34mNew user created. \033[0m");
-              res.send('New user created.');
+              res.json({
+                id: user.id,
+                email: user.email,
+                username: user.username,
+              });
             })
-            .catch( error => console.log("Password hashing error: ", erorr) )
+            .catch( error => console.log("Password hashing error: ", error) )
         })
         .catch( err => {
           console.log(err);
@@ -51,7 +55,11 @@ module.exports = {
             password.compare(req.body.password, user.password)
               .then( result => {
                 console.log('\033[34mUser logged in. \033[0m');
-                res.send('Logged in.');
+                res.json({
+                  id: user.id,
+                  email: user.email,
+                  username: user.username,
+                });
               })
               .catch( error => {
                 res.status(500).send('Password incorrect.');

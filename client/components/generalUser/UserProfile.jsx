@@ -7,7 +7,96 @@ import { fetchUserActivity } from '../../actions/index';
 
 class UserProfile extends React.Component {
   componentWillMount() {
-    this.props.fetchUserActivity(this.props.user.id);
+    this.props.fetchUserActivity(localStorage.getItem('userId'));
+  }
+
+  renderBuyerHistory() {
+    if (!this.props.userActivity.buyerActivity.length) {
+      return (
+        <div>
+          <h3>Upcoming Events:</h3>
+          <span>You have not purchased tickets for any upcoming events.</span>
+        </div>
+      );
+    }
+
+    return (
+      this.props.userActivity.buyerActivity.map(auction => (
+        <div className="activity-item" key={auction.id}>
+          <p>Number of Tickets: {auction.numTickets}</p>
+          <p>Sale Price: {auction.currentPrice}</p>
+        </div>
+      ))
+    );
+  }
+
+  renderCurrentlySelling() {
+    if (!this.props.userActivity.sellerActivity.on_sale.length) {
+      return (
+        <div>
+          <h3>Currently Selling:</h3>
+          <span>You are not currently selling any tickets.</span>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <h3>Currently Selling:</h3>
+        {this.props.userActivity.sellerActivity.on_sale.map(auction => (
+          <div className="activity-item" key={auction.id}>
+            <p>Number of Tickets: {auction.numTickets}</p>
+            <p>Sale Price: {auction.currentPrice}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  renderSold() {
+    if (!this.props.userActivity.sellerActivity.sold.length) {
+      return (
+        <div>
+          <h3>Sold:</h3>
+          <span>You have not sold any tickets.</span>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <h3>Sold:</h3>
+        {this.props.userActivity.sellerActivity.sold.map(auction => (
+          <div className="activity-item" key={auction.id}>
+            <p>Number of Tickets: {auction.numTickets}</p>
+            <p>Sale Price: {auction.currentPrice}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  renderExpired() {
+    if (!this.props.userActivity.sellerActivity.expired.length) {
+      return (
+        <div>
+          <h3>Expired:</h3>
+          <span>You do not have any expired auctions.</span>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <h3>Expired:</h3>
+        {this.props.userActivity.sellerActivity.expired.map(auction => (
+          <div className="activity-item" key={auction.id}>
+            <p>Number of Tickets: {auction.numTickets}</p>
+            <p>Sale Price: {auction.currentPrice}</p>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   render() {
@@ -21,45 +110,21 @@ class UserProfile extends React.Component {
 
     if (this.props.userActivity.buyerActivity) {
       return (
-        <div>
+        <Paper zDepth={0}>
           <h1>My Account</h1>
           <Paper zDepth={2}>
             <Tabs inkBarStyle={inkBarStyle}>
               <Tab style={tabStyle} label="Buyer History">
-                {this.props.userActivity.buyerActivity.map(auction => (
-                  <div className="activity-item" key={auction.id}>
-                    <p>Number of Tickets: {auction.numTickets}</p>
-                    <p>Sale Price: {auction.currentPrice}</p>
-                  </div>
-                ))}
+                {this.renderBuyerHistory()}
               </Tab>
               <Tab style={tabStyle} label="Seller History">
-                <h3>Currently Selling:</h3>
-                {this.props.userActivity.sellerActivity.on_sale.map(auction => (
-                  <div className="activity-item" key={auction.id}>
-                    <p>Number of Tickets: {auction.numTickets}</p>
-                    <p>Sale Price: {auction.currentPrice}</p>
-                  </div>
-                ))}
-
-                <h3>Sold:</h3>
-                {this.props.userActivity.sellerActivity.sold.map(auction => (
-                  <div className="activity-item" key={auction.id}>
-                    <p>Number of Tickets: {auction.numTickets}</p>
-                    <p>Sale Price: {auction.currentPrice}</p>
-                  </div>
-                ))}
-                <h3>Expired:</h3>
-                {this.props.userActivity.sellerActivity.expired.map(auction => (
-                  <div className="activity-item" key={auction.id}>
-                    <p>Number of Tickets: {auction.numTickets}</p>
-                    <p>Sale Price: {auction.currentPrice}</p>
-                  </div>
-                ))}
+                {this.renderCurrentlySelling()}
+                {this.renderSold()}
+                {this.renderExpired()}
               </Tab>
             </Tabs>
           </Paper>
-        </div>
+        </Paper>
       );
     }
 

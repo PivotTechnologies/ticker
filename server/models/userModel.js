@@ -33,12 +33,10 @@ const User = connection.define('user', {
   average_rating: {
     type: Sequelize.INTEGER,
     defaultValue: 5
+  },
+  meta: {
+    type: Sequelize.JSON
   }
 });
-
-connection
-  .sync()
-  .then( err => console.log('\033[34mUser model sync() successful. \033[0m') )
-  .catch( err => console.log('An error occurred while creating the table:', err) )
 
 module.exports = User;

@@ -34,8 +34,8 @@ class App extends React.Component {
       <MuiThemeProvider>
         <div className="app">
           <NavBar />
-          {this.props.children}
           {this.renderSpinner()}
+          {this.props.children}
         </div>
       </MuiThemeProvider>
     );

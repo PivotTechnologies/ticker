@@ -1,4 +1,6 @@
 import React from 'react';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
@@ -18,17 +20,21 @@ class SellerEventListItem extends React.Component {
 
   render() {
     return (
-      <div className="list-item" onClick={this.handleClick}>
-        <p> Name: { this.props.event.name } </p>
-        <p> Date: { this.props.event.datetime_local }, &nbsp;
-          Timezone: { this.props.event.timezone } </p>
-        <p> Venue: { this.props.event.venue } </p>
-        <p> Address: { this.props.event.address }, &nbsp;
-          { this.props.event.city }, &nbsp;
-          {this.props.event.state } &nbsp;
-          {this.props.event.zip }
-        </p>
-      </div>
+      <Card className="list-item" onClick={this.handleClick}>
+        <CardTitle
+          title={this.props.event.name}
+          subtitle={
+            <div>
+              <div>
+                {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
+              </div>
+              <div>
+                {moment(this.props.event.datetime_local).format('MMMM Do, YYYY [@] h:mma')}
+              </div>
+            </div>
+          }
+        />
+      </Card>
     );
   }
 }

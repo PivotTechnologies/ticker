@@ -87,7 +87,7 @@ body {
   text-indent: 10px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 920px) {
   .search-bar {
     width: 310px;
   }
@@ -117,6 +117,12 @@ body {
 
 .list-item:hover {
   cursor: pointer;
+}
+
+@media (max-width: 920px) {
+  .list {
+    width: 500px;
+  }
 }
 
 /**************** USER PROFILE ****************/

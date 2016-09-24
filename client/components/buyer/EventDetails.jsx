@@ -2,15 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const EventDetails = ({ activeEvent }) => {
-  if (activeEvent) { // won't need this if when we use react router!!
-    return (
-      <div>
-        You are viewing the event: {activeEvent.name}
-      </div>
-    );
-  }
-
-  return <div />;
+  return (
+    <div>
+      You are viewing the event: {activeEvent.name}
+    </div>
+  );
 };
 
 function mapStateToProps(state) {

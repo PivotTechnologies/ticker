@@ -17,7 +17,7 @@ class SellerEventList extends React.Component {
     }
 
     return (
-      <div>
+      <div className="list">
         { this.renderEventList() }
       </div>
     );

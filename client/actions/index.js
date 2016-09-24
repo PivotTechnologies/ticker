@@ -10,6 +10,7 @@ export const SIGNIN = 'SIGNIN';
 export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
 export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
 export const CREATE_AUCTION = 'CREATE_AUCTION';
+export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 
 export function searchEvents(query, date, city) {
   const data = {
@@ -144,5 +145,12 @@ export function searchSeatGeek(query) {
   return {
     type: SEARCH_SEATGEEK,
     payload: request,
+  };
+}
+
+export function clearEvents() {
+  console.log('hey')
+  return {
+    type: CLEAR_EVENTS,
   };
 }

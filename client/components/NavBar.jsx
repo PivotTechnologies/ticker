@@ -14,7 +14,7 @@ class NavBar extends React.Component {
     super(props);
 
     this.state = {
-      menuOpen: false
+      menuOpen: false,
     };
 
     this.openMenu = this.openMenu.bind(this);
@@ -65,7 +65,7 @@ class NavBar extends React.Component {
           />
           <MenuItem
             primaryText="Sign Out"
-            onTouchTap={event => {
+            onTouchTap={(event) => {
               this.signOut();
               this.routeToBuyerSearch();
             }}
@@ -106,20 +106,20 @@ class NavBar extends React.Component {
             title="Actions"
             showMenuIconButton={false}
           />
-        <MenuItem
-          primaryText="Find Tickets"
-          onTouchTap={event => {
-            this.closeMenu();
-            this.routeToBuyerSearch();
-          }}
-        />
-        <MenuItem
-          primaryText="Sell Tickets"
-          onTouchTap={event => {
-            this.closeMenu();
-            this.routeToSellerSearch();
-          }}
-        />
+          <MenuItem
+            primaryText="Find Tickets"
+            onTouchTap={(event) => {
+              this.closeMenu();
+              this.routeToBuyerSearch();
+            }}
+          />
+          <MenuItem
+            primaryText="Sell Tickets"
+            onTouchTap={(event) => {
+              this.closeMenu();
+              this.routeToSellerSearch();
+            }}
+          />
         </Drawer>
       </div>
     );

@@ -42,13 +42,13 @@ body {
   font-size: .75em;
 }
 
-/**************** BUYER SEARCH ****************/
+/**************** SEARCH ****************/
 
 .search-bar {
-  width: 70%;
+  width: 900px;
 }
 
-.search-bar-form {
+.search-bar-form, .seller-search-bar-form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,14 +62,57 @@ body {
   text-indent: 10px;
 }
 
+.event-field {
+  min-width: 310px;
+  padding-right: 20px
+}
+
+.date-field {
+  min-width: 310px;
+  text-indent: 5px;
+}
+
+.city-field {
+  min-width: 200px;
+  padding-right: 5px;
+}
+
+.seller-search-bar {
+  width: 360px;
+}
+
+.seller-event-field {
+  min-width: 310px;
+  padding-right: 5px;
+  text-indent: 10px;
+}
+
+@media (max-width: 900px) {
+  .search-bar {
+    width: 310px;
+  }
+
+  .search-bar-form {
+    flex-direction: column;
+  }
+
+  .search-field-text {
+    border-right: none;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 0;
+    margin: 0;
+    min-width: 310px;
+  }
+}
+
 /**************** RESULTS ****************/
 
 .list {
-  width: 70%
+  width: 920px;
 }
 
 .list-item {
-  border: 1px solid black;
+  margin: 10px;
 }
 
 .list-item:hover {

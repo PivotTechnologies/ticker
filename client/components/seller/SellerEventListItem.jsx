@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { selectEvent } from '../../actions/index';
 
-class SellerEventItem extends React.Component {
+class SellerEventListItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,8 +13,7 @@ class SellerEventItem extends React.Component {
 
   handleClick() {
     this.props.selectEvent(this.props.event);
-    console.log('this.props.event:', this.props.event);
-    browserHistory.push(`/sell/form`);
+    browserHistory.push('/sell/form');
   }
 
   render() {
@@ -38,4 +37,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ selectEvent }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SellerEventItem);
+export default connect(null, mapDispatchToProps)(SellerEventListItem);

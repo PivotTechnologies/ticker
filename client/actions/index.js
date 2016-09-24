@@ -11,6 +11,7 @@ export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
 export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
 export const CREATE_AUCTION = 'CREATE_AUCTION';
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
+export const START_SPINNER = 'START_SPINNER';
 
 export function searchEvents(query, date, city) {
   const data = {
@@ -21,7 +22,7 @@ export function searchEvents(query, date, city) {
     },
   };
 
-  const request = axios.get('api/event/buyerSearch', data);
+  const request = axios.get('/api/event/buyerSearch', data);
 
   return {
     type: SEARCH_EVENTS,
@@ -38,14 +39,16 @@ export function selectEvent(event) {
 
 export function fetchAuctions(eventId) {
   const data = {
-    eventId,
+    params: {
+      eventId,
+    },
   };
 
-  // const request = axios.post('/fetchAuctions', data);
+  const request = axios.get('/api/auction/fetch', data);
 
   return {
     type: FETCH_AUCTIONS,
-    payload: data, // change to request when axios call added
+    payload: request,
   };
 }
 
@@ -78,7 +81,7 @@ export function createAuction(event, startPrice, minPrice, numTickets, userId) {
     numTickets,
     userId,
   };
-  console.log('inside of createAuction:', data);
+
   const request = axios.post('/api/auction/create', data);
 
   return {
@@ -149,8 +152,13 @@ export function searchSeatGeek(query) {
 }
 
 export function clearEvents() {
-  console.log('hey')
   return {
     type: CLEAR_EVENTS,
+  };
+}
+
+export function startSpinner() {
+  return {
+    type: START_SPINNER,
   };
 }

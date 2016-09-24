@@ -1,4 +1,8 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
+import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { signin } from '../../actions/index';
@@ -33,24 +37,33 @@ class Signin extends React.Component {
 
   render() {
     return (
-      <form className="auth" onSubmit={this.onFormSubmit}>
-        <input
-          className="auth-input"
-          type="text"
-          onChange={this.onUsernameChange}
-          value={this.state.username}
-          placeholder="username"
-        />
-
-        <input
-          className="auth-input"
-          type="password"
-          onChange={this.onPasswordChange}
-          value={this.state.password}
-          placeholder="password"
-        />
-        <button type="submit">Sign In</button>
-      </form>
+      <Paper zDepth={0} className="main-content">
+        <h1>Sign In</h1>
+        <form className="auth" onSubmit={this.onFormSubmit}>
+          <Paper zDepth={2} className="auth-input">
+            <TextField
+              className="auth-input-text"
+              onChange={this.onUsernameChange}
+              value={this.state.username}
+              hintText="Username"
+              underlineShow={false}
+            />
+            <Divider />
+            <TextField
+              className="auth-input-text"
+              onChange={this.onPasswordChange}
+              value={this.state.password}
+              hintText="Password"
+              underlineShow={false}
+            />
+            <Divider />
+          </Paper>
+          <RaisedButton type="submit">Sign In</RaisedButton>
+          <p className="auth-message">
+            Don't have an account? <a href="/signup">Sign Up</a>
+          </p>
+        </form>
+      </Paper>
     );
   }
 }

@@ -1,14 +1,56 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
+import { ToolbarGroup } from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FaceIcon from 'material-ui/svg-icons/action/face';
 import FlatButton from 'material-ui/FlatButton';
+import Drawer from 'material-ui/Drawer';
+import { browserHistory } from 'react-router';
 
 class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      menuOpen: false
+    };
+
+    this.openMenu = this.openMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
+
+  openMenu(event) {
+    this.setState({ menuOpen: true });
+  }
+
+  closeMenu(event) {
+    this.setState({ menuOpen: false });
+  }
+
+  routeToBuyerSearch(event) {
+    browserHistory.push('/');
+  }
+
+  routeToSellerSearch(event) {
+    browserHistory.push('/sell');
+  }
+
+  routeToAuth(event) {
+    browserHistory.push('/signin');
+  }
+
+  routeToUserProfile(event) {
+    browserHistory.push('/account');
+  }
+
+  signOut(event) {
+    localStorage.removeItem('userToken');
+  }
+
   renderRightElement() {
-    if (true){//(localStorage.getItem('userToken')) { // IF LOGGED IN, SHOW ACCOUNT STUFF
+    if (localStorage.getItem('userToken')) {
       return (
         <IconMenu
           iconButtonElement={
@@ -17,35 +59,69 @@ class NavBar extends React.Component {
           targetOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         >
-          <MenuItem primaryText="My Account" />
-          <MenuItem primaryText="Sign Out" />
+          <MenuItem
+            primaryText="My Account"
+            onTouchTap={this.routeToUserProfile}
+          />
+          <MenuItem
+            primaryText="Sign Out"
+            onTouchTap={event => {
+              this.signOut();
+              this.routeToBuyerSearch();
+            }}
+          />
         </IconMenu>
       );
     }
-    // IF NOT LOGGED IN, SHOW SIGNIN/SIGNUP BUTTON
+
     return (
-      <FlatButton label="Sign In / Sign Up" />
+      <FlatButton
+        label="Sign In"
+        onClick={this.routeToAuth}
+      />
     );
   }
 
   render() {
     return (
-      <AppBar
-        title="ticker"
-        iconElementLeft={
-          <IconMenu
-            iconButtonElement={
-              <IconButton><FaceIcon /></IconButton>
-            }
-            targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-            anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-          >
-            <MenuItem primaryText="My Account" />
-            <MenuItem primaryText="Sign Out" />
-          </IconMenu>
-        }
-        iconElementRight={this.renderRightElement()}
-      />
+      <div>
+        <AppBar
+          className="nav-bar"
+          title={
+            <div className="navbar-title">
+              ticker
+            </div>
+          }
+          onTitleTouchTap={this.routeToBuyerSearch}
+          onLeftIconButtonTouchTap={this.openMenu}
+          iconElementRight={this.renderRightElement()}
+        />
+        <Drawer
+          docked={false}
+          width={200}
+          open={this.state.menuOpen}
+          onRequestChange={this.closeMenu}
+        >
+          <AppBar
+            title="Actions"
+            showMenuIconButton={false}
+          />
+        <MenuItem
+          primaryText="Find Tickets"
+          onTouchTap={event => {
+            this.closeMenu();
+            this.routeToBuyerSearch();
+          }}
+        />
+        <MenuItem
+          primaryText="Sell Tickets"
+          onTouchTap={event => {
+            this.closeMenu();
+            this.routeToSellerSearch();
+          }}
+        />
+        </Drawer>
+      </div>
     );
   }
 

@@ -15,7 +15,6 @@ import UserProfile from './components/generalUser/UserProfile.jsx';
 import SellerView from './components/seller/SellerView.jsx';
 import SellerForm from './components/seller/SellerForm.jsx';
 
-const logger = createLogger();
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension():f=>f);
 

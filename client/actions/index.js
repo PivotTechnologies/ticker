@@ -149,7 +149,7 @@ export function searchSeatGeek(query) {
 }
 
 export function clearEvents() {
-  console.log('hey')
+  console.log('hey');
   return {
     type: CLEAR_EVENTS,
   };

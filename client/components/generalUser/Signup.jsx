@@ -16,6 +16,8 @@ class Signup extends React.Component {
       username: '',
       email: '',
       password: '',
+      confirmPassword: '',
+      open: false,
     };
 
     this.onFirstnameChange = this.onFirstnameChange.bind(this);
@@ -23,6 +25,7 @@ class Signup extends React.Component {
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onConfirmPasswordChange = this.onConfirmPasswordChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
@@ -46,17 +49,28 @@ class Signup extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  onConfirmPasswordChange(event) {
+    this.setState({ confirmPassword: event.target.value });
+  }
+
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.signup(this.state.firstName, this.state.lastName, this.state.username,
-      this.state.email, this.state.password);
-    this.setState({
-      firstName: '',
-      lastName: '',
-      username: '',
-      email: '',
-      password: '',
-    });
+    if (this.state.password === this.state.confirmPassword) {
+      this.props.signup(this.state.firstName, this.state.lastName, this.state.username,
+        this.state.email, this.state.password);
+      this.setState({
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+    } else {
+      // Need to add error window/popup
+      
+      console.log('Passwords do not match');
+    }
   }
 
   render() {
@@ -86,6 +100,7 @@ class Signup extends React.Component {
               onChange={this.onEmailChange}
               value={this.state.email}
               hintText="E-mail Address"
+              type="email"
               underlineShow={false}
             />
             <Divider />
@@ -102,9 +117,18 @@ class Signup extends React.Component {
               onChange={this.onPasswordChange}
               value={this.state.password}
               hintText="Password"
+              type="password"
               underlineShow={false}
             />
             <Divider />
+            <TextField
+            className="auth-input-text"
+            onChange={this.onConfirmPasswordChange}
+            value={this.state.confirmPassword}
+            hintText="Confirm Password"
+            type="password"
+            underlineShow={false}
+            />
           </Paper>
           <RaisedButton type="submit">Sign Up</RaisedButton>
           <p className="auth-message">

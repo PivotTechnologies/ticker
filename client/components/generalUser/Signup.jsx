@@ -1,4 +1,8 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
+import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { signup } from '../../actions/index';
@@ -57,48 +61,57 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <form className="auth" onSubmit={this.onFormSubmit}>
-        <input
-          className="auth-input"
-          type="text"
-          onChange={this.onFirstnameChange}
-          value={this.state.firstName}
-          placeholder="First Name"
-        />
-
-        <input
-          className="auth-input"
-          type="text"
-          onChange={this.onLastnameChange}
-          value={this.state.lastName}
-          placeholder="Last Name"
-        />
-
-        <input
-          className="auth-input"
-          type="text"
-          onChange={this.onUsernameChange}
-          value={this.state.username}
-          placeholder="Username"
-        />
-
-        <input
-          className="auth-input"
-          type="email"
-          onChange={this.onEmailChange}
-          value={this.state.email}
-          placeholder="Email"
-        />
-
-        <input
-          className="auth-input"
-          type="password"
-          onChange={this.onPasswordChange}
-          value={this.state.password}
-          placeholder="Password"
-        />
-        <button type="submit">Sign Up</button>
-      </form>
+      <Paper zDepth={0} className="main-content">
+        <h1>Sign Up</h1>
+        <form className="auth" onSubmit={this.onFormSubmit}>
+          <Paper zDepth={2} className="auth-input">
+            <TextField
+              className="auth-input-text"
+              onChange={this.onFirstnameChange}
+              value={this.state.firstName}
+              hintText="First Name"
+              underlineShow={false}
+            />
+            <Divider />
+            <TextField
+              className="auth-input-text"
+              onChange={this.onLastnameChange}
+              value={this.state.lastName}
+              hintText="Last Name"
+              underlineShow={false}
+            />
+            <Divider />
+            <TextField
+              className="auth-input-text"
+              onChange={this.onEmailChange}
+              value={this.state.email}
+              hintText="E-mail Address"
+              underlineShow={false}
+            />
+            <Divider />
+            <TextField
+              className="auth-input-text"
+              onChange={this.onUsernameChange}
+              value={this.state.username}
+              hintText="Username"
+              underlineShow={false}
+            />
+            <Divider />
+            <TextField
+              className="auth-input-text"
+              onChange={this.onPasswordChange}
+              value={this.state.password}
+              hintText="Password"
+              underlineShow={false}
+            />
+            <Divider />
+          </Paper>
+          <RaisedButton type="submit">Sign Up</RaisedButton>
+          <p className="auth-message">
+            Already have an account? <a href="/signin">Sign In</a>
+          </p>
+        </form>
+      </Paper>
     );
   }
 }

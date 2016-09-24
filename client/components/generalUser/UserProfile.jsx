@@ -134,7 +134,6 @@ class UserProfile extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
     userActivity: state.userActivity,
   };
 }

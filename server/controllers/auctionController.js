@@ -59,6 +59,7 @@ module.exports = {
           })
           .then( (event) => {
             console.log('New event created: ', event.dataValues);
+            auctionEventId = event.dataValues.id;
             createAuction();
           })
           .catch( err => console.log('Error:', err) );
@@ -66,6 +67,7 @@ module.exports = {
         /* event found */
         else {
           console.log('Event found: ', event.dataValues);
+          auctionEventId = event.dataValues.id;
           createAuction();
         }
       })

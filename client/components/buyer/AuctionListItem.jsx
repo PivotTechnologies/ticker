@@ -19,8 +19,8 @@ class AuctionListItem extends React.Component {
   render() {
     return (
       <div className="list-item" onClick={this.handleClick}>
-        <p> Number of Tickets: { this.props.auction.num_tickets } </p>
-        <p> Total Price: { this.props.auction.price } </p>
+        <p> Number of Tickets: { this.props.auction.numTickets } </p>
+        <p> Total Price: { this.props.auction.currentPrice } </p>
       </div>
     );
   }

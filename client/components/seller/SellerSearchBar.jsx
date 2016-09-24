@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { searchSeatGeek } from '../../actions/index.js';
+import { searchSeatGeek, startSpinner } from '../../actions/index.js';
 
 class SellerSearchBar extends React.Component {
   constructor(props) {
@@ -24,6 +24,7 @@ class SellerSearchBar extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+    this.props.startSpinner();
     this.props.searchSeatGeek(this.state.query);
     this.setState({ query: '' });
   }
@@ -49,7 +50,7 @@ class SellerSearchBar extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ searchSeatGeek }, dispatch);
+  return bindActionCreators({ searchSeatGeek, startSpinner }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(SellerSearchBar);

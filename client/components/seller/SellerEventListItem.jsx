@@ -4,9 +4,9 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import { selectEvent, fetchAuctions } from '../../actions/index';
+import { selectEvent } from '../../actions/index';
 
-class EventListItem extends React.Component {
+class SellerEventListItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,8 +15,7 @@ class EventListItem extends React.Component {
 
   handleClick() {
     this.props.selectEvent(this.props.event);
-    this.props.fetchAuctions(this.props.event.id);
-    browserHistory.push(`/event/${this.props.event.id}`);
+    browserHistory.push('/sell/form');
   }
 
   render() {
@@ -41,7 +40,7 @@ class EventListItem extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectEvent, fetchAuctions }, dispatch);
+  return bindActionCreators({ selectEvent }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(EventListItem);
+export default connect(null, mapDispatchToProps)(SellerEventListItem);

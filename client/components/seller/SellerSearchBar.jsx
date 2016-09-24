@@ -1,4 +1,8 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
+import ActionSearch from 'material-ui/svg-icons/action/search';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { searchSeatGeek } from '../../actions/index.js';
@@ -26,15 +30,20 @@ class SellerSearchBar extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
-        <input
-          type="text"
-          onChange={this.onQueryChange}
-          value={this.state.query}
-          placeholder="Event"
-        />
-        <button type="submit">Search</button>
-      </form>
+      <Paper zDepth={2} className="seller-search-bar">
+        <form className="seller-search-bar-form" onSubmit={this.onFormSubmit}>
+          <TextField
+            className="seller-event-field"
+            onChange={this.onQueryChange}
+            value={this.state.query}
+            hintText="Search for Events"
+            underlineShow={false}
+          />
+          <IconButton type="submit">
+            <ActionSearch />
+          </IconButton>
+        </form>
+      </Paper>
     );
   }
 }

@@ -1,12 +1,14 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
 import SellerSearchBar from './SellerSearchBar.jsx';
 import SellerEventList from './SellerEventList.jsx';
 
 const SellerView = () => (
-  <div>
+  <Paper className="main-content" zDepth={0}>
+    <h1>Sell Tickets</h1>
     <SellerSearchBar />
     <SellerEventList />
-  </div>
+  </Paper>
 );
 
 export default SellerView;

@@ -7,6 +7,9 @@ import MenuItem from 'material-ui/MenuItem';
 import FaceIcon from 'material-ui/svg-icons/action/face';
 import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { clearEvents } from '../actions/index';
 import { browserHistory } from 'react-router';
 
 class NavBar extends React.Component {
@@ -14,11 +17,13 @@ class NavBar extends React.Component {
     super(props);
 
     this.state = {
-      menuOpen: false
+      menuOpen: false,
     };
 
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.routeToBuyerSearch = this.routeToBuyerSearch.bind(this);
+    this.routeToSellerSearch = this.routeToSellerSearch.bind(this);
   }
 
   openMenu(event) {
@@ -30,10 +35,12 @@ class NavBar extends React.Component {
   }
 
   routeToBuyerSearch(event) {
+    this.props.clearEvents();
     browserHistory.push('/');
   }
 
   routeToSellerSearch(event) {
+    this.props.clearEvents();
     browserHistory.push('/sell');
   }
 
@@ -65,7 +72,7 @@ class NavBar extends React.Component {
           />
           <MenuItem
             primaryText="Sign Out"
-            onTouchTap={event => {
+            onTouchTap={(event) => {
               this.signOut();
               this.routeToBuyerSearch();
             }}
@@ -106,20 +113,20 @@ class NavBar extends React.Component {
             title="Actions"
             showMenuIconButton={false}
           />
-        <MenuItem
-          primaryText="Find Tickets"
-          onTouchTap={event => {
-            this.closeMenu();
-            this.routeToBuyerSearch();
-          }}
-        />
-        <MenuItem
-          primaryText="Sell Tickets"
-          onTouchTap={event => {
-            this.closeMenu();
-            this.routeToSellerSearch();
-          }}
-        />
+          <MenuItem
+            primaryText="Find Tickets"
+            onTouchTap={(event) => {
+              this.closeMenu();
+              this.routeToBuyerSearch();
+            }}
+          />
+          <MenuItem
+            primaryText="Sell Tickets"
+            onTouchTap={(event) => {
+              this.closeMenu();
+              this.routeToSellerSearch();
+            }}
+          />
         </Drawer>
       </div>
     );
@@ -127,11 +134,8 @@ class NavBar extends React.Component {
 
 }
 
-export default NavBar;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ clearEvents }, dispatch);
+}
 
-// <a href="/"><h1>ticker</h1></a>
-// <a href="/signup">Sign Up</a>
-// <a href="/signin">Sign In</a>
-// <a href="/account">My Account</a>
-// <a href="/">Find Tickets</a>
-// <a href="/sell">Sell Tickets</a>
+export default connect(null, mapDispatchToProps)(NavBar);

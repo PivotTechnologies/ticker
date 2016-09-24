@@ -55,7 +55,7 @@ class BuyerSearchBar extends React.Component {
       <Paper zDepth={2} className="search-bar">
         <form className="search-bar-form" onSubmit={this.onFormSubmit}>
           <TextField
-            className="search-field-border search-field-text"
+            className="event-field search-field-border search-field-text"
             onChange={this.onQueryChange}
             value={this.state.query}
             hintText="Search for Events"
@@ -74,7 +74,7 @@ class BuyerSearchBar extends React.Component {
             cancelLabel="Any Date"
           />
           <TextField
-            className="search-field-text"
+            className="city-field search-field search-field-text"
             onChange={this.onCityChange}
             value={this.state.city}
             hintText="City"

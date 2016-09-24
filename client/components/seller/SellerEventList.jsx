@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SellerEventItem from './SellerEventItem.jsx';
+import SellerEventListItem from './SellerEventListItem.jsx';
 
 class SellerEventList extends React.Component {
   renderEventList() {
     return this.props.events.map((event, idx) =>
-      <SellerEventItem key={idx} event={event} />
+      <SellerEventListItem key={idx} event={event} />
     );
   }
 
@@ -17,7 +17,7 @@ class SellerEventList extends React.Component {
     }
 
     return (
-      <div>
+      <div className="list">
         { this.renderEventList() }
       </div>
     );

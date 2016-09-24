@@ -5,8 +5,12 @@ const connection = require('../config/db');
 
 Event.hasMany(Auction);
 Auction.belongsTo(Event);
-Auction.hasOne(User, { as: 'seller'} );
-Auction.hasOne(User, { as: 'buyer' });
+
+// Auction.hasOne(User, { as: 'seller'} );
+// Auction.hasOne(User, { as: 'buyer' });
+
+// line below is the opposite of line above
+// User.hasOne(Auction);
 
 connection
   .sync()

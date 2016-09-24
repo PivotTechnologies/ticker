@@ -2,13 +2,13 @@ const Sequelize = require('sequelize');
 const connection = require('../config/db');
 
 const Auction = connection.define('auction', {
-  sellerId: {
+  sellerId: { // remove
     type: Sequelize.INTEGER
   },
-  buyerId: {
+  buyerId: { // remove
     type: Sequelize.INTEGER
   },
-  eventId: {
+  eventId: { // remove
     type: Sequelize.INTEGER
   },
   startPrice: {
@@ -23,15 +23,19 @@ const Auction = connection.define('auction', {
   numTickets: {
     type: Sequelize.INTEGER
   },
+  sellDate: {
+    type: Sequelize.DATE
+  },
+  /* Statuses: 'On Sale', 'Sold', 'Expired' */
   status: {
+    type: Sequelize.STRING
+  },
+  eventName: {
+    type: Sequelize.STRING
+  },
+  eventDate: {
     type: Sequelize.STRING
   }
 });
-
-
-connection
-  .sync()
-  .then( err => console.log('\033[34mAuction model sync() successful. \033[0m') )
-  .catch( err => console.log('An error occurred while creating the table:', err) )
 
 module.exports = Auction;

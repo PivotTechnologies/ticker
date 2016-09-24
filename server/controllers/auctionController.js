@@ -1,11 +1,9 @@
-const axios = require('axios');
-const Auction = require('../models/auctionModel');
-const Event = require('../models/eventModel');
+const models = require('../models/models');
 
 module.exports = {
 
     create: (req, res) => {
-      Event.findOne({
+      models.Event.findOne({
           where: {
             id: req.body.eventId
           }
@@ -17,7 +15,7 @@ module.exports = {
             res.send("Invalid eventId.")
           }
           else {
-            const newAuction = Auction.create({
+            const newAuction = models.Auction.create({
               sellerId: req.body.sellerId,
               buyerId: '',
               eventId: req.body.eventId,
@@ -43,7 +41,7 @@ module.exports = {
 
     fetch: (req, res) => {
       const results = [];
-      Auction.findAll({
+      models.Auction.findAll({
         where: {
           eventId: req.query.eventId,
         }

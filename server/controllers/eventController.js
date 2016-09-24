@@ -1,11 +1,11 @@
-const Event = require('../models/eventModel');
+const models = require('../models/models');
 const seatgeek = require('../config/seatgeekHelper');
 
 module.exports = {
 
     findOrMake: (req, res) => {
 
-      Event.findOne({
+      models.Event.findOne({
           where: {
             name: {
               $iLike: req.body.event.name
@@ -20,7 +20,7 @@ module.exports = {
         })
         .then( event => {
           if(!event){
-            const newEvent = Event.create({
+            const newEvent = models.Event.create({
               name: req.body.event.name,
               venue: req.body.event.venue,
               city: req.body.event.city,
@@ -62,7 +62,7 @@ module.exports = {
         where.city = { $iLike: req.query.city }
       }
 
-      Event.findAll({
+      models.Event.findAll({
         where
       })
       .then( events => {

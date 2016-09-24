@@ -1,11 +1,10 @@
-const User = require('../models/userModel');
-const Auction = require('../models/auctionModel');
+const models = require('../models/models');
 const password = require('../config/passwordHelper');
 
 module.exports = {
 
     signup: (req, res) => {
-      const newUser = User.build({
+      const newUser = models.User.build({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: req.body.password,
@@ -41,7 +40,7 @@ module.exports = {
       if (!req.body.password) {
         res.status(500).send('Password required.');
       }
-      User.findOne({
+      models.User.findOne({
           where: {
             username: req.body.username
           },
@@ -84,7 +83,7 @@ module.exports = {
         },
       };
 
-      Auction.findAll({
+      models.Auction.findAll({
         where: {
           $or: [
             {

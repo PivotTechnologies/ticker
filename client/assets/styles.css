@@ -1,9 +1,15 @@
+/**************** GLOBAL ****************/
+
+body {
+  margin: 0;
+}
+
 /**************** NAV ****************/
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.navbar-title {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 2em;
 }
 
 /**************** MAIN CONTENT ****************/
@@ -21,10 +27,19 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 20%;
 }
 
 .auth-input {
-  width: 20%;
+  margin-bottom: 20px;
+}
+
+.auth-input-text {
+  text-indent: 10px;
+}
+
+.auth-message {
+  font-size: .75em;
 }
 
 /**************** BUYER SEARCH ****************/

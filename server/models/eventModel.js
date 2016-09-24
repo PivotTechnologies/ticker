@@ -39,7 +39,7 @@ const Event = connection.define('event', {
     allowNull: false
   },
   timezone: {
-    type: Sequelize.DATE,
+    type: Sequelize.STRING,
     allowNull: false
   },
   latitude: {

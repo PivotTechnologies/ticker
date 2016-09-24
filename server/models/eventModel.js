@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const connection = require('../config/db');
-const Auction = require('../models/auctionModel');
 
 const Event = connection.define('event', {
   name: {
@@ -15,33 +14,45 @@ const Event = connection.define('event', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  // address: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false
-  // },
+  image: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   city: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  // zip: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false
-  // },
-  time: {
-    type: Sequelize.TIME,
+  zip: {
+    type: Sequelize.STRING,
     allowNull: false
   },
-  date: {
-    type: Sequelize.DATEONLY,
+  state: {
+    type: Sequelize.STRING,
     allowNull: false
   },
+  datetime_local: {
+    type: Sequelize.DATE,
+    allowNull: false
+  },
+  timezone: {
+    type: Sequelize.DATE,
+    allowNull: false
+  },
+  latitude: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  longitude: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  meta: {
+    type: Sequelize.JSON
+  }
 });
-
-Event.hasMany(Auction, {as: 'Auctions'});
-
-connection
-  .sync()
-  .then( err => console.log('\033[34mEvent model sync() successful. \033[0m') )
-  .catch( err => console.log('An error occurred while creating the table:', err) )
 
 module.exports = Event;

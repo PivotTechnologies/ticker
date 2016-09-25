@@ -8,7 +8,7 @@ class SellerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: localStorage.getItem('userId'),
+      userId: this.props.user.id,
       startPrice: '',
       minPrice: '',
       numTickets: '',
@@ -98,6 +98,7 @@ class SellerForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     activeEvent: state.activeEvent,
   };
 }

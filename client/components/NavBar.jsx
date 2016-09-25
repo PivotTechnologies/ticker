@@ -58,7 +58,7 @@ class NavBar extends React.Component {
   }
 
   renderRightElement() {
-    if (localStorage.getItem('userId')) {
+    if (this.props.user.token) {
       return (
         <IconMenu
           iconButtonElement={

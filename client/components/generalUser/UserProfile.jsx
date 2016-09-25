@@ -7,7 +7,7 @@ import { fetchUserActivity } from '../../actions/index';
 
 class UserProfile extends React.Component {
   componentWillMount() {
-    this.props.fetchUserActivity(localStorage.getItem('userId'));
+    this.props.fetchUserActivity(this.props.user.id);
   }
 
   renderBuyerHistory() {
@@ -134,6 +134,7 @@ class UserProfile extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     userActivity: state.userActivity,
   };
 }

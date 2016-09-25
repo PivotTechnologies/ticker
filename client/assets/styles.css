@@ -7,6 +7,8 @@ body {
 .app {
   position: relative;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /**************** NAV ****************/
@@ -24,6 +26,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  flex: 1;
 }
 
 /**************** AUTH ****************/
@@ -132,6 +135,14 @@ body {
 
 /**************** USER PROFILE ****************/
 
+.account-activity {
+  width: 70%;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
 .activity-item {
   border: 1px solid black;
 }
@@ -140,5 +151,6 @@ body {
 
 .spinner {
   position: absolute;
+  top: 64px;
   width: 100%;
 }

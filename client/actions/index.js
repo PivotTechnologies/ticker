@@ -7,6 +7,8 @@ export const SELECT_AUCTION = 'SELECT_AUCTION';
 export const PURCHASE_TICKETS = 'PURCHASE_TICKETS';
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
+export const AUTHENTICATE = 'AUTHENTICATE';
+export const SIGNOUT = 'SIGNOUT';
 export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
 export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
 export const CREATE_AUCTION = 'CREATE_AUCTION';
@@ -118,6 +120,27 @@ export function signin(username, password) {
   return {
     type: SIGNIN,
     payload: request,
+  };
+}
+
+export function authenticate(token) {
+  const data = {
+    token,
+  };
+
+  const request = axios.post('/api/user/authenticate', data);
+
+  return {
+    type: AUTHENTICATE,
+    payload: request.then((response) => {
+      localStorage.setItem('userToken', response.data.token);
+    }),
+  };
+}
+
+export function signout() {
+  return {
+    type: SIGNOUT,
   };
 }
 

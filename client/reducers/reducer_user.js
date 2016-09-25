@@ -1,4 +1,4 @@
-import { SIGNIN, SIGNUP } from '../actions/index';
+import { SIGNIN, SIGNUP, AUTHENTICATE, SIGNOUT } from '../actions/index';
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -6,19 +6,22 @@ export default function (state = {}, action) {
       if (action.payload.response) {
         return action.payload.response.data;
       }
-      localStorage.setItem('userId', action.payload.data.id);
-      localStorage.setItem('email', action.payload.data.email);
-      localStorage.setItem('username', action.payload.data.username);
       return action.payload.data;
 
     case SIGNUP:
       if (action.payload.response) {
         return action.payload.response.data;
       }
-      localStorage.setItem('userId', action.payload.data.id);
-      localStorage.setItem('email', action.payload.data.email);
-      localStorage.setItem('username', action.payload.data.username);
       return action.payload.data;
+
+    case AUTHENTICATE:
+      if (action.payload.response) { // IF TOKEN NOT VALID
+        return {};
+      }
+      return action.payload.data;
+
+    case SIGNOUT:
+      return {};
 
     default:
       return state;

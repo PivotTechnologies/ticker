@@ -9,7 +9,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { clearEvents } from '../actions/index';
+import { clearEvents, signout } from '../actions/index';
 import { browserHistory } from 'react-router';
 
 class NavBar extends React.Component {
@@ -53,11 +53,12 @@ class NavBar extends React.Component {
   }
 
   signOut(event) {
-    localStorage.removeItem('userToken');
+    this.props.signout();
+    this.routeToAuth();
   }
 
   renderRightElement() {
-    if (localStorage.getItem('userToken')) {
+    if (this.props.user.username) {
       return (
         <IconMenu
           iconButtonElement={
@@ -74,7 +75,6 @@ class NavBar extends React.Component {
             primaryText="Sign Out"
             onTouchTap={(event) => {
               this.signOut();
-              this.routeToBuyerSearch();
             }}
           />
         </IconMenu>
@@ -134,8 +134,14 @@ class NavBar extends React.Component {
 
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ clearEvents }, dispatch);
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
 }
 
-export default connect(null, mapDispatchToProps)(NavBar);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ clearEvents, signout }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

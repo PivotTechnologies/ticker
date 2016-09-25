@@ -7,7 +7,7 @@ import { fetchUserActivity } from '../../actions/index';
 
 class UserProfile extends React.Component {
   componentWillMount() {
-    this.props.fetchUserActivity(localStorage.getItem('userId'));
+    this.props.fetchUserActivity(this.props.user.id);
   }
 
   renderBuyerHistory() {
@@ -110,9 +110,9 @@ class UserProfile extends React.Component {
 
     if (this.props.userActivity.buyerActivity) {
       return (
-        <Paper zDepth={0}>
+        <Paper zDepth={0} className="main-content">
           <h1>My Account</h1>
-          <Paper zDepth={2}>
+          <Paper zDepth={2} className="account-activity">
             <Tabs inkBarStyle={inkBarStyle}>
               <Tab style={tabStyle} label="Buyer History">
                 {this.renderBuyerHistory()}
@@ -134,6 +134,7 @@ class UserProfile extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     userActivity: state.userActivity,
   };
 }

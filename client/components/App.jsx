@@ -14,6 +14,14 @@ class App extends React.Component {
     this.renderSpinner = this.renderSpinner.bind(this);
   }
 
+  componentWillMount() {
+    const token = localStorage.getItem('userToken');
+
+    if (token) {
+      this.props.authenticate(token);
+    }
+  }
+
   renderSpinner() {
     if (this.props.isLoading) {
       return (

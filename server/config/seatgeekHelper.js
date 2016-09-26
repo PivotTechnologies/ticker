@@ -8,7 +8,8 @@ function getEvents(query) {
       qs: {
         'client_id': process.env.api_clientId,
         'client_secret': process.env.api_Secret,
-        'q' : query
+        'q' : query,
+        'per_page' : 100
       },
       method: 'GET',
     }, function(error, response, body){

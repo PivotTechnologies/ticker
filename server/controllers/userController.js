@@ -1,5 +1,6 @@
 const models = require('../models/models');
 const password = require('../config/passwordHelper');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 
@@ -19,10 +20,13 @@ module.exports = {
             .then( hash => {
               newUser.update({ password: hash });
               console.log("\033[34mNew user created. \033[0m");
+              const token = jwt.sign(user.dataValues, 'tickerticker');
               res.json({
                 id: user.id,
+                firstName: user.firstName,
                 email: user.email,
                 username: user.username,
+                token: token,
               });
             })
             .catch( error => console.log("Password hashing error: ", error) )
@@ -44,7 +48,7 @@ module.exports = {
           where: {
             username: req.body.username
           },
-          attributes: ['id', 'email', 'username', 'password']
+          attributes: ['id', 'firstName', 'email', 'username', 'password']
         })
         .then( user => {
           if(!user) {
@@ -54,13 +58,17 @@ module.exports = {
             password.compare(req.body.password, user.password)
               .then( result => {
                 console.log('\033[34mUser logged in. \033[0m');
+                const token = jwt.sign(user.dataValues, 'tickerticker');
                 res.json({
                   id: user.id,
+                  firstName: user.firstName,
                   email: user.email,
                   username: user.username,
+                  token: token,
                 });
               })
               .catch( error => {
+                console.log("error:", error);
                 res.status(500).send('Password incorrect.');
               })
           }

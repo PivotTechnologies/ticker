@@ -1,53 +1,15 @@
 const models = require('../models/models');
 const seatgeek = require('../config/seatgeekHelper');
 const moment = require('moment');
+
 module.exports = {
-
-    findOrMake: (req, res) => {
-
-      models.Event.findOne({
-          where: {
-            name: {
-              $iLike: req.body.event.name
-            },
-            venue: {
-              $iLike: req.body.event.venue
-            },
-            date: {
-              $iLike: req.body.event.date
-            },
-          }
-        })
-        .then( event => {
-          if(!event){
-            const newEvent = models.Event.create({
-              name: req.body.event.name,
-              venue: req.body.event.venue,
-              city: req.body.event.city,
-              time: req.body.event.time,
-              category: req.body.event.category,
-              date: req.body.event.date
-            })
-            .then( (event) => {
-              console.log('New event created: ', event.dataValues);
-              res.send(event.dataValues);
-            })
-            .catch( err => console.log('Error:', err) );
-          }
-          else {
-            console.log('found it!');
-            res.send(event.dataValues);
-          }
-        })
-        .catch( err => console.log('Error:', err) );
-    },
 
     buyerSearch: (req, res) => {
       const results = [];
+      let keywordQuery, dateQuery, locationQuery;
 
-      where = {};
       if(req.query.query){
-        where = {
+        keywordQuery = {
           $or: [
             { name: { $iLike: '%'+req.query.query+'%' } },
             { category: { $iLike: '%'+req.query.query+'%' } },
@@ -55,26 +17,26 @@ module.exports = {
           ]
         }
       }
+
       if(req.query.date){
         const momentObj = moment(req.query.date, "YYYY-MM-DD");
         const dateStart = momentObj.format('YYYY-MM-DDTHH:mm:ss');
         const dateEnd = momentObj.add(24, 'hours').format('YYYY-MM-DD HH:mm:ss');
-        console.log('dateStart = ', dateStart);
-        console.log('dateEnd = ', dateEnd);
-        where = {
+        dateQuery = {
           datetime_local: {
             $gte: dateStart,
             $lte: dateEnd
           }
         };
       }
+
       if(req.query.location){
         var city, state;
         if(req.query.location.includes(',')) {
           let arr = req.query.location.split(',');
           city = arr[0]; console.log('city = ', city);
           state = arr[1]; console.log('state', state);
-          where = {
+          locationQuery = {
             $or: [
               { city: { $iLike: '%'+city+'%' } },
               { state: { $iLike: '%'+state+'%' } }
@@ -82,7 +44,7 @@ module.exports = {
           }
         }
         else {
-          where = {
+          locationQuery = {
             $or: [
               { city: { $iLike: '%'+req.query.location+'%' } },
               { state: { $iLike: '%'+req.query.location+'%' } }
@@ -92,7 +54,13 @@ module.exports = {
       }
 
       models.Event.findAll({
-        where
+        where: {
+          $and: [
+            keywordQuery,
+            dateQuery,
+            locationQuery
+          ]
+        }
       })
       .then( events => {
         events.forEach( event => results.push(event.dataValues) );
@@ -109,7 +77,7 @@ module.exports = {
 
     sellerSearch: (req, res) => {
       // make a call to seatgeekAPI
-      //console.log("req.query.query", req.query.query);
+      // console.log("req.query.query", req.query.query);
       seatgeek.getEvents(req.query.query)
         .then(function(results) {
         //console.log("results :", results);

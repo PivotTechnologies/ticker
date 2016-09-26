@@ -9,7 +9,6 @@ const connection = new Sequelize(
     host: process.env.db_host,
     dialect: process.env.db_type,
     port: process.env.db_port,
-    logging: false,
     options: {
       timezone: 'America/Los_Angeles'
   }

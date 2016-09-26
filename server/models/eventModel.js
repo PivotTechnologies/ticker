@@ -50,6 +50,10 @@ const Event = connection.define('event', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  numAuctions: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
   meta: {
     type: Sequelize.JSON
   }

@@ -19,7 +19,7 @@ class UserProfile extends React.Component {
         </div>
       );
     }
-
+    // ADD PAST EVENTS
     return (
       this.props.userActivity.buyerActivity.map(auction => (
         <div className="activity-item" key={auction.id}>

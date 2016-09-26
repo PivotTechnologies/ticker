@@ -15,12 +15,12 @@ export const CREATE_AUCTION = 'CREATE_AUCTION';
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 export const START_SPINNER = 'START_SPINNER';
 
-export function searchEvents(query, date, city) {
+export function searchEvents(query, date, location) {
   const data = {
     params: {
       query,
       date,
-      city,
+      location,
     },
   };
 

@@ -16,13 +16,13 @@ class BuyerSearchBar extends React.Component {
     this.state = {
       query: '',
       date: null,
-      city: '',
+      location: '',
     };
 
     this.onQueryChange = this.onQueryChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.clearDate = this.clearDate.bind(this);
-    this.onCityChange = this.onCityChange.bind(this);
+    this.onLocationChange = this.onLocationChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
@@ -38,8 +38,8 @@ class BuyerSearchBar extends React.Component {
     this.setState({ date: null });
   }
 
-  onCityChange(event) {
-    this.setState({ city: event.target.value });
+  onLocationChange(event) {
+    this.setState({ location: event.target.value });
   }
 
   onFormSubmit(event) {
@@ -47,7 +47,7 @@ class BuyerSearchBar extends React.Component {
     this.props.startSpinner();
     const dateString = this.state.date ?
                        moment(this.state.date).format('YYYY-MM-DD') : '';
-    this.props.searchEvents(this.state.query, dateString, this.state.city);
+    this.props.searchEvents(this.state.query, dateString, this.state.location);
     this.setState({ query: '' });
   }
 
@@ -75,10 +75,10 @@ class BuyerSearchBar extends React.Component {
             cancelLabel="Any Date"
           />
           <TextField
-            className="city-field search-field search-field-text"
-            onChange={this.onCityChange}
-            value={this.state.city}
-            hintText="City"
+            className="location-field search-field search-field-text"
+            onChange={this.onLocationChange}
+            value={this.state.location}
+            hintText="Location"
             underlineShow={false}
           />
           <IconButton type="submit">

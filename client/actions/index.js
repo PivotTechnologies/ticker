@@ -83,7 +83,11 @@ export function createAuction(event, startPrice, minPrice, numTickets, userId) {
     numTickets,
     userId,
   };
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> feature/userAuth
   const request = axios.post('/api/auction/create', data);
 
   return {

@@ -14,13 +14,12 @@ import Signin from './components/generalUser/Signin.jsx';
 import UserProfile from './components/generalUser/UserProfile.jsx';
 import SellerView from './components/seller/SellerView.jsx';
 import SellerForm from './components/seller/SellerForm.jsx';
-import createLogger from 'redux-logger';
 
-const logger = createLogger();
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise, logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension():f=>f);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={BuyerView} />

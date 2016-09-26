@@ -78,7 +78,7 @@ export function createAuction(event, startPrice, minPrice, numTickets, userId) {
     numTickets,
     userId,
   };
-  console.log('inside of createAuction:', data);
+  
   const request = axios.post('/api/auction/create', data);
 
   return {

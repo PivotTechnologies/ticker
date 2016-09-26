@@ -17,7 +17,6 @@ class Signup extends React.Component {
       email: '',
       password: '',
       confirmPassword: '',
-      open: false,
     };
 
     this.onFirstnameChange = this.onFirstnameChange.bind(this);
@@ -68,7 +67,7 @@ class Signup extends React.Component {
       });
     } else {
       // Need to add error window/popup
-      
+
       console.log('Passwords do not match');
     }
   }

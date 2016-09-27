@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/PivotTechnologies/ticker.git"
   },
-  "author": "",
+  "author": "Carling Sugarman, Eugene Row, Kinjal Chatterjee",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/PivotTechnologies/ticker/issues"

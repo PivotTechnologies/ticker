@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { createAuction } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
+import moment from 'moment';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
 class SellerForm extends React.Component {
   constructor(props) {
@@ -18,11 +20,11 @@ class SellerForm extends React.Component {
     this.onMinPriceChange = this.onMinPriceChange.bind(this);
     this.onNumTicketsChange = this.onNumTicketsChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   onFormSubmit(event) {
     event.preventDefault();
-    console.log('this.state.userId', this.state.userId);
     this.props.createAuction(this.props.activeEvent, this.state.startPrice, this.state.minPrice,
       this.state.numTickets, this.state.userId);
     this.setState({
@@ -31,6 +33,7 @@ class SellerForm extends React.Component {
       numTickets: '',
     });
   }
+
 
   onStartPriceChange(event) {
     this.setState({ startPrice: event.target.value });
@@ -52,21 +55,23 @@ class SellerForm extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <h3>Event
-              <button onClick={this.onClick}> Go back to search </button>
-          </h3>
+        <Card className="list-item">
+          <button onClick={this.onClick}> Go back to search </button>
+          <CardTitle
+              title={ this.props.activeEvent.name }
+              subtitle={
+                <div>
+                  <div>
+                    {this.props.activeEvent.venue} - {this.props.activeEvent.city}, {this.props.activeEvent.state}
+                  </div>
+                  <div>
+                    {moment(this.props.activeEvent.datetime_local).format('MMMM Do, YYYY [@] h:mma')}
+                  </div>
+                </div>
+              }
+          />
+      </Card>
 
-          <p> Name: { this.props.activeEvent.name } </p>
-          <p> Date: { this.props.activeEvent.datetime_local }, &nbsp;
-            Timezone: { this.props.activeEvent.timezone } </p>
-          <p> Venue: { this.props.activeEvent.venue } </p>
-          <p> Address: { this.props.activeEvent.address }, &nbsp;
-            { this.props.activeEvent.city }, &nbsp;
-            {this.props.activeEvent.state } &nbsp;
-            {this.props.activeEvent.zip }
-          </p>
-        </div>
         <form onSubmit={this.onFormSubmit}>
           <input
             type="integer"

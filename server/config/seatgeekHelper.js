@@ -9,6 +9,7 @@ function getEvents(query) {
         'client_id': process.env.api_clientId,
         'client_secret': process.env.api_Secret,
         'q' : query,
+        'venue.country': 'US',
         'per_page' : 100
       },
       method: 'GET',
@@ -32,7 +33,6 @@ function getEvents(query) {
             longitude: event.venue.location.lon
           });
         });
-        // console.log(filteredBody);
         resolve(filteredBody);
       } else {
         console.log(error);

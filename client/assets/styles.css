@@ -154,3 +154,18 @@ body {
   top: 64px;
   width: 100%;
 }
+
+/**************** SELLER FORM ****************/
+
+.file-upload-container {
+  display: flex;
+  align-items: center;
+}
+
+#file-upload {
+  display: none;
+}
+
+.file-name {
+  text-indent: 10px;
+}

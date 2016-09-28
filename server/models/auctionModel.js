@@ -35,7 +35,10 @@ const Auction = connection.define('auction', {
   },
   eventDate: {
     type: Sequelize.STRING
-  }
+  },
+  tickets: {
+    type: Sequelize.TEXT
+  },
 });
 
 module.exports = Auction;

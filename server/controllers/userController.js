@@ -59,6 +59,9 @@ module.exports = {
               .then( result => {
                 console.log('\033[34mUser logged in. \033[0m');
                 const token = jwt.sign(user.dataValues, 'tickerticker');
+                console.log('token:', token);
+                //const decoded =  jwt.verify(token, 'tickerticker');
+                //console.log("decoded:", decoded);
                 res.json({
                   id: user.id,
                   firstName: user.firstName,
@@ -77,6 +80,32 @@ module.exports = {
           console.log('Error:', err);
           res.status(500).send('Login information incorrect.');
         });
+    },
+
+    reauthenticate: (req, res) => {
+      if (!req.body.token) {
+        res.status(500).send('Token not found');
+      } else {
+        var decoded = jwt.verify(req.body.token, 'tickerticker');
+        models.User.findOne({
+          where: {
+            email: decoded.email,
+          }
+        })
+          .then( user => {
+            console.log('\033[34mReauthenicated. \033[0m');
+            res.json({
+              id: user.id,
+              firstName: user.firstName,
+              email: user.email,
+              username: user.username,
+              token: req.body.token,
+            });
+          })
+          .catch( err => {
+            console.log('Error:', err);
+          });
+      }
     },
 
     fetchUserActivity: (req, res) => {

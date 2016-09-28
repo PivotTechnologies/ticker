@@ -14,6 +14,7 @@ import Signin from './components/generalUser/Signin.jsx';
 import UserProfile from './components/generalUser/UserProfile.jsx';
 import SellerView from './components/seller/SellerView.jsx';
 import SellerForm from './components/seller/SellerForm.jsx';
+import Authentication from './components/hoc/Authentication.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension():f=>f);
@@ -27,9 +28,9 @@ ReactDOM.render(
         <Route path="auction/:auctionId" component={AuctionView} />
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
-        <Route path="account" component={UserProfile} />
-        <Route path="sell" component={SellerView} />
-        <Route path="sell/form" component={SellerForm} />
+        <Route path="account" component={Authentication(UserProfile)} />
+        <Route path="sell" component={Authentication(SellerView)} />
+        <Route path="sell/form" component={Authentication(SellerForm)} />
       </Route>
     </Router>
   </Provider>

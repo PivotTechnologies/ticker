@@ -8,6 +8,7 @@ const routes = (app, express) => {
   /* User Endpoints */
   app.post('/api/user/signup', userController.signup );
   app.post('/api/user/signin', userController.signin );
+  app.post('/api/user/reauthenticate', userController.reauthenticate);
   app.get('/api/user/fetchUserActivity', userController.fetchUserActivity );
 
   /* Event Endpoints */

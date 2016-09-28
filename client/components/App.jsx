@@ -4,6 +4,8 @@ import LinearProgress from 'material-ui/LinearProgress';
 import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import NavBar from './NavBar.jsx';
+import { bindActionCreators } from 'redux';
+import { reauthenticate } from '../actions/index';
 
 injectTapEventPlugin();
 
@@ -15,10 +17,10 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    const token = localStorage.getItem('userToken');
-
+    const token = localStorage.getItem('token');
+    console.log('token:', token);
     if (token) {
-      this.props.authenticate(token);
+      this.props.reauthenticate(token);
     }
   }
 
@@ -56,4 +58,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ reauthenticate }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

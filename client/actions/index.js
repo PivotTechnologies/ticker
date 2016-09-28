@@ -7,7 +7,7 @@ export const SELECT_AUCTION = 'SELECT_AUCTION';
 export const PURCHASE_TICKETS = 'PURCHASE_TICKETS';
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
-export const AUTHENTICATE = 'AUTHENTICATE';
+export const REAUTHENTICATE = 'REAUTHENTICATE';
 export const SIGNOUT = 'SIGNOUT';
 export const FETCH_USER_ACTIVITY = 'FETCH_USER_ACTIVITY';
 export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
@@ -105,7 +105,9 @@ export function signup(firstName, lastName, username, email, password) {
 
   return {
     type: SIGNUP,
-    payload: request,
+    payload: request.then((response) => {
+      localStorage.setItem('token', response.data.token);
+    }),
   };
 }
 
@@ -117,28 +119,28 @@ export function signin(username, password) {
 
   const request = axios.post('/api/user/signin', data);
 
+
   return {
     type: SIGNIN,
     payload: request,
   };
 }
 
-export function authenticate(token) {
+export function reauthenticate(token) {
   const data = {
     token,
   };
 
-  const request = axios.post('/api/user/authenticate', data);
-
+  const request = axios.post('/api/user/reauthenticate', data);
+  
   return {
-    type: AUTHENTICATE,
-    payload: request.then((response) => {
-      localStorage.setItem('userToken', response.data.token);
-    }),
+    type: REAUTHENTICATE,
+    payload: request,
   };
 }
 
 export function signout() {
+  localStorage.clear();
   return {
     type: SIGNOUT,
   };

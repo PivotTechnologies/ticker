@@ -12,10 +12,10 @@ const Auction = connection.define('auction', {
     type: Sequelize.INTEGER
   },
   startPrice: {
-    type: type: Sequelize.DECIMAL(6, 2)
+    type: Sequelize.DECIMAL(6, 2)
   },
   currentPrice: {
-    type: type: Sequelize.DECIMAL(6, 2)
+    type: Sequelize.DECIMAL(6, 2)
   },
   minPrice: {
     type: Sequelize.DECIMAL(6, 2)
@@ -35,7 +35,10 @@ const Auction = connection.define('auction', {
   },
   eventDate: {
     type: Sequelize.STRING
-  }
+  },
+  tickets: {
+     type: Sequelize.TEXT
+  },
 });
 
 module.exports = Auction;

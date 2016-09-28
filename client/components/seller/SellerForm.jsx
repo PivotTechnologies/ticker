@@ -1,4 +1,6 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { createAuction } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
@@ -14,6 +16,8 @@ class SellerForm extends React.Component {
       startPrice: '',
       minPrice: '',
       numTickets: '',
+      file: null,
+      errorMessage: '',
     };
 
     this.onStartPriceChange = this.onStartPriceChange.bind(this);
@@ -21,17 +25,37 @@ class SellerForm extends React.Component {
     this.onNumTicketsChange = this.onNumTicketsChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.handleFileUpload = this.handleFileUpload.bind(this);
+    this.renderFilePreview = this.renderFilePreview.bind(this);
   }
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.createAuction(this.props.activeEvent, this.state.startPrice, this.state.minPrice,
-      this.state.numTickets, this.state.userId);
-    this.setState({
-      startPrice: '',
-      minPrice: '',
-      numTickets: '',
-    });
+
+    if (this.state.file) {
+      var reader = new FileReader();
+
+      reader.onload = (e) => {
+        var dataUrl = reader.result;
+        console.log(dataUrl)
+        this.props.createAuction(
+          this.props.activeEvent,
+          this.state.startPrice,
+          this.state.minPrice,
+          this.state.numTickets,
+          this.state.userId,
+          dataUrl
+        );
+      }
+
+      reader.readAsDataURL(this.state.file);
+
+      console.log('AUCTION CREATED');
+      browserHistory.push('/sell/confirm');
+
+    } else {
+      this.setState({ errorMessage: 'Please upload your tickets.' });
+    }
   }
 
 
@@ -51,13 +75,29 @@ class SellerForm extends React.Component {
     browserHistory.push(`/sell`);
   }
 
+  openFileUpload() {
+    document.getElementById("file-upload").click();
+  }
+
+  handleFileUpload() {
+    const file = document.getElementById("file-upload").files[0];
+    this.setState({ file });
+  }
+
+  renderFilePreview(errorMessage) {
+    if (this.state.file) {
+      return <div className="file-name">{this.state.file.name}</div>;
+    }
+
+    return <div className="file-name">{this.state.errorMessage}</div>;
+  }
 
   render() {
     return (
-      <div>
-        <Card className="list-item">
-          <button onClick={this.onClick}> Go back to search </button>
-          <CardTitle
+      <Paper zDepth={0}>
+          <Card className="list-item">
+            <button onClick={this.onClick}> Go back to search </button>
+            <CardTitle
               title={ this.props.activeEvent.name }
               subtitle={
                 <div>
@@ -69,8 +109,8 @@ class SellerForm extends React.Component {
                   </div>
                 </div>
               }
-          />
-      </Card>
+            />
+          </Card>
 
         <form onSubmit={this.onFormSubmit}>
           <input
@@ -94,9 +134,19 @@ class SellerForm extends React.Component {
             value={this.state.numTickets}
             placeholder="Number of Tickets"
           />
+          <div className="file-upload-container">
+            <RaisedButton label='Upload Tickets' onClick={this.openFileUpload} />
+            <input
+              type="file"
+              accept="application/pdf"
+              id="file-upload"
+              onChange={this.handleFileUpload}
+            />
+            {this.renderFilePreview()}
+          </div>
           <button type="submit">Submit</button>
         </form>
-      </div>
+      </Paper>
     );
   }
 }

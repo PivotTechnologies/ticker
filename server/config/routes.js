@@ -21,6 +21,7 @@ const routes = (app, express) => {
   app.get('/api/auction/cancel', auctionController.cancel );
   app.get('/api/auction/fetch', auctionController.fetch );
   app.get('/api/auction/buy', auctionController.buy );
+  app.get('/api/auction/fetchTickets', auctionController.fetchTickets );
 
   /* Other Endpoints */
   app.get('*', (req, res) => {

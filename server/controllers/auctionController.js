@@ -1,4 +1,5 @@
 const models = require('../models/models');
+const fs = require('fs');
 
 module.exports = {
 
@@ -14,8 +15,10 @@ module.exports = {
         numTickets: req.body.numTickets,
         status: 'On Sale',
         eventName: req.body.event.name,
-        eventDate: req.body.event.datetime_local
-      })
+        eventDate: req.body.event.datetime_local,
+        tickets: req.body.tickets,
+      });
+
       newAuction
         .save()
         .then(auction => {
@@ -114,5 +117,21 @@ module.exports = {
           res.send('Auction not found.')
         }
       })
+  },
+
+  fetchTickets: (req, res) => {
+    models.Auction.findOne({
+      where: {
+        buyerId: req.query.userId,
+        id: req.query.auctionId,
+      }
+    })
+    .then( auction => {
+      res.json({ tickets: auction.dataValues.tickets });
+    })
+    .catch( err => {
+      console.log('Error:', err.message);
+      res.send(err.message);
+    });
   }
 }

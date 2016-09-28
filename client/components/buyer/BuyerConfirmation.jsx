@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchTickets } from '../../actions/index';
+import { buyTickets, fetchTickets } from '../../actions/index';
 
 class BuyerConfirmation extends React.Component {
   componentWillMount() {
@@ -29,7 +29,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchTickets }, dispatch);
+  return bindActionCreators({ buyTickets, fetchTickets }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuyerConfirmation);

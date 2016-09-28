@@ -34,7 +34,7 @@ ReactDOM.render(
         <Route path="account" component={Authentication(UserProfile)} />
         <Route path="sell" component={Authentication(SellerView)} />
         <Route path="sell/form" component={Authentication(SellerForm)} />
-        <Route path="sell/confirm" component={SellerConfirmation} />
+        <Route path="sell/confirm" component={Authentication(SellerConfirmation)} />
       </Route>
     </Router>
   </Provider>

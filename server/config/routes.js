@@ -20,7 +20,7 @@ const routes = (app, express) => {
   app.post('/api/auction/create', auctionController.create );
   app.get('/api/auction/cancel', auctionController.cancel );
   app.get('/api/auction/fetch', auctionController.fetch );
-  app.get('/api/auction/buy', auctionController.buy );
+  app.post('/api/auction/buyTickets', auctionController.buyTickets );
   app.get('/api/auction/fetchTickets', auctionController.fetchTickets );
 
   /* Other Endpoints */

@@ -4,7 +4,7 @@ export const SEARCH_EVENTS = 'SEARCH_EVENTS';
 export const SELECT_EVENT = 'SELECT_EVENT';
 export const FETCH_AUCTIONS = 'FETCH_AUCTIONS';
 export const SELECT_AUCTION = 'SELECT_AUCTION';
-export const PURCHASE_TICKETS = 'PURCHASE_TICKETS';
+export const BUY_TICKETS = 'BUY_TICKETS';
 export const FETCH_TICKETS = 'FETCH_TICKETS';
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
@@ -62,16 +62,16 @@ export function selectAuction(auction) {
   };
 }
 
-export function purchaseTickets(userId, auctionId) {
+export function buyTickets(userId, auctionId) {
   const data = {
     userId,
     auctionId,
   };
 
-  const request = axios.post('/purchaseTickets', data);
+  const request = axios.post('/api/auction/buyTickets', data);
 
   return {
-    type: PURCHASE_TICKETS,
+    type: BUY_TICKETS,
     payload: request,
   };
 }
@@ -101,7 +101,7 @@ export function createAuction(event, startPrice, minPrice, numTickets, userId, t
     userId,
     tickets,
   };
-
+  
   const request = axios.post('/api/auction/create', data);
 
   return {
@@ -150,7 +150,7 @@ export function reauthenticate(token) {
   };
 
   const request = axios.post('/api/user/reauthenticate', data);
-  
+
   return {
     type: REAUTHENTICATE,
     payload: request,

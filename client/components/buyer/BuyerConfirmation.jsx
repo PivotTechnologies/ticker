@@ -5,6 +5,7 @@ import { buyTickets, fetchTickets } from '../../actions/index';
 
 class BuyerConfirmation extends React.Component {
   componentWillMount() {
+    this.props.buyTickets(this.props.user.id, this.props.auction.id);
     this.props.fetchTickets(this.props.user.id, this.props.auction.id);
   }
 

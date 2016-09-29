@@ -99,16 +99,17 @@ module.exports = {
       });
   },
 
-  buy: (req, res) => {
+  buyTickets: (req, res) => {
     models.Auction
       .findOne({
-        where: { id: req.query.auctionId }
+        where: { id: req.body.auctionId }
       })
       .then(auction => {
+        console.log('auction found:', auction)
         if(auction) {
           auction.status = 'Sold';
           auction.sellDate = Date.now();
-          auction.buyerId = req.query.buyerId;
+          auction.buyerId = req.body.userId;
           auction.save();
           console.log('Sold: \n', auction.dataValues)
           res.sendStatus(200);
@@ -127,6 +128,7 @@ module.exports = {
       }
     })
     .then( auction => {
+      console.log(auction.dataValues.tickets)
       res.json({ tickets: auction.dataValues.tickets });
     })
     .catch( err => {

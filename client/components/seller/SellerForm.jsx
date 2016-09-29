@@ -37,7 +37,6 @@ class SellerForm extends React.Component {
 
       reader.onload = (e) => {
         var dataUrl = reader.result;
-        console.log(dataUrl)
         this.props.createAuction(
           this.props.activeEvent,
           this.state.startPrice,

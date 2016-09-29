@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 class SellerConfirmation extends React.Component {
   render() {
     if (this.props.newAuction.tickets) {
-      console.log('tickets', this.props.newAuction.tickets);
       return <div>We have your tickets</div>;
     }
 

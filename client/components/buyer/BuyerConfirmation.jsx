@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { buyTickets, fetchTickets } from '../../actions/index';
+import { fetchTickets } from '../../actions/index';
 
 class BuyerConfirmation extends React.Component {
   componentWillMount() {
-    this.props.buyTickets(this.props.user.id, this.props.auction.id);
     this.props.fetchTickets(this.props.user.id, this.props.auction.id);
   }
 
@@ -30,7 +29,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ buyTickets, fetchTickets }, dispatch);
+  return bindActionCreators({ fetchTickets }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuyerConfirmation);

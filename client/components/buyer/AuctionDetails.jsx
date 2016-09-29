@@ -1,10 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { buyTickets } from '../../actions/index';
 import { browserHistory } from 'react-router';
 
 class AuctionDetails extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.buyTickets = this.buyTickets.bind(this);
+  }
+
   buyTickets() {
-    browserHistory.push('/confirm');
+    this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
+    .then(response => browserHistory.push('/confirm'));
   }
 
   render() {
@@ -19,8 +28,13 @@ class AuctionDetails extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.user,
     activeAuction: state.activeAuction,
   };
 }
 
-export default connect(mapStateToProps)(AuctionDetails);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ buyTickets }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuctionDetails);

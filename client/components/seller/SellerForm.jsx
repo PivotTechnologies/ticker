@@ -6,6 +6,7 @@ import { createAuction } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import moment from 'moment';
+import TextField from 'material-ui/TextField';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
 class SellerForm extends React.Component {
@@ -18,6 +19,9 @@ class SellerForm extends React.Component {
       numTickets: '',
       file: null,
       errorMessage: '',
+      errorStartPrice: '',
+      errorMinPrice: '',
+      errorNumTickets: '',
     };
 
     this.onStartPriceChange = this.onStartPriceChange.bind(this);
@@ -31,43 +35,60 @@ class SellerForm extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-
     if (this.state.file) {
       var reader = new FileReader();
 
       reader.onload = (e) => {
         var dataUrl = reader.result;
         this.props.createAuction(
-          this.props.activeEvent,
-          this.state.startPrice,
-          this.state.minPrice,
-          this.state.numTickets,
-          this.state.userId,
-          dataUrl
+        this.props.activeEvent,
+        this.state.startPrice,
+        this.state.minPrice,
+        this.state.numTickets,
+        this.state.userId,
+        dataUrl,
         );
       }
 
       reader.readAsDataURL(this.state.file);
-
       console.log('AUCTION CREATED');
       browserHistory.push('/sell/confirm');
 
-    } else {
+  } else {
       this.setState({ errorMessage: 'Please upload your tickets.' });
     }
   }
 
 
   onStartPriceChange(event) {
-    this.setState({ startPrice: event.target.value });
+    this.setState({
+      startPrice: event.target.value,
+    });
+    var regex = /^\$?[0-9]+(\.[0-9][0-9])?$/;
+    if (regex.test(event.target.value) && (event.target.value > 0) && (event.target.value < 1000000)) {
+      this.setState({ errorStartPrice: '', })
+    } else {
+      this.setState({ errorStartPrice: 'Invalid price', });
+    }
   }
 
   onMinPriceChange(event) {
     this.setState({ minPrice: event.target.value });
+    var regex = /^\$?[0-9]+(\.[0-9][0-9])?$/;
+    if (regex.test(event.target.value) && (event.target.value > 0) && (event.target.value < 1000000) && (+this.state.startPrice > +event.target.value)) {
+      this.setState({ errorMinPrice: '', });
+    } else {
+      this.setState({ errorMinPrice: 'Invalid price', });
+    }
   }
 
   onNumTicketsChange(event) {
     this.setState({ numTickets: event.target.value });
+    if (event.target.value > 0 && event.target.value < 100) {
+      this.setState({ errorNumTickets: '', });
+    } else {
+      this.setState({ errorNumTickets: 'Invalid input', });
+    }
   }
 
   onClick(event) {
@@ -111,27 +132,32 @@ class SellerForm extends React.Component {
             />
           </Card>
 
-        <form onSubmit={this.onFormSubmit}>
-          <input
-            type="integer"
+        <form className="auth" onSubmit={this.onFormSubmit}>
+          <TextField
+            type="number"
+            step="0.01"
             required="required"
             onChange={this.onStartPriceChange}
             value={this.state.startPrice}
-            placeholder="Start Price $"
+            floatingLabelText="Start Price $"
+            errorText={this.state.errorStartPrice}
           />
-          <input
-            type="integer"
+          <TextField
+            type="number"
+            step="0.01"
             required="required"
             onChange={this.onMinPriceChange}
             value={this.state.minPrice}
-            placeholder="Minimum Price $"
+            floatingLabelText="Minimum Price $"
+            errorText={this.state.errorMinPrice}
           />
-          <input
+          <TextField
             type="integer"
             required="required"
             onChange={this.onNumTicketsChange}
             value={this.state.numTickets}
-            placeholder="Number of Tickets"
+            floatingLabelText="Number of Tickets"
+            errorText={this.state.errorNumTickets}
           />
           <div className="file-upload-container">
             <RaisedButton label='Upload Tickets' onClick={this.openFileUpload} />

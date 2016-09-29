@@ -20,7 +20,7 @@ module.exports = {
             .then( hash => {
               newUser.update({ password: hash });
               console.log("\033[34mNew user created. \033[0m");
-              const token = jwt.sign(user.dataValues, 'tickerticker');
+              const token = jwt.sign(user.dataValues , 'tickerticker');
               res.json({
                 id: user.id,
                 firstName: user.firstName,
@@ -59,9 +59,6 @@ module.exports = {
               .then( result => {
                 console.log('\033[34mUser logged in. \033[0m');
                 const token = jwt.sign(user.dataValues, 'tickerticker');
-                console.log('token:', token);
-                //const decoded =  jwt.verify(token, 'tickerticker');
-                //console.log("decoded:", decoded);
                 res.json({
                   id: user.id,
                   firstName: user.firstName,

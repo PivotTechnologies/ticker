@@ -5,6 +5,7 @@ import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import { signin } from '../../actions/index';
 
 class Signin extends React.Component {
@@ -31,7 +32,13 @@ class Signin extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.signin(this.state.username, this.state.password);
+    this.props.signin(this.state.username, this.state.password)
+      .then((response) => {
+        if (response.payload.status === 200) {
+          browserHistory.push('/');
+        }
+      }
+    );
     this.setState({ username: '', password: '' });
   }
 

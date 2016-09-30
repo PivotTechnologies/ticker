@@ -123,9 +123,7 @@ export function signup(firstName, lastName, username, email, password) {
 
   return {
     type: SIGNUP,
-    payload: request.then((response) => {
-      localStorage.setItem('token', response.data.token);
-    }),
+    payload: request,
   };
 }
 

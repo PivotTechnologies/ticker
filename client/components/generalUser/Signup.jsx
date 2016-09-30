@@ -5,6 +5,7 @@ import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import { signup } from '../../actions/index';
 
 class Signup extends React.Component {
@@ -55,8 +56,13 @@ class Signup extends React.Component {
   onFormSubmit(event) {
     event.preventDefault();
     if (this.state.password === this.state.confirmPassword) {
-      this.props.signup(this.state.firstName, this.state.lastName, this.state.username,
-        this.state.email, this.state.password);
+      this.props.signup(this.state.firstName, this.state.lastName, this.state.username, this.state.email, this.state.password)
+        .then((response) => {
+          if (response.payload.status === 200) {
+            browserHistory.push('/');
+          }
+        });
+
       this.setState({
         firstName: '',
         lastName: '',
@@ -84,6 +90,7 @@ class Signup extends React.Component {
               value={this.state.firstName}
               hintText="First Name"
               underlineShow={false}
+              required="required"
             />
             <Divider />
             <TextField
@@ -92,6 +99,7 @@ class Signup extends React.Component {
               value={this.state.lastName}
               hintText="Last Name"
               underlineShow={false}
+              required="required"
             />
             <Divider />
             <TextField
@@ -101,6 +109,7 @@ class Signup extends React.Component {
               hintText="E-mail Address"
               type="email"
               underlineShow={false}
+              required="required"
             />
             <Divider />
             <TextField
@@ -109,6 +118,7 @@ class Signup extends React.Component {
               value={this.state.username}
               hintText="Username"
               underlineShow={false}
+              required="required"
             />
             <Divider />
             <TextField
@@ -118,15 +128,17 @@ class Signup extends React.Component {
               hintText="Password"
               type="password"
               underlineShow={false}
+              required="required"
             />
             <Divider />
             <TextField
-            className="auth-input-text"
-            onChange={this.onConfirmPasswordChange}
-            value={this.state.confirmPassword}
-            hintText="Confirm Password"
-            type="password"
-            underlineShow={false}
+              className="auth-input-text"
+              onChange={this.onConfirmPasswordChange}
+              value={this.state.confirmPassword}
+              hintText="Confirm Password"
+              type="password"
+              underlineShow={false}
+              required="required"
             />
           </Paper>
           <RaisedButton type="submit">Sign Up</RaisedButton>

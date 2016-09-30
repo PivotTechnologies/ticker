@@ -12,6 +12,12 @@ export default function(ComposedComponent) {
       }
     }
 
+    componentWillUpdate(nextProps) {
+      if (nextProps.token === undefined) {
+        browserHistory.push('/signin');
+      }
+    }
+
     render() {
       return (
         <ComposedComponent {...this.props} />

@@ -18,6 +18,13 @@ class Signup extends React.Component {
       email: '',
       password: '',
       confirmPassword: '',
+      errorFirstName: '',
+      errorLastName: '',
+      errorUserName: '',
+      errorEmail: '',
+      errorPassWord: '',
+      errorConfirm: '',
+      passwordMatch: false,
     };
 
     this.onFirstnameChange = this.onFirstnameChange.bind(this);
@@ -30,51 +37,130 @@ class Signup extends React.Component {
   }
 
   onFirstnameChange(event) {
-    this.setState({ firstName: event.target.value });
+    const regex = /^[a-zA-Z]{1,50}$/; // limits string length, min 1, max 50, letters only
+    this.setState({
+      firstName: event.target.value,
+    });
+
+    if (regex.test(event.target.value)) {
+      this.setState({ errorFirstName: '' });
+    }
+    else {
+      this.setState({ errorFirstName: 'Invalid input' });
+    }
   }
 
   onLastnameChange(event) {
+    const regex = /^[a-zA-Z]{1,50}$/; // limits string length, min 1, max 50, letters only
     this.setState({ lastName: event.target.value });
+    if (regex.test(event.target.value)) {
+      this.setState({
+        errorLastName: '',
+      });
+    }
+    else {
+      this.setState({
+        errorLastName: 'Invalid input',
+      });
+    }
   }
 
   onUsernameChange(event) {
+    const regex = /^[a-zA-Z0-9]{3,50}$/; // limits string length, min 3, max 50, all letters, numbers
     this.setState({ username: event.target.value });
+    if (regex.test(event.target.value)) {
+      this.setState({ errorUserName: '' });
+    }
+    else {
+      this.setState({ errorUserName: 'Must be at least 3 characters' });
+    }
   }
 
   onEmailChange(event) {
+    const regex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
     this.setState({ email: event.target.value });
+    if (regex.test(event.target.value)) {
+      this.setState({ errorEmail: '' });
+    }
+    else {
+      this.setState({ errorEmail: 'Invalid email' });
+    }
   }
 
   onPasswordChange(event) {
     this.setState({ password: event.target.value });
+    const regex = /^[ A-Za-z0-9_@./#&+-]{3,50}$/; // limits string length, min 3, max 15, all letters, numbers, symbols
+    if (regex.test(event.target.value)) {
+      this.setState({
+        errorPassWord: '',
+      });
+    }
+    else {
+      this.setState({
+        errorPassWord: 'Must be at least 3 characters long',
+      });
+    }
   }
 
   onConfirmPasswordChange(event) {
     this.setState({ confirmPassword: event.target.value });
+    if (event.target.value === this.state.password) {
+      this.setState({
+        errorConfirm: '',
+        passwordMatch: true,
+      });
+    }
+    else {
+      this.setState({
+        errorConfirm: 'Passwords do not match',
+        passwordMatch: false,
+      });
+    }
   }
 
   onFormSubmit(event) {
     event.preventDefault();
-    if (this.state.password === this.state.confirmPassword) {
+    if (this.state.errorFirstName.length === 0 && this.state.errorLastName.length === 0
+      && this.state.errorUserName.length === 0 && this.state.errorEmail.length === 0
+        && this.state.errorPassWord.length === 0 && this.state.errorConfirm.length === 0
+          && this.state.passwordMatch) {
       this.props.signup(this.state.firstName, this.state.lastName, this.state.username, this.state.email, this.state.password)
         .then((response) => {
+          //console.log("response:", response.payload.response.data.errors[0].path);
           if (response.payload.status === 200) {
+            this.setState({
+              firstName: '',
+              lastName: '',
+              username: '',
+              email: '',
+              password: '',
+              confirmPassword: '',
+              errorFirstName: '',
+              errorLastName: '',
+              errorUserName: '',
+              errorEmail: '',
+              errorPassWord: '',
+              errorConfirm: '',
+              passwordMatch: false,
+            });
+
             browserHistory.push('/');
           }
+          else {
+            if (response.payload.response.data.errors[0].path === 'username') {
+              this.setState({
+                errorUserName: 'Username already taken',
+              });
+            }
+            else {
+              if (response.payload.response.data.errors[0].path === 'email') {
+                this.setState({
+                  errorEmail: 'Email already taken',
+                });
+              }
+            }
+          }
         });
-
-      this.setState({
-        firstName: '',
-        lastName: '',
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-      });
-    } else {
-      // Need to add error window/popup
-
-      console.log('Passwords do not match');
     }
   }
 
@@ -89,8 +175,8 @@ class Signup extends React.Component {
               onChange={this.onFirstnameChange}
               value={this.state.firstName}
               hintText="First Name"
+              errorText={this.state.errorFirstName}
               underlineShow={false}
-              required="required"
             />
             <Divider />
             <TextField
@@ -98,8 +184,8 @@ class Signup extends React.Component {
               onChange={this.onLastnameChange}
               value={this.state.lastName}
               hintText="Last Name"
+              errorText={this.state.errorLastName}
               underlineShow={false}
-              required="required"
             />
             <Divider />
             <TextField
@@ -107,9 +193,8 @@ class Signup extends React.Component {
               onChange={this.onEmailChange}
               value={this.state.email}
               hintText="E-mail Address"
-              type="email"
+              errorText={this.state.errorEmail}
               underlineShow={false}
-              required="required"
             />
             <Divider />
             <TextField
@@ -117,18 +202,18 @@ class Signup extends React.Component {
               onChange={this.onUsernameChange}
               value={this.state.username}
               hintText="Username"
+              errorText={this.state.errorUserName}
               underlineShow={false}
-              required="required"
             />
             <Divider />
             <TextField
               className="auth-input-text"
               onChange={this.onPasswordChange}
               value={this.state.password}
-              hintText="Password"
               type="password"
+              hintText="Password"
+              errorText={this.state.errorPassWord}
               underlineShow={false}
-              required="required"
             />
             <Divider />
             <TextField
@@ -137,8 +222,8 @@ class Signup extends React.Component {
               value={this.state.confirmPassword}
               hintText="Confirm Password"
               type="password"
+              errorText={this.state.errorConfirm}
               underlineShow={false}
-              required="required"
             />
           </Paper>
           <RaisedButton type="submit">Sign Up</RaisedButton>

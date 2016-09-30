@@ -2,12 +2,12 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import { createAuction } from '../../actions/index.js';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import moment from 'moment';
 import TextField from 'material-ui/TextField';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { createAuction } from '../../actions/index.js';
 
 class SellerForm extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class SellerForm extends React.Component {
       minPrice: '',
       numTickets: '',
       file: null,
-      errorMessage: '',
+      errorFileUpload: '',
       errorStartPrice: '',
       errorMinPrice: '',
       errorNumTickets: '',
@@ -35,59 +35,86 @@ class SellerForm extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    if (this.state.file) {
-      var reader = new FileReader();
-
-      reader.onload = (e) => {
-        var dataUrl = reader.result;
-        this.props.createAuction(
-        this.props.activeEvent,
-        this.state.startPrice,
-        this.state.minPrice,
-        this.state.numTickets,
-        this.state.userId,
-        dataUrl,
-        );
+    if (this.state.errorStartPrice.length === 0 && this.state.errorMinPrice.length === 0
+      && this.state.errorNumTickets.length === 0) {
+      if (this.state.file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          let dataUrl = reader.result;
+          this.props.createAuction(
+            this.props.activeEvent,
+            this.state.startPrice,
+            this.state.minPrice,
+            this.state.numTickets,
+            this.state.userId,
+            dataUrl
+          );
+        }
+        reader.readAsDataURL(this.state.file);
+        console.log('AUCTION CREATED');
+        this.setState({
+          startPrice: '',
+          minPrice: '',
+          numTickets: '',
+          file: null,
+          errorFileUpload: '',
+          errorStartPrice: '',
+          errorMinPrice: '',
+          errorNumTickets: '',
+        });
+        browserHistory.push('/sell/confirm');
       }
-
-      reader.readAsDataURL(this.state.file);
-      console.log('AUCTION CREATED');
-      browserHistory.push('/sell/confirm');
-
-  } else {
-      this.setState({ errorMessage: 'Please upload your tickets.' });
+    else {
+      console.log('error File Upload');
+      this.setState({ errorFileUpload: 'Please upload your tickets.' });
     }
   }
+}
 
 
   onStartPriceChange(event) {
+    const regex = /^\$?[0-9]+(\.[0-9][0-9])?$/;
     this.setState({
       startPrice: event.target.value,
     });
-    var regex = /^\$?[0-9]+(\.[0-9][0-9])?$/;
-    if (regex.test(event.target.value) && (event.target.value > 0) && (event.target.value < 1000000)) {
-      this.setState({ errorStartPrice: '', })
+    if (regex.test(event.target.value) && (event.target.value > 0)
+      && (event.target.value < 1000000)) {
+      this.setState({
+        errorStartPrice: '',
+      });
     } else {
-      this.setState({ errorStartPrice: 'Invalid price', });
+      this.setState({
+        errorStartPrice: 'Invalid price',
+      });
     }
   }
 
   onMinPriceChange(event) {
     this.setState({ minPrice: event.target.value });
-    var regex = /^\$?[0-9]+(\.[0-9][0-9])?$/;
-    if (regex.test(event.target.value) && (event.target.value > 0) && (event.target.value < 1000000) && (+this.state.startPrice > +event.target.value)) {
-      this.setState({ errorMinPrice: '', });
+    const regex = /^\$?[0-9]+(\.[0-9][0-9])?$/; // limits input to two decimal places
+    if (regex.test(event.target.value) && (event.target.value > 0) && (event.target.value < 1000000)
+      && (+this.state.startPrice > +event.target.value)) {
+      this.setState({
+        errorMinPrice: '',
+        inputsValid: true,
+      });
     } else {
-      this.setState({ errorMinPrice: 'Invalid price', });
+      this.setState({
+        errorMinPrice: 'Invalid price',
+      });
     }
   }
 
   onNumTicketsChange(event) {
     this.setState({ numTickets: event.target.value });
     if (event.target.value > 0 && event.target.value < 100) {
-      this.setState({ errorNumTickets: '', });
+      this.setState({
+        errorNumTickets: '',
+      });
     } else {
-      this.setState({ errorNumTickets: 'Invalid input', });
+      this.setState({
+        errorNumTickets: 'Invalid input',
+      });
     }
   }
 
@@ -96,20 +123,20 @@ class SellerForm extends React.Component {
   }
 
   openFileUpload() {
-    document.getElementById("file-upload").click();
+    document.getElementById('file-upload').click();
   }
 
   handleFileUpload() {
-    const file = document.getElementById("file-upload").files[0];
+    const file = document.getElementById('file-upload').files[0];
     this.setState({ file });
   }
 
-  renderFilePreview(errorMessage) {
+  renderFilePreview() {
     if (this.state.file) {
       return <div className="file-name">{this.state.file.name}</div>;
     }
 
-    return <div className="file-name">{this.state.errorMessage}</div>;
+    return <div className="file-name">{this.state.errorFileUpload}</div>;
   }
 
   render() {
@@ -118,7 +145,7 @@ class SellerForm extends React.Component {
           <Card className="list-item">
             <button onClick={this.onClick}> Go back to search </button>
             <CardTitle
-              title={ this.props.activeEvent.name }
+              title={this.props.activeEvent.name}
               subtitle={
                 <div>
                   <div>
@@ -136,7 +163,6 @@ class SellerForm extends React.Component {
           <TextField
             type="number"
             step="0.01"
-            required="required"
             onChange={this.onStartPriceChange}
             value={this.state.startPrice}
             floatingLabelText="Start Price $"
@@ -145,7 +171,6 @@ class SellerForm extends React.Component {
           <TextField
             type="number"
             step="0.01"
-            required="required"
             onChange={this.onMinPriceChange}
             value={this.state.minPrice}
             floatingLabelText="Minimum Price $"
@@ -153,14 +178,13 @@ class SellerForm extends React.Component {
           />
           <TextField
             type="integer"
-            required="required"
             onChange={this.onNumTicketsChange}
             value={this.state.numTickets}
             floatingLabelText="Number of Tickets"
             errorText={this.state.errorNumTickets}
           />
           <div className="file-upload-container">
-            <RaisedButton label='Upload Tickets' onClick={this.openFileUpload} />
+            <RaisedButton label="Upload Tickets" onClick={this.openFileUpload} />
             <input
               type="file"
               accept="application/pdf"

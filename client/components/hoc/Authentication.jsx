@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 
-export default function(ComposedComponent) {
+export default function (ComposedComponent) {
   class Authentication extends React.Component {
 
     componentWillMount() {

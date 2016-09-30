@@ -35,8 +35,8 @@ class SellerForm extends React.Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    if (this.state.errorStartPrice.length === 0 && this.state.errorMinPrice.length === 0
-      && this.state.errorNumTickets.length === 0) {
+
+    if (this.state.errorStartPrice.length === 0 && this.state.errorMinPrice.length === 0 && this.state.errorNumTickets.length === 0) {
       if (this.state.file) {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -51,7 +51,7 @@ class SellerForm extends React.Component {
           );
         }
         reader.readAsDataURL(this.state.file);
-        console.log('AUCTION CREATED');
+
         this.setState({
           startPrice: '',
           minPrice: '',
@@ -62,7 +62,9 @@ class SellerForm extends React.Component {
           errorMinPrice: '',
           errorNumTickets: '',
         });
+
         browserHistory.push('/sell/confirm');
+
       }
     else {
       console.log('error File Upload');

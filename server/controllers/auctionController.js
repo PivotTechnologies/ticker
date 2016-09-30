@@ -26,7 +26,7 @@ module.exports = {
         numTickets: req.body.numTickets,
         status: 'On Sale',
         eventName: req.body.event.name,
-        eventDate: formattedEventDate,
+        eventDate: eventDate,
         tickets: req.body.tickets,
         coefA: computed.a,
         coefB: computed.b,

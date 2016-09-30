@@ -34,11 +34,20 @@ const Auction = connection.define('auction', {
     type: Sequelize.STRING
   },
   eventDate: {
-    type: Sequelize.STRING
+    type: Sequelize.DATE
   },
   tickets: {
      type: Sequelize.TEXT
   },
+  coefA: {
+    type: Sequelize.DOUBLE(11, 12)
+  },
+  coefB: {
+    type: Sequelize.DOUBLE(11, 12)
+  },
+  startTime: {
+    type: Sequelize.DATE
+  }
 });
 
 module.exports = Auction;

@@ -85,7 +85,8 @@ module.exports = {
     models.Auction.findAll({
         where: {
           eventId: req.query.eventId,
-        }
+        },
+        attributes: [ 'id', 'sellerId', 'buyerId', 'eventId', 'startPrice', 'currentPrice', 'minPrice', 'numTickets', 'sellDate', 'status', 'eventName', 'eventDate']
       })
       .then(auctions => {
         auctions.forEach(auction => results.push(auction.dataValues));

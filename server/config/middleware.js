@@ -4,6 +4,7 @@ const morgan = require('morgan');
 
 const middleware = (app, express) => {
   app.use(cors());
+  app.use(bodyParser({limit: '50mb'}));
   app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json());
   app.use('/', express.static('./client'));

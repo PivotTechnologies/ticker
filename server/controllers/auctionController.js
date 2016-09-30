@@ -130,6 +130,7 @@ module.exports = {
   fetch: (req, res) => {
     const results = [];
     models.Auction.findAll({
+<<<<<<< 21eb7f7ab50569b019c238972955f40a81cb4906
       where: {
         eventId: req.query.eventId,
       },
@@ -229,7 +230,6 @@ module.exports = {
       }
     })
     .then( auction => {
-      //console.log(auction.dataValues.tickets)
       res.json({ tickets: auction.dataValues.tickets });
     })
     .catch( err => {

@@ -1,14 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { buyTickets } from '../../actions/index';
+import { buyTickets, fetchAuctionById } from '../../actions/index';
 import { browserHistory } from 'react-router';
 
 class AuctionDetails extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      intervalId: null
+    };
+
     this.buyTickets = this.buyTickets.bind(this);
+  }
+
+  componentDidMount() {
+    const id = setInterval(() => {
+      console.log('updating active auction!')
+      this.props.fetchAuctionById(this.props.activeAuction.id);
+    }, 1000);
+    this.setState({ intervalId: id });
+  }
+
+  componentWillUnmount() {
+    console.log('no longer updating active auction')
+    clearInterval(this.state.intervalId);
   }
 
   buyTickets() {
@@ -34,7 +51,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ buyTickets }, dispatch);
+  return bindActionCreators({ buyTickets, fetchAuctionById }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuctionDetails);

@@ -8,14 +8,6 @@ const port = process.env.PORT || 3000;
 
 require('./config/middleware')(app, express);
 require('./config/routes')(app, express);
-//
-// const test = schedule.scheduleJob('*/5 * * * * *', () => {
-//   const now = new Date();
-//   console.log('Scheduling test @ ', now.toTimeString() );
-// });
-
-// */5 * * * * * = every five seconds
-// * /5 * * * * = every five minute
 
 const decrementPrice = schedule.scheduleJob('*/5 * * * * *', () => {
   const list = [];
@@ -29,7 +21,8 @@ const decrementPrice = schedule.scheduleJob('*/5 * * * * *', () => {
     })
     .then( auctions => {
       auctions.forEach( auction => {
-        //console.log('auction:', auction.dataValues);
+        // console.log('auction:', auction.dataValues);
+        // recalculate price
         list.push(auction.dataValues)
       });
       console.log('Updating the following auctions: ', list);

@@ -4,7 +4,9 @@ const fs = require('fs');
 module.exports = {
 
   create: (req, res) => {
-    /* TODO: test to make sure all info is coming it */
+    // findCoefficients(req.body.startPrice, req.body.minPrice, startTime, endTime)
+    const computedA = 0;
+    const computedB = 0;
     function createAuction() {
       const newAuction = models.Auction.build({
         eventId: auctionEventId,
@@ -17,6 +19,9 @@ module.exports = {
         eventName: req.body.event.name,
         eventDate: req.body.event.datetime_local,
         tickets: req.body.tickets,
+        coefA: computedA,
+        coefB: computedB,
+        startTime: new Date()
       });
 
       newAuction

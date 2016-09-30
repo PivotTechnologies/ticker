@@ -91,7 +91,6 @@ module.exports = {
       .then(auctions => {
         auctions.forEach(auction => results.push(auction.dataValues));
         console.log('\033[34mSending data: \033[0m');
-        console.log(results);
         res.json(results);
       })
       .catch(err => {
@@ -129,7 +128,6 @@ module.exports = {
       }
     })
     .then( auction => {
-      console.log(auction.dataValues.tickets)
       res.json({ tickets: auction.dataValues.tickets });
     })
     .catch( err => {

@@ -19,7 +19,7 @@ import Authentication from './components/hoc/Authentication.jsx';
 import SellerConfirmation from './components/seller/SellerConfirmation.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension():f=>f);
+const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension(): f => f);
 
 ReactDOM.render(
   <Provider store={store}>

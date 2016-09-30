@@ -3,8 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import LinearProgress from 'material-ui/LinearProgress';
 import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import NavBar from './NavBar.jsx';
 import { bindActionCreators } from 'redux';
+import NavBar from './NavBar.jsx';
 import { reauthenticate } from '../actions/index';
 
 injectTapEventPlugin();
@@ -18,7 +18,7 @@ class App extends React.Component {
 
   componentWillMount() {
     const token = localStorage.getItem('token');
-    
+
     if (token) {
       this.props.reauthenticate(token);
     }

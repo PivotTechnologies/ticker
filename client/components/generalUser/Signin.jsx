@@ -15,6 +15,7 @@ class Signin extends React.Component {
     this.state = {
       username: '',
       password: '',
+      errorMessage: '',
     };
 
     this.onUsernameChange = this.onUsernameChange.bind(this);
@@ -23,11 +24,17 @@ class Signin extends React.Component {
   }
 
   onUsernameChange(event) {
-    this.setState({ username: event.target.value });
+    this.setState({
+      username: event.target.value,
+      errorMessage: '',
+    });
   }
 
   onPasswordChange(event) {
-    this.setState({ password: event.target.value });
+    this.setState({
+      password: event.target.value,
+      errorMessage: '',
+    });
   }
 
   onFormSubmit(event) {
@@ -35,11 +42,19 @@ class Signin extends React.Component {
     this.props.signin(this.state.username, this.state.password)
       .then((response) => {
         if (response.payload.status === 200) {
+          this.setState({
+            username: '',
+            password: '',
+            errorMessage: '',
+          });
           browserHistory.push('/');
         }
-      }
-    );
-    this.setState({ username: '', password: '' });
+        else {
+          this.setState({
+            errorMessage: 'Incorrect username and/or password',
+          });
+        }
+      });
   }
 
   render() {
@@ -61,6 +76,8 @@ class Signin extends React.Component {
               onChange={this.onPasswordChange}
               value={this.state.password}
               hintText="Password"
+              type="password"
+              errorText={this.state.errorMessage}
               underlineShow={false}
             />
             <Divider />

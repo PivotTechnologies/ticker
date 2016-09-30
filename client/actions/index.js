@@ -4,6 +4,7 @@ export const SEARCH_EVENTS = 'SEARCH_EVENTS';
 export const SELECT_EVENT = 'SELECT_EVENT';
 export const FETCH_AUCTIONS = 'FETCH_AUCTIONS';
 export const SELECT_AUCTION = 'SELECT_AUCTION';
+export const FETCH_AUCTION_BY_ID = 'FETCH_AUCTION_BY_ID';
 export const BUY_TICKETS = 'BUY_TICKETS';
 export const FETCH_TICKETS = 'FETCH_TICKETS';
 export const SIGNUP = 'SIGNUP';
@@ -59,6 +60,21 @@ export function selectAuction(auction) {
   return {
     type: SELECT_AUCTION,
     payload: auction,
+  };
+}
+
+export function fetchAuctionById(auctionId) {
+  const data = {
+    params: {
+      auctionId,
+    },
+  };
+
+  const request = axios.get('/api/auction/fetchById', data);
+
+  return {
+    type: FETCH_AUCTION_BY_ID,
+    payload: request,
   };
 }
 

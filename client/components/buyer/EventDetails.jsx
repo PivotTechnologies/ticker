@@ -28,12 +28,12 @@ const EventDetails = ({ activeEvent }) => {
                 </div>
               </div>
               <div>
-                <div>
-                  {moment(activeEvent.eventDate).format('MMMM Do, YYYY')}
-                </div>
-                <div>
-                  {moment(activeEvent.eventDate).format('h:mma')}
-                </div>
+              <div>
+                {moment(activeEvent.eventDate).format('MMMM Do, YYYY')}
+              </div>
+              <div>
+                {moment(activeEvent.eventDate).format('h:mma')}
+              </div>
               </div>
             </div>
           }

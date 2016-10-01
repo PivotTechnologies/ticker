@@ -180,10 +180,13 @@ body {
   align-content: space-between;
 }
 
+<<<<<<< c5b1529e8f7a7e71f8c69426c8e17b16ccf7d6c8
 .event-details-p {
   padding-top: 10px;
 }
 
+=======
+>>>>>>> [style] - styles event list items
 /**************** USER PROFILE ****************/
 
 .account-activity {

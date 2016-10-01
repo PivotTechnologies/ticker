@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
@@ -18,10 +19,15 @@ class AuctionListItem extends React.Component {
 
   render() {
     return (
-      <div className="list-item" onClick={this.handleClick}>
-        <p> Number of Tickets: { this.props.auction.numTickets } </p>
-        <p> Total Price: { this.props.auction.currentPrice } </p>
-      </div>
+      <Card className="list-item auction-list-item" onClick={this.handleClick}>
+        <CardHeader title="sellerUsername" />
+        <CardTitle
+          title={
+            `${this.props.auction.numTickets} Ticket(s) -
+            $${this.props.auction.currentPrice}`
+          }
+        />
+      </Card>
     );
   }
 }

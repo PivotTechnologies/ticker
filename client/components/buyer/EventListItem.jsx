@@ -48,28 +48,30 @@ class EventListItem extends React.Component {
           <CardTitle
             title={this.props.event.name}
             subtitle={
-              <div>
-                <div className="event-details-p">
-                  {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
+                <div>
+                  <div className="event-details-p">
+                    {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
+                  </div>
+                  <div className="event-details-p">
+                    {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
+                  </div>
                 </div>
-                <div className="event-details-p">
-                  {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
-                </div>
-              </div>
-            }
+              }
           />
           <Chip
             style={{position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer'}}
           >
             <Avatar icon={<ActionGavel />} />
+            style={{position: 'absolute', top: '20px', right: '20px', cursor: 'pointer'}}
+          >
             {this.props.event.numAuctions} Open Auction{this.renderPlural()}
           </Chip>
         </Card>
         <Card>
-          <CardMedia style={{width: '200px'}}>
-            <img src={this.props.event.image} />
-          </CardMedia>
-        </Card>
+            <CardMedia style={{width: '200px'}}>
+              <img src={this.props.event.image} />
+            </CardMedia>
+          </Card>
       </div>
     );
   }

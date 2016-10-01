@@ -32,7 +32,7 @@ class AuctionListItem extends React.Component {
         <CardTitle
           title={
             `${this.props.auction.numTickets} Ticket${this.renderPlural()} -
-            $${this.props.auction.currentPrice}`
+             $${this.props.auction.currentPrice}`
           }
         />
       </Card>

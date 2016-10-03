@@ -161,6 +161,10 @@ body {
   align-content: space-between;
 }
 
+.event-details-p {
+  padding-top: 10px;
+}
+
 /**************** USER PROFILE ****************/
 
 .account-activity {

@@ -2,7 +2,7 @@ const express = require('express');
 const cluster = require('cluster');
 const schedule = require('node-schedule');
 const models = require('./models/models');
-
+const pricing = require('./config/pricingHelper');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -16,19 +16,21 @@ const decrementPrice = schedule.scheduleJob('*/5 * * * * *', () => {
       where: {
         status: 'On Sale'
       },
-      // attributes: ['id', 'eventName', 'eventDate', 'startPrice', 'currentPrice', 'minPrice', 'numTickets', 'status']
-      attributes: ['id', 'eventName']
+      attributes: [
+        'id', 'eventName', 'eventDate', 'minPrice',
+        'startTime', 'startPrice',
+        'coefA', 'coefB'
+      ]
     })
     .then( auctions => {
       auctions.forEach( auction => {
-        // console.log('auction:', auction.dataValues);
-        // recalculate price
-        list.push(auction.dataValues)
+        auction.currentPrice = pricing.calculatePrice( auction.dataValues.startTime,
+                                                       auction.dataValues.startPrice,
+                                                       auction.dataValues.coefA,
+                                                       auction.dataValues.coefB );
+        auction.save();
       });
-      console.log('Updating the following auctions: ', list);
     })
-
-
 });
 
 app.listen(port, () => console.log('\033[34m🎟  Ticker server listening on port: \033[0m', port) );

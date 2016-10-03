@@ -1,12 +1,21 @@
 const models = require('../models/models');
 const fs = require('fs');
+const prices = require('../config/pricingHelper.js');
+var moment = require('moment-timezone');
 
 module.exports = {
 
   create: (req, res) => {
-    // findCoefficients(req.body.startPrice, req.body.minPrice, startTime, endTime)
-    const computedA = 0;
-    const computedB = 0;
+
+    const formattedEventDate  = moment(req.body.event.datetime_local, "YYYY-MM-DDTHH:mm:ss").format('YYYY-MM-DDTHH:mm:ss.sss') + 'Z';
+    const startTime = new Date( moment(new Date()).tz(req.body.event.timezone) );
+    const endTime  = new Date( moment(req.body.event.datetime_local, "YYYY-MM-DDTHH:mm:ss") );
+
+    const computed = prices.findCoefficients(req.body.startPrice,
+                                             req.body.minPrice,
+                                             startTime,
+                                             endTime );
+
     function createAuction() {
       const newAuction = models.Auction.build({
         eventId: auctionEventId,
@@ -17,17 +26,21 @@ module.exports = {
         numTickets: req.body.numTickets,
         status: 'On Sale',
         eventName: req.body.event.name,
-        eventDate: req.body.event.datetime_local,
+        eventDate: formattedEventDate,
         tickets: req.body.tickets,
-        coefA: computedA,
-        coefB: computedB,
-        startTime: new Date()
+        coefA: computed.a,
+        coefB: computed.b,
+        startTime: startTime
       });
 
       newAuction
         .save()
         .then(auction => {
-          console.log('New auction created: ', auction.dataValues);
+          console.log('New auction created: ');
+          console.log('  id:',  auction.dataValues.id);
+          console.log('  name:',  auction.dataValues.eventName);
+          console.log('  eventDate:',  auction.dataValues.eventDate);
+          console.log('  startTime:',  auction.dataValues.startTime);
           res.send(auction.dataValues);
         })
         .catch(err => console.log('Error:', err))
@@ -39,7 +52,7 @@ module.exports = {
         where: {
           name: req.body.event.name,
           venue: req.body.event.venue,
-          datetime_local: req.body.event.datetime_local
+          datetime_local: formattedEventDate
         }
       })
       .then(event => {
@@ -55,7 +68,7 @@ module.exports = {
               venue: req.body.event.venue,
               city: req.body.event.city,
               category: req.body.event.category,
-              datetime_local: req.body.event.datetime_local, // need to convert to pg format
+              datetime_local: formattedEventDate,
               timezone: req.body.event.timezone,
               latitude: req.body.event.latitude,
               longitude: req.body.event.longitude,
@@ -91,62 +104,18 @@ module.exports = {
         where: {
           eventId: req.query.eventId,
         },
-        attributes: [
-          'id',
-          'sellerId',
-          'buyerId',
-          'eventId',
-          'startPrice',
-          'currentPrice',
-          'minPrice',
-          'numTickets',
-          'sellDate',
-          'status',
-          'eventName',
-          'eventDate'
-        ]
+        attributes: [ 'id', 'sellerId', 'buyerId', 'eventId', 'startPrice', 'currentPrice', 'minPrice', 'numTickets', 'sellDate', 'status', 'eventName', 'eventDate']
       })
       .then(auctions => {
         auctions.forEach(auction => results.push(auction.dataValues));
         console.log('\033[34mSending data: \033[0m');
+        //console.log(results);
         res.json(results);
       })
       .catch(err => {
         console.log('Error:', err.message);
         res.send(err.message);
       });
-  },
-
-  fetchById: (req, res) => {
-    models.Auction
-      .findOne({
-        where: {
-          id: req.query.auctionId
-        },
-        attributes: [
-          'id',
-          'sellerId',
-          'buyerId',
-          'eventId',
-          'startPrice',
-          'currentPrice',
-          'minPrice',
-          'numTickets',
-          'sellDate',
-          'status',
-          'eventName',
-          'eventDate'
-        ]
-      })
-      .then( auction => {
-        if(auction) {
-          res.json(auction.dataValues);
-        }
-        else {
-          res.send("Auction not found.");
-        }
-      })
-      .catch( err => console.log(err) )
   },
 
   buyTickets: (req, res) => {
@@ -161,7 +130,7 @@ module.exports = {
           auction.sellDate = Date.now();
           auction.buyerId = req.body.userId;
           auction.save();
-          console.log('Sold: \n', auction.dataValues)
+          //console.log('Sold: \n', auction.dataValues)
           res.sendStatus(200);
         }
         else {
@@ -178,6 +147,7 @@ module.exports = {
       }
     })
     .then( auction => {
+      //console.log(auction.dataValues.tickets)
       res.json({ tickets: auction.dataValues.tickets });
     })
     .catch( err => {

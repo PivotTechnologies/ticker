@@ -21,6 +21,7 @@ const routes = (app, express) => {
   app.get('/api/auction/cancel', auctionController.cancel );
   app.get('/api/auction/fetch', auctionController.fetch );
   app.get('/api/auction/fetchById', auctionController.fetchById );
+  app.post('/api/auction/cancel', auctionController.cancel );
   app.post('/api/auction/buyTickets', auctionController.buyTickets );
   app.get('/api/auction/fetchTickets', auctionController.fetchTickets );
 

@@ -1,13 +1,24 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUserActivity } from '../../actions/index';
+import { fetchUserActivity, cancelAuction } from '../../actions/index';
 
 class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.cancelAuction = this.cancelAuction.bind(this);
+  }
+
   componentWillMount() {
     this.props.fetchUserActivity(this.props.user.id);
+  }
+
+  cancelAuction(auctionId) {
+    this.props.cancelAuction(auctionId);
   }
 
   renderBuyerHistory() {
@@ -47,6 +58,12 @@ class UserProfile extends React.Component {
           <div className="activity-item" key={auction.id}>
             <p>Number of Tickets: {auction.numTickets}</p>
             <p>Sale Price: {auction.currentPrice}</p>
+            <RaisedButton
+              label="Cancel Auction"
+              onClick={() => {
+                this.cancelAuction(auction.id)
+              }}
+            />
           </div>
         ))}
       </div>
@@ -140,7 +157,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchUserActivity }, dispatch);
+  return bindActionCreators({ fetchUserActivity, cancelAuction }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

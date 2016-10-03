@@ -33,6 +33,7 @@
     "jsonwebtoken": "^7.1.9",
     "material-ui": "^0.15.4",
     "moment": "^2.15.1",
+    "moment-timezone": "^0.5.5",
     "morgan": "^1.7.0",
     "node-schedule": "^1.1.1",
     "path": "^0.12.7",

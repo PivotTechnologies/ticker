@@ -190,6 +190,38 @@ module.exports = {
     .catch( err => console.log(err) )
   },
 
+  fetchById: (req, res) => {
+    models.Auction
+      .findOne({
+        where: {
+          id: req.query.auctionId
+        },
+        attributes: [
+          'id',
+          'sellerId',
+          'buyerId',
+          'eventId',
+          'startPrice',
+          'currentPrice',
+          'minPrice',
+          'numTickets',
+          'sellDate',
+          'status',
+          'eventName',
+          'eventDate'
+        ]
+      })
+      .then( auction => {
+        if(auction) {
+          res.json(auction.dataValues);
+        }
+        else {
+          res.send("Auction not found.");
+        }
+      })
+      .catch( err => console.log(err) )
+  },
+  
   buyTickets: (req, res) => {
     models.Auction
       .findOne({

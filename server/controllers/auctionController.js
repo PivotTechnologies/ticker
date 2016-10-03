@@ -101,7 +101,7 @@ module.exports = {
       }
     })
     .then( auction => {
-      if(auction) {
+      if (auction) {
         models.Event.findOne({
           where: {
             id: auction.eventId
@@ -175,7 +175,7 @@ module.exports = {
       ]
     })
     .then( auction => {
-      if(auction) {
+      if (auction) {
         res.json(auction.dataValues);
       }
       else {

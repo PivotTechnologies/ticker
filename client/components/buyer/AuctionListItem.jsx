@@ -10,11 +10,19 @@ class AuctionListItem extends React.Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.renderPlural = this.renderPlural.bind(this);
   }
 
   handleClick() {
     this.props.selectAuction(this.props.auction);
     browserHistory.push(`/auction/${this.props.auction.id}`);
+  }
+
+  renderPlural() {
+    if (this.props.auction.numTickets > 1){
+      return 's';
+    }
+    return '';
   }
 
   render() {
@@ -23,7 +31,7 @@ class AuctionListItem extends React.Component {
         <CardHeader title="sellerUsername" />
         <CardTitle
           title={
-            `${this.props.auction.numTickets} Ticket(s) -
+            `${this.props.auction.numTickets} Ticket${this.renderPlural()} -
             $${this.props.auction.currentPrice}`
           }
         />

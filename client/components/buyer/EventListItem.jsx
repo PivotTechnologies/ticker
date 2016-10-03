@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+import ActionGavel from 'material-ui/svg-icons/action/gavel';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -22,14 +24,16 @@ class EventListItem extends React.Component {
   }
 
   renderPlural() {
-    if (this.props.event.numAuctions > 1)
+    if (this.props.event.numAuctions > 1) {
       return 's';
+    }
+    return '';
   }
 
   render() {
     return (
       <div className="event-details list-item" onClick={this.handleClick} >
-        <Card className="event-date" style={{width: '130px'}}>
+        <Card className="event-date" style={{width: '125px', background: '#E0E0E0'}}>
           <div>
             {moment(this.props.event.datetime_local).format('MMM').toUpperCase()}
           </div>
@@ -40,28 +44,29 @@ class EventListItem extends React.Component {
             {moment(this.props.event.datetime_local).format('ddd').toUpperCase()}
           </div>
         </Card>
-        <Card style={{flex: '1', position: 'relative'}}>
+        <Card style={{flex: '1', position: 'relative', maxHeight: '150px'}}>
           <CardTitle
             title={this.props.event.name}
             subtitle={
               <div>
-                <div>
+                <div className="event-details-p">
                   {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
                 </div>
-                <div>
+                <div className="event-details-p">
                   {moment(this.props.event.datetime_local).format('MMMM Do, YYYY [@] h:mma')}
                 </div>
               </div>
             }
           />
           <Chip
-            style={{position: 'absolute', top: '20px', right: '20px', cursor: 'pointer'}}
+            style={{position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer'}}
           >
+            <Avatar icon={<ActionGavel />} />
             {this.props.event.numAuctions} Open Auction{this.renderPlural()}
           </Chip>
         </Card>
         <Card>
-          <CardMedia style={{width: '175px'}}>
+          <CardMedia style={{width: '200px'}}>
             <img src={this.props.event.image} />
           </CardMedia>
         </Card>

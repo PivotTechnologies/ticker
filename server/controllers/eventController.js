@@ -58,7 +58,8 @@ module.exports = {
           $and: [
             keywordQuery,
             dateQuery,
-            locationQuery
+            locationQuery,
+            { numAuctions: { $gt: 0 } }
           ]
         }
       })

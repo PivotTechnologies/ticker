@@ -11,6 +11,7 @@ require('./config/middleware')(app, express);
 require('./config/routes')(app, express);
 
 const decrementPrice = schedule.scheduleJob('*/5 * * * * *', () => {
+<<<<<<< 49756ec84f4575d6d312e6233aa814e17c1f7abc
   models.Auction.findAll({
     where: {
       status: 'On Sale'
@@ -75,6 +76,29 @@ const expireAuctions = schedule.scheduleJob('*/5 * * * * *', () => {
       event.save();
     });
   })
+=======
+  const list = [];
+  models.Auction
+    .findAll({
+      where: {
+        status: 'On Sale'
+      },
+      attributes: [
+        'id', 'eventName', 'eventDate', 'minPrice',
+        'startTime', 'startPrice',
+        'coefA', 'coefB'
+      ]
+    })
+    .then( auctions => {
+      auctions.forEach( auction => {
+        auction.currentPrice = pricing.calculatePrice( auction.dataValues.startTime,
+                                                       auction.dataValues.startPrice,
+                                                       auction.dataValues.coefA,
+                                                       auction.dataValues.coefB );
+        auction.save();
+      });
+    })
+>>>>>>> [feature] - integrates pricingHelper to compute prices and coefficients for pricing
 });
 
 app.listen(port, () => console.log('\033[34m🎟  Ticker server listening on port: \033[0m', port) );

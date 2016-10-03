@@ -8,7 +8,7 @@ module.exports = {
       const results = [];
       let keywordQuery, dateQuery, locationQuery;
 
-      if(req.query.query){
+      if (req.query.query){
         keywordQuery = {
           $or: [
             { name: { $iLike: '%'+req.query.query+'%' } },
@@ -18,7 +18,7 @@ module.exports = {
         }
       }
 
-      if(req.query.date){
+      if (req.query.date){
         const momentObj = moment(req.query.date, "YYYY-MM-DD");
         const dateStart = momentObj.format('YYYY-MM-DDTHH:mm:ss');
         const dateEnd = momentObj.add(24, 'hours').format('YYYY-MM-DD HH:mm:ss');
@@ -30,7 +30,7 @@ module.exports = {
         };
       }
 
-      if(req.query.location){
+      if (req.query.location){
         var city, state;
         if(req.query.location.includes(',')) {
           let arr = req.query.location.split(',');
@@ -94,7 +94,7 @@ module.exports = {
           }
         })
         .then( event => {
-          if(event) {
+          if (event) {
             res.json(event.dataValues);
           }
           else {

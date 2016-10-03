@@ -95,61 +95,96 @@ module.exports = {
   },
 
   cancel: (req, res) => {
-    res.send('cancel');
+    models.Auction.findOne({
+      where: {
+        id: req.body.auctionId
+      }
+    })
+    .then( auction => {
+      if(auction) {
+        models.Event.findOne({
+          where: {
+            id: auction.eventId
+          }
+        })
+        .then( event => {
+          event.numAuctions -= 1;
+          event.save();
+        })
+
+        auction.destroy();
+        res.send('Auction deleted.');
+      }
+      else {
+        res.send('Auction not found.');
+      }
+    })
+    .catch( err => console.log(err) );
   },
 
   fetch: (req, res) => {
     const results = [];
     models.Auction.findAll({
-        where: {
-          eventId: req.query.eventId,
-        },
-        attributes: [ 'id', 'sellerId', 'buyerId', 'eventId', 'startPrice', 'currentPrice', 'minPrice', 'numTickets', 'sellDate', 'status', 'eventName', 'eventDate']
-      })
-      .then(auctions => {
-        auctions.forEach(auction => results.push(auction.dataValues));
-        console.log('\033[34mSending data: \033[0m');
-        //console.log(results);
-        res.json(results);
-      })
-      .catch(err => {
-        console.log('Error:', err.message);
-        res.send(err.message);
-      });
+      where: {
+        eventId: req.query.eventId,
+      },
+      attributes: [
+        'id',
+        'sellerId',
+        'buyerId',
+        'eventId',
+        'startPrice',
+        'currentPrice',
+        'minPrice',
+        'numTickets',
+        'sellDate',
+        'status',
+        'eventName',
+        'eventDate'
+      ]
+    })
+    .then(auctions => {
+      auctions.forEach(auction => results.push(auction.dataValues));
+      console.log('\033[34mSending data: \033[0m');
+      res.json(results);
+    })
+    .catch(err => {
+      console.log('Error:', err.message);
+      res.send(err.message);
+    });
   },
 
   fetchById: (req, res) => {
-    models.Auction
-      .findOne({
-        where: {
-          id: req.query.auctionId
-        },
-        attributes: [
-          'id',
-          'sellerId',
-          'buyerId',
-          'eventId',
-          'startPrice',
-          'currentPrice',
-          'minPrice',
-          'numTickets',
-          'sellDate',
-          'status',
-          'eventName',
-          'eventDate'
-        ]
-      })
-      .then( auction => {
-        if(auction) {
-          res.json(auction.dataValues);
-        }
-        else {
-          res.send("Auction not found.");
-        }
-      })
-      .catch( err => console.log(err) )
+    models.Auction.findOne({
+      where: {
+        id: req.query.auctionId
+      },
+      attributes: [
+        'id',
+        'sellerId',
+        'buyerId',
+        'eventId',
+        'startPrice',
+        'currentPrice',
+        'minPrice',
+        'numTickets',
+        'sellDate',
+        'status',
+        'eventName',
+        'eventDate'
+      ]
+    })
+    .then( auction => {
+      if(auction) {
+        res.json(auction.dataValues);
+      }
+      else {
+        res.send('Auction not found.');
+      }
+    })
+    .catch( err => console.log(err) )
   },
-  
+
   buyTickets: (req, res) => {
     models.Auction
       .findOne({
@@ -158,6 +193,16 @@ module.exports = {
       .then(auction => {
         console.log('auction found:', auction)
         if(auction) {
+          models.Event.findOne({
+            where: {
+              id: auction.eventId
+            }
+          })
+          .then( event => {
+            event.numAuctions -= 1;
+            event.save();
+          })
+
           auction.status = 'Sold';
           auction.sellDate = Date.now();
           auction.buyerId = req.body.userId;
@@ -168,7 +213,7 @@ module.exports = {
         else {
           res.send('Auction not found.')
         }
-      })
+      });
   },
 
   fetchTickets: (req, res) => {

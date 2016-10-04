@@ -7,7 +7,6 @@ class EventList extends React.Component {
     return this.props.events.map((event, idx) =>
       <EventListItem key={idx} event={event} />
     );
-
   }
 
   render() {

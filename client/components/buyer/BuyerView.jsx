@@ -9,9 +9,7 @@ const BuyerView = () => (
     <h1>Find Tickets</h1>
     <BuyerSearchBar />
     <EventList />
-
-    <Maps />
-
+   <Maps /> 
 
   </Paper>
 );

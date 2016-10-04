@@ -35,7 +35,6 @@ const decrementPrice = schedule.scheduleJob('*/5 * * * * *', () => {
 const expireAuctions = schedule.scheduleJob('*/5 * * * * *', () => {
   const now = new Date();
   const nowLA = new Date(moment.tz(now, 'America/Los_Angeles').format('YYYY-MM-DDTHH:mm:ss'));
-  console.log("IT IS NOW:", nowLA)
 
   models.Event.findAll({
     where: {

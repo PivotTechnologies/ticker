@@ -29,7 +29,7 @@ class SellerEventListItem extends React.Component {
                 {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
               </div>
               <div>
-                {moment(this.props.event.datetime_local).format('MMMM Do, YYYY [@] h:mma')}
+                {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
               </div>
             </div>
           }

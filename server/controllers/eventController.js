@@ -23,7 +23,7 @@ module.exports = {
         const dateStart = momentObj.format('YYYY-MM-DDTHH:mm:ss');
         const dateEnd = momentObj.add(24, 'hours').format('YYYY-MM-DD HH:mm:ss');
         dateQuery = {
-          datetime_local: {
+          eventDate: {
             $gte: dateStart,
             $lte: dateEnd
           }

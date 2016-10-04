@@ -11,7 +11,7 @@ const models = require('./models/models.js');
 //   venue: 'req.body.event.venue',
 //   city: 'req.body.event.city',
 //   category: 'req.body.event.category',
-//   datetime_local: '2016-09-24T21:00:00',
+//   eventDate: '2016-09-24T21:00:00',
 //   timezone: 'req.body.event.timezone',
 //   latitude: 'req.body.event.latitude',
 //   longitude: 'req.body.event.longitude'

@@ -35,13 +35,13 @@ class EventListItem extends React.Component {
       <div className="event-details list-item" onClick={this.handleClick} >
         <Card className="event-date" style={{width: '125px', background: '#E0E0E0'}}>
           <div>
-            {moment(this.props.event.datetime_local).format('MMM').toUpperCase()}
+            {moment(this.props.event.eventDate).format('MMM').toUpperCase()}
           </div>
           <div className="event-date-day">
-            {moment(this.props.event.datetime_local).format('DD').toUpperCase()}
+            {moment(this.props.event.eventDate).format('DD').toUpperCase()}
           </div>
           <div>
-            {moment(this.props.event.datetime_local).format('ddd').toUpperCase()}
+            {moment(this.props.event.eventDate).format('ddd').toUpperCase()}
           </div>
         </Card>
         <Card style={{flex: '1', position: 'relative', maxHeight: '150px'}}>
@@ -53,7 +53,7 @@ class EventListItem extends React.Component {
                   {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
                 </div>
                 <div className="event-details-p">
-                  {moment(this.props.event.datetime_local).format('MMMM Do, YYYY [@] h:mma')}
+                  {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
                 </div>
               </div>
             }

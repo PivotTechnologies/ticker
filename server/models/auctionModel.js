@@ -36,9 +36,6 @@ const Auction = connection.define('auction', {
   eventDate: {
     type: Sequelize.DATE
   },
-  tickets: {
-     type: Sequelize.TEXT
-  },
   coefA: {
     type: Sequelize.DOUBLE(11, 12)
   },
@@ -47,6 +44,9 @@ const Auction = connection.define('auction', {
   },
   startTime: {
     type: Sequelize.DATE
+  },
+  tickets: {
+    type: Sequelize.TEXT
   }
 });
 

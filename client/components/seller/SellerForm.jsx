@@ -154,7 +154,7 @@ class SellerForm extends React.Component {
                     {this.props.activeEvent.venue} - {this.props.activeEvent.city}, {this.props.activeEvent.state}
                   </div>
                   <div>
-                    {moment(this.props.activeEvent.datetime_local).format('MMMM Do, YYYY [@] h:mma')}
+                    {moment(this.props.activeEvent.eventDate).format('MMMM Do, YYYY [@] h:mma')}
                   </div>
                 </div>
               }

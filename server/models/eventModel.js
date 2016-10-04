@@ -33,7 +33,7 @@ const Event = connection.define('event', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  datetime_local: {
+  eventDate: {
     type: Sequelize.DATE,
     allowNull: false
   },

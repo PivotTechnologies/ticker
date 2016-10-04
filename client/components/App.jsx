@@ -115,20 +115,11 @@ function mapStateToProps(state) {
   return {
     user: state.user,
     isLoading: state.isLoading,
-    userLocation: state.userLocation,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-<<<<<<< 12e3426ae04c0d61e6494fcecd770f47d48a5427
-  return bindActionCreators({ reauthenticate, fetchWatchList }, dispatch);
-=======
-  return bindActionCreators({ reauthenticate, getLocation }, dispatch);
-  // return {
-  //   reauthenticate: (x)=>dispatch(reauthenticate(x)),
-  //   dispatch: (x)=>dispatch(x)
-  // }
->>>>>>> [feature] - saves user geolocation into redux store
+  return bindActionCreators({ reauthenticate, fetchWatchList, getLocation }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

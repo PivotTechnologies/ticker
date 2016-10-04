@@ -314,6 +314,7 @@ export function getLocation() {
     });
   })
   .then((userLocation)=> {
+    console.log("user location: ", userLocation);
     return {
       type: GET_LOCATION,
       payload: userLocation,

@@ -22,6 +22,3 @@ module.exports = {
   findCoefficients: findCoefficients,
   calculatePrice: calculatePrice
 }
-
-console.log(findCoefficients(40, 20, new Date('2016-10-03 19:05:30+00'), new Date('2016-10-03 19:30:00+00')))
-console.log(calculatePrice(new Date('2016-10-03 19:05:30+00'), 40, 1.25, 0.0000018861147770338648))

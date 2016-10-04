@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Maps from '../Maps.jsx';
 import EventListItem from './EventListItem.jsx';
 
 class EventList extends React.Component {

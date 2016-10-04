@@ -59,16 +59,11 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     isLoading: state.isLoading,
-    userLocation: state.userLocation,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ reauthenticate, getLocation }, dispatch);
-  // return {
-  //   reauthenticate: (x)=>dispatch(reauthenticate(x)),
-  //   dispatch: (x)=>dispatch(x)
-  // }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

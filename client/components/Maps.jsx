@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
+
 import { GoogleMap, Marker, GoogleMapLoader  } from 'react-google-maps';
 import  ScriptjsLoader from 'react-google-maps/lib/async/ScriptjsLoader';
+import LinearProgress from 'material-ui/LinearProgress'; 
 
 class Maps extends React.Component {
   constructor(props) {

@@ -4,6 +4,7 @@ import EventListItem from './EventListItem.jsx';
 
 class EventList extends React.Component {
   renderEventList() {
+    console.log("inside event list:", this.props);
     return this.props.events.map((event, idx) =>
       <EventListItem key={idx} event={event} />
     );

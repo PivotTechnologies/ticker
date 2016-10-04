@@ -88,9 +88,11 @@ class AuctionDetails extends React.Component {
   }
 
   buyTickets() {
-    browserHistory.push('/buyerForm');
-    // this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
-    //   .then(response => browserHistory.push('/buyerForm'));
+    if (localStorage.getItem('token')) {
+      browserHistory.push('/buyerForm');
+    } else {
+      browserHistory.push('/signin');
+    }
   }
 
   openWatchModal() {

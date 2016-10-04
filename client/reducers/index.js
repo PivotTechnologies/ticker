@@ -10,6 +10,7 @@ import NewAuctionReducer from './reducer_new_auction';
 import isLoadingReducer from './reducer_is_loading';
 import WatchListReducer from './reducer_watch_list';
 import PaymentReducer from './reducer_payment';
+import userLocationReducer from './reducer_user_location';
 
 const rootReducer = combineReducers({
   events: EventsReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   isLoading: isLoadingReducer,
   watchList: WatchListReducer,
   paymentToken: PaymentReducer,
+  userLocation: userLocationReducer,
 });
 
 export default rootReducer;

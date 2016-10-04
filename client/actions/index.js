@@ -22,6 +22,7 @@ export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 export const START_SPINNER = 'START_SPINNER';
 export const CHECKOUT = 'CHECKOUT';
 export const GET_CLIENT_TOKEN = 'GET_CLIENT_TOKEN';
+export const GET_LOCATION = 'GET_LOCATION';
 
 export function searchEvents(query, date, location) {
   const data = {
@@ -305,4 +306,20 @@ export function getClientToken() {
     type: GET_CLIENT_TOKEN,
     payload: request,
   };
+
+export function getLocation() {
+  return new Promise ((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      resolve(position.coords);
+    });
+  })
+  .then((userLocation)=> {
+    return {
+      type: GET_LOCATION,
+      payload: userLocation,
+    };
+  })
+  .catch((error) => {
+    reject(error);
+  });
 }

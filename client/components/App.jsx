@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import NavBar from './NavBar.jsx';
 import WatchList from './generalUser/WatchList.jsx';
 import { reauthenticate, fetchWatchList } from '../actions/index';
+import { reauthenticate, getLocation } from '../actions/index';
 
 injectTapEventPlugin();
 
@@ -36,8 +37,8 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    setInterval(() => this.props.fetchWatchList(this.props.user.id), 1000);
-  }
+      setInterval(() => this.props.fetchWatchList(this.props.user.id), 1000);
+    }
 
   renderSpinner() {
     if (this.props.isLoading) {
@@ -114,11 +115,20 @@ function mapStateToProps(state) {
   return {
     user: state.user,
     isLoading: state.isLoading,
+    userLocation: state.userLocation,
   };
 }
 
 function mapDispatchToProps(dispatch) {
+<<<<<<< 12e3426ae04c0d61e6494fcecd770f47d48a5427
   return bindActionCreators({ reauthenticate, fetchWatchList }, dispatch);
+=======
+  return bindActionCreators({ reauthenticate, getLocation }, dispatch);
+  // return {
+  //   reauthenticate: (x)=>dispatch(reauthenticate(x)),
+  //   dispatch: (x)=>dispatch(x)
+  // }
+>>>>>>> [feature] - saves user geolocation into redux store
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

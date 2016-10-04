@@ -64,9 +64,13 @@ module.exports = {
         }
       })
       .then( events => {
-        events.forEach( event => results.push(event.dataValues) );
+        events.forEach( event => {
+          var convertedEventTime = moment(event.dataValues.eventDate).tz(event.dataValues.timezone).add(7, 'h').format('YYYY-MM-DDTHH:mm:ss');
+          event.dataValues.eventDate = convertedEventTime;
+          results.push(event.dataValues);
+        });
         console.log('\033[34mSending data: \033[0m');
-        console.log(results);
+        // console.log(results);
         res.json(results);
       })
       .catch( err => {

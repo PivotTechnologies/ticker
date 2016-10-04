@@ -22,7 +22,7 @@ function getEvents(query) {
             name: event.title,
             category: event.taxonomies[0].name,
             image: event.performers[0].image,
-            datetime_local: event.datetime_local,
+            eventDate: event.datetime_local,
             timezone: event.venue.timezone,
             venue: event.venue.name,
             address: event.venue.address,

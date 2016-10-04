@@ -1,5 +1,8 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+import ActionGavel from 'material-ui/svg-icons/action/gavel';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -11,6 +14,7 @@ class EventListItem extends React.Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.renderPlural = this.renderPlural.bind(this);
   }
 
   handleClick() {
@@ -19,23 +23,54 @@ class EventListItem extends React.Component {
     browserHistory.push(`/event/${this.props.event.id}`);
   }
 
+  renderPlural() {
+    if (this.props.event.numAuctions > 1) {
+      return 's';
+    }
+    return '';
+  }
+
   render() {
     return (
-      <Card className="list-item" onClick={this.handleClick}>
-        <CardTitle
-          title={this.props.event.name}
-          subtitle={
-            <div>
+      <div className="event-details list-item" onClick={this.handleClick} >
+        <Card className="event-date" style={{width: '125px', background: '#E0E0E0'}}>
+          <div>
+            {moment(this.props.event.eventDate).format('MMM').toUpperCase()}
+          </div>
+          <div className="event-date-day">
+            {moment(this.props.event.eventDate).format('DD').toUpperCase()}
+          </div>
+          <div>
+            {moment(this.props.event.eventDate).format('ddd').toUpperCase()}
+          </div>
+        </Card>
+        <Card style={{flex: '1', position: 'relative', maxHeight: '150px'}}>
+          <CardTitle
+            title={this.props.event.name}
+            subtitle={
               <div>
-                {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
+                <div className="event-details-p">
+                  {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
+                </div>
+                <div className="event-details-p">
+                  {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
+                </div>
               </div>
-              <div>
-                {moment(this.props.event.datetime_local).format('MMMM Do, YYYY [@] h:mma')}
-              </div>
-            </div>
-          }
-        />
-      </Card>
+            }
+          />
+          <Chip
+            style={{position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer'}}
+          >
+            <Avatar icon={<ActionGavel />} />
+            {this.props.event.numAuctions} Open Auction{this.renderPlural()}
+          </Chip>
+        </Card>
+        <Card>
+          <CardMedia style={{width: '200px'}}>
+            <img src={this.props.event.image} />
+          </CardMedia>
+        </Card>
+      </div>
     );
   }
 }

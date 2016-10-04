@@ -133,6 +133,38 @@ body {
   }
 }
 
+.auction-list {
+  width: 300px;
+}
+
+/**************** EVENT DETAILS ****************/
+
+.event-details {
+  display: flex;
+}
+
+.event-date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.event-date-day {
+  font-size: 3em;
+}
+
+.event-details-text {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.event-details-p {
+  padding-top: 10px;
+}
+
 /**************** USER PROFILE ****************/
 
 .account-activity {

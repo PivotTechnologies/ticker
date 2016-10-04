@@ -5,6 +5,7 @@ export const SELECT_EVENT = 'SELECT_EVENT';
 export const FETCH_AUCTIONS = 'FETCH_AUCTIONS';
 export const SELECT_AUCTION = 'SELECT_AUCTION';
 export const FETCH_AUCTION_BY_ID = 'FETCH_AUCTION_BY_ID';
+export const CANCEL_AUCTION = 'CANCEL_AUCTION';
 export const BUY_TICKETS = 'BUY_TICKETS';
 export const FETCH_TICKETS = 'FETCH_TICKETS';
 export const SIGNUP = 'SIGNUP';
@@ -74,6 +75,19 @@ export function fetchAuctionById(auctionId) {
 
   return {
     type: FETCH_AUCTION_BY_ID,
+    payload: request,
+  };
+}
+
+export function cancelAuction(auctionId) {
+  const data = {
+    auctionId,
+  };
+
+  const request = axios.post('/api/auction/cancel', data);
+
+  return {
+    type: CANCEL_AUCTION,
     payload: request,
   };
 }

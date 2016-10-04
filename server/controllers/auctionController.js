@@ -9,7 +9,11 @@ module.exports = {
     const now = new Date();
     const startTime = moment.tz(now, 'America/Los_Angeles').format('YYYY-MM-DDTHH:mm:ss');
 
+<<<<<<< 1480bd8e525a5e297d577683317a650234704412
     const eventDate = moment.tz(req.body.event.eventDate, req.body.event.timezone).tz('America/Los_Angeles').format('YYYY-MM-DDTHH:mm:ss.sss') + 'Z';
+=======
+    const eventDate = moment.tz(req.body.event.eventDate, req.body.event.timezone).tz('America/Los_Angeles').format('YYYY-MM-DDTHH:mm:ss');
+>>>>>>> [feature] - expires events once event time has passed, standardizes time in db to PDT
 
     const computed = prices.findCoefficients(req.body.startPrice,
                                              req.body.minPrice,

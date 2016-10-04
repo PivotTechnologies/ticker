@@ -53,9 +53,6 @@ class EventListItem extends React.Component {
                   {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
                 </div>
                 <div className="event-details-p">
-                  {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
-                </div>
-                <div className="event-details-p">
                   {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
                 </div>
               </div>

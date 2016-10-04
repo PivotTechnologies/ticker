@@ -17,6 +17,7 @@ export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
 export const CREATE_AUCTION = 'CREATE_AUCTION';
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 export const START_SPINNER = 'START_SPINNER';
+export const GET_LOCATION = 'GET_LOCATION';
 
 export function searchEvents(query, date, location) {
   const data = {
@@ -232,4 +233,21 @@ export function startSpinner() {
   return {
     type: START_SPINNER,
   };
+}
+
+export function getLocation() {
+  return new Promise ((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      resolve(position.coords);
+    });
+  })
+  .then((userLocation)=> {
+    return {
+      type: GET_LOCATION,
+      payload: userLocation,
+    };
+  })
+  .catch((error) => {
+    reject(error);
+  });
 }

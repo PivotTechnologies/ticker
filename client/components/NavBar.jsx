@@ -12,6 +12,7 @@ import { bindActionCreators } from 'redux';
 import { clearEvents, signout } from '../actions/index';
 import { browserHistory } from 'react-router';
 
+
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -131,7 +132,6 @@ class NavBar extends React.Component {
       </div>
     );
   }
-
 }
 
 function mapStateToProps(state) {

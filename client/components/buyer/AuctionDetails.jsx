@@ -29,8 +29,12 @@ class AuctionDetails extends React.Component {
   }
 
   buyTickets() {
-    this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
-    .then(response => browserHistory.push('/confirm'));
+    if (localStorage.getItem('token')) {
+      this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
+        .then(response => browserHistory.push('/confirm'));
+    } else {
+      browserHistory.push('/signin');
+    }
   }
 
   render() {

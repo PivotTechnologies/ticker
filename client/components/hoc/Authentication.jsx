@@ -7,13 +7,13 @@ export default function (ComposedComponent) {
   class Authentication extends React.Component {
 
     componentWillMount() {
-      if (this.props.token === undefined) {
+      if (localStorage.getItem('token') === undefined) {
         browserHistory.push('/signin');
       }
     }
 
     componentWillUpdate(nextProps) {
-      if (nextProps.token === undefined) {
+      if (localStorage.getItem('token') === undefined) {
         browserHistory.push('/signin');
       }
     }

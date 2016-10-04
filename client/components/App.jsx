@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { bindActionCreators } from 'redux';
 import NavBar from './NavBar.jsx';
-import { reauthenticate } from '../actions/index';
+import { reauthenticate, getLocation } from '../actions/index';
 
 injectTapEventPlugin();
 
@@ -22,6 +22,10 @@ class App extends React.Component {
     if (token) {
       this.props.reauthenticate(token);
     }
+  }
+
+  componentDidMount() {
+    this.props.getLocation();
   }
 
   renderSpinner() {
@@ -55,11 +59,16 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     isLoading: state.isLoading,
+    userLocation: state.userLocation,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ reauthenticate }, dispatch);
+  return bindActionCreators({ reauthenticate, getLocation }, dispatch);
+  // return {
+  //   reauthenticate: (x)=>dispatch(reauthenticate(x)),
+  //   dispatch: (x)=>dispatch(x)
+  // }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

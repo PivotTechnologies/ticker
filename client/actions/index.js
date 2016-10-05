@@ -238,7 +238,11 @@ export function startSpinner() {
 export function getLocation() {
   return new Promise ((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((position) => {
-      resolve(position.coords);
+      if (position) {
+        resolve(position.coords);
+      } else {
+        reject(position);
+      }
     });
   })
   .then((userLocation)=> {
@@ -248,7 +252,4 @@ export function getLocation() {
       payload: userLocation,
     };
   })
-  .catch((error) => {
-    reject(error);
-  });
 }

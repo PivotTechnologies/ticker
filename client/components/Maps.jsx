@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { GoogleMap, Marker, GoogleMapLoader  } from 'react-google-maps';
 import  ScriptjsLoader from 'react-google-maps/lib/async/ScriptjsLoader';
-import LinearProgress from 'material-ui/LinearProgress'; 
+import LinearProgress from 'material-ui/LinearProgress';
 
 class Maps extends React.Component {
   constructor(props) {
@@ -31,57 +31,51 @@ class Maps extends React.Component {
         </div>
       );
     }
-
-    return <div />;
   }
 
   render() {
-    // if (!this.props.userlocation) {
-    //   return <div>Map not found</div>
-    // }
-
     return (
-//NEED TO ADD spinner
-//AND MAYBE AND LIST/MAP VIEW
 
-<ScriptjsLoader
-hostname={"maps.googleapis.com"}
-pathname={"/maps/api/js"}
-query={{ key: "AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ", libraries: "geometry,drawing,places"}}
-loadingElement={
-  <div>
-    {this.renderSpinner()}
-  </div>
-}
-containerElement={
-  <div
-  style={{
-    height: "75%",
-    width: "50%",
-    // position: "absolute"
-  }}/>
-}
-googleMapElement={
-  <GoogleMap
-  ref={(map) => {
-    // setTimeout(() => {
-    //   if (!map) {
-    //     return;
-    //   }
-      console.log("map:", map);}}
-    // }, 5);}}
-    defaultZoom={15}
-    defaultCenter={{lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude}}
-  >
+    <ScriptjsLoader
+      hostname={"maps.googleapis.com"}
+      pathname={"/maps/api/js"}
+      query={{ key: "AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ", libraries: "geometry,drawing,places"}}
 
-  </GoogleMap>
-}
-/>
+      loadingElement={
+        <div>
+          {this.renderSpinner()}
+        </div>
+      }
 
-  );
+      containerElement={
+        <div
+        style={{
+          height: "920px",
+          width: "920px",
+        }}/>
+      }
+      googleMapElement={
+        <GoogleMap
+          ref={(map) => {
+            // setTimeout(() => {
+            //   if (!map) {
+            //     return;
+            //   }
+            if (!map) {
+              {this.renderSpinner()}
+            }
+              console.log("map:", map);}}
+            // }, 5);}}
+            defaultZoom={15}
+            defaultCenter={{lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude}}
+          >
+        </GoogleMap>
+      }
+    />
+    );
   }
 }
-// lat: this.props.userlocation.latitude, lng: this.props.userlocation.longitude
+
 function mapStateToProps(state) {
   return {
     events: state.events,
@@ -91,42 +85,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Maps);
-
-
-
-
-{/* <GoogleMapLoader
-query={{ libraries: "geometry,drawing,places" }}
-
-loadingElement={
-  <div>Loading....</div>
-}
-
-containerElement={
-  <div
-  {...this.props.containerElementProps}
-  style={{
-    height: "100%",
-    width: "100%",
-    position: "absolute"
-  }}
-  />
-}
-
-googleMapElement={
-  <GoogleMap
-  ref={(map) => {
-    setTimeout(() => {
-      if (!map) {
-        return;
-      }
-      console.log("map:", map);
-    }, 5);
-    //console.log(map)
-  }}
-  defaultZoom={15}
-  defaultCenter={{ lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude }}
-  >
-  </GoogleMap>
-}
-/> */}

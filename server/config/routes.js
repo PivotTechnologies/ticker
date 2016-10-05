@@ -1,8 +1,9 @@
-const userController = require('../controllers/userController');
-const eventController = require('../controllers/eventController');
+const userController    = require('../controllers/userController');
+const eventController   = require('../controllers/eventController');
 const auctionController = require('../controllers/auctionController');
-const watchController = require('../controllers/watchController');
-const path = require('path');
+const watchController   = require('../controllers/watchController');
+const paymentController = require('../controllers/paymentController');
+const path              = require('path');
 
 const routes = (app, express) => {
 
@@ -31,11 +32,19 @@ const routes = (app, express) => {
   app.post('/api/watch/remove', watchController.remove );
   app.get('/api/watch/fetch', watchController.fetch );
 
-  /* Other Endpoints */
+  /* Payment Endpoints */
+  app.get('/api/payment/client_token', paymentController.client_token);
+  app.post('/api/payment/checkout', paymentController.checkout);
+  app.post('/api/payment/payout', paymentController.payout);
+
+  /* Serve Client Files */
   app.get('*', (req, res) => {
     res.sendFile(path.resolve('./', 'client', 'index.html'))
   })
+
+  /* 404 Redirection */
   app.get('*', (req, res) => res.sendStatus(404) );
+
 };
 
 module.exports = routes;

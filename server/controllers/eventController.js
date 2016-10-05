@@ -81,12 +81,9 @@ module.exports = {
     },
 
     sellerSearch: (req, res) => {
-      // make a call to seatgeekAPI
-      // console.log("req.query.query", req.query.query);
       seatgeek.getEvents(req.query.query)
-        .then(function(results) {
-        //console.log("results :", results);
-      res.json(results);
+      .then(function(results) {
+        res.json(results);
       });
     },
 

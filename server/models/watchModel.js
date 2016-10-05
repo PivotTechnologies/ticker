@@ -8,9 +8,6 @@ const Watch = connection.define('watch', {
   auctionId: {
     type: Sequelize.INTEGER
   },
-  desiredPrice: {
-    type: Sequelize.DECIMAL(6, 2)
-  },
 });
 
 module.exports = Watch;

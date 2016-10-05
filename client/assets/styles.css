@@ -11,6 +11,10 @@ body {
   flex-direction: column;
 }
 
+.app-content {
+  display: flex;
+}
+
 /**************** NAV ****************/
 
 .navbar-title {

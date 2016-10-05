@@ -6,6 +6,9 @@ export const FETCH_AUCTIONS = 'FETCH_AUCTIONS';
 export const SELECT_AUCTION = 'SELECT_AUCTION';
 export const FETCH_AUCTION_BY_ID = 'FETCH_AUCTION_BY_ID';
 export const CANCEL_AUCTION = 'CANCEL_AUCTION';
+export const WATCH_AUCTION = 'WATCH_AUCTION';
+export const REMOVE_WATCH = 'REMOVE_WATCH';
+export const FETCH_WATCHLIST = 'FETCH_WATCHLIST';
 export const BUY_TICKETS = 'BUY_TICKETS';
 export const FETCH_TICKETS = 'FETCH_TICKETS';
 export const SIGNUP = 'SIGNUP';
@@ -88,6 +91,48 @@ export function cancelAuction(auctionId) {
 
   return {
     type: CANCEL_AUCTION,
+    payload: request,
+  };
+}
+
+export function watchAuction(userId, auctionId) {
+  const data = {
+    userId,
+    auctionId,
+  };
+
+  const request = axios.post('/api/watch/create', data);
+
+  return {
+    type: WATCH_AUCTION,
+    payload: request,
+  };
+}
+
+export function removeWatch(watchId) {
+  const data = {
+    watchId,
+  };
+
+  const request = axios.post('/api/watch/remove', data);
+
+  return {
+    type: REMOVE_WATCH,
+    payload: request,
+  };
+}
+
+export function fetchWatchList(userId) {
+  const data = {
+    params: {
+      userId,
+    },
+  };
+
+  const request = axios.get('/api/watch/fetch', data);
+
+  return {
+    type: FETCH_WATCHLIST,
     payload: request,
   };
 }

@@ -57,6 +57,17 @@ const expireAuctions = schedule.scheduleJob('*/5 * * * * *', () => {
         auctions.forEach( auction => {
           auction.status = 'Expired';
           auction.save();
+
+          models.Watch.findAll({
+            where: {
+              auctionId: auction.id
+            }
+          })
+          .then( watches => {
+            watches.forEach( watch => {
+              watch.destroy();
+            });
+          })
         })
       })
       event.numAuctions = 0;

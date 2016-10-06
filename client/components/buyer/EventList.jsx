@@ -18,7 +18,8 @@ class EventList extends React.Component {
   }
 
   renderEventList() {
-    if (this.props.events.length) {
+    if (this.props.events) {
+      console.log("inside renderEventList:", this.props.events);
       return (
         <Tabs
           value={this.state.value}
@@ -41,7 +42,7 @@ class EventList extends React.Component {
         <div>No events match this search.</div>
       );
     }
-    }
+  }
 
   handleChange(value) {
     this.setState({
@@ -50,12 +51,12 @@ class EventList extends React.Component {
   }
 
   render() {
-      return (
-        <div className="list">
+    return (
+      <div className="list">
         { this.renderEventList() }
-        </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {

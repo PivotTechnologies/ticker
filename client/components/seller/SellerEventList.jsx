@@ -4,6 +4,7 @@ import SellerEventListItem from './SellerEventListItem.jsx';
 
 class SellerEventList extends React.Component {
   renderEventList() {
+
     return this.props.events.map((event, idx) =>
       <SellerEventListItem key={idx} event={event} />
     );

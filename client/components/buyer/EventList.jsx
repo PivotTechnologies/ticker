@@ -2,39 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import EventListItem from './EventListItem.jsx';
+import { bindActionCreators } from 'redux';
 import Maps from '../Maps.jsx';
-
-// class EventList extends React.Component {
-//   renderEventList() {
-//     //console.log("inside event list:", this.props);
-//     return this.props.events.map((event, idx) =>
-//       <EventListItem key={idx} event={event} />
-//     );
-//   }
-//
-//   render() {
-//     if (!this.props.events) {
-//       return (
-//         <div>No events match this search.</div>
-//       );
-//     }
-//
-//     return (
-//       <div className="list">
-//         { this.renderEventList() }
-//       </div>
-//     );
-//   }
-// }
-//
-// function mapStateToProps(state) {
-//   return {
-//     events: state.events,
-//   };
-// }
-//
-// export default connect(mapStateToProps)(EventList);
-//
+import { getLocation } from '../../actions/index';
 
 class EventList extends React.Component {
 
@@ -47,7 +17,14 @@ class EventList extends React.Component {
   this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillMount() {
+    if (!this.props.userLocation) {
+      this.props.getLocation();
+    }
+  }
+
   renderEventList() {
+    console.log("this.props.events inside of event list:", this.props.events);
     if (this.props.events.length) {
       return (
         <Tabs
@@ -79,65 +56,25 @@ class EventList extends React.Component {
     });
   }
 
-  // componentWillMount() {
-  //   if (this.props.events.length === 0) {
-  //     // render() {
-  //       return (
-  //         <div></div>
-  //       );
-  //     // }
-  //   }
-  // }
-
   render() {
-    // if (this.props.events.length) {
       return (
         <div className="list">
         { this.renderEventList() }
         </div>
       );
     }
-
-      // return (
-      //   <div>No events match this search.</div>
-      // );
-
 }
 
 function mapStateToProps(state) {
   return {
     events: state.events,
+    userLocation: state.userLocation,
   };
 }
 
-export default connect(mapStateToProps)(EventList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getLocation }, dispatch);
+}
 
-// renderEventList() {
-//     //console.log("inside event list:", this.props);
-//     return this.props.events.map((event, idx) =>
-//       <EventListItem key={idx} event={event} />
-//     );
-//   }
-//
-//   render() {
-//     if (!this.props.events) {
-//       return (
-//         <div>No events match this search.</div>
-//       );
-//     }
-//
-//     return (
-//       <div className="list">
-//         { this.renderEventList() }
-//       </div>
-//     );
-//   }
-// }
-//
-// function mapStateToProps(state) {
-//   return {
-//     events: state.events,
-//   };
-// }
-//
-// export default connect(mapStateToProps)(EventList);
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventList);

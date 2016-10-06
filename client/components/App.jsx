@@ -34,7 +34,6 @@ class App extends React.Component {
     if (token) {
       this.props.reauthenticate(token);
     }
-  }
 
   componentDidUpdate() {
       setInterval(() => this.props.fetchWatchList(this.props.user.id), 1000);

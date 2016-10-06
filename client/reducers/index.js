@@ -8,6 +8,7 @@ import UserReducer from './reducer_user';
 import UserActivityReducer from './reducer_user_activity';
 import NewAuctionReducer from './reducer_new_auction';
 import isLoadingReducer from './reducer_is_loading';
+import PaymentReducer from './reducer_payment';
 
 const rootReducer = combineReducers({
   events: EventsReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   userActivity: UserActivityReducer,
   newAuction: NewAuctionReducer,
   isLoading: isLoadingReducer,
+  paymentToken: PaymentReducer,
 });
 
 export default rootReducer;

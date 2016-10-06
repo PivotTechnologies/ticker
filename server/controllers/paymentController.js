@@ -1,33 +1,48 @@
 const braintree = require('braintree');
 const request   = require('request');
 
+// const gateway = braintree.connect({
+//   environment: braintree.Environment.Sandbox,
+//   merchantId: "yhthgck3p6q25b7z", // move these to .env file
+//   publicKey: "54szbjxs9j7d7fb8",
+//   privateKey: "f0039ca71804124cb64e8cdc4c3efd3a"
+// });
+//
+// { nonce:
+//   { nonce: '18fa6f87-525c-4e7b-ac96-7e05471eea15',
+//     details:
+//      { email: 'kinjalchatterjee-buyer@gmail.com',
+//        firstName: 'test',
+//        lastName: 'buyer',
+//        payerId: '27TZ6G4YWQYBY',
+//        countryCode: 'US',
+//        billingAddress: [Object],
+//        shippingAddress: {}
+//      },
+//     type: 'PayPalAccount'
+//   },
+//  amount: '104.03'
+// }
+
 const gateway = braintree.connect({
-  environment: braintree.Environment.Sandbox,
-  merchantId: "yhthgck3p6q25b7z", // move these to .env file
-  publicKey: "54szbjxs9j7d7fb8",
-  privateKey: "f0039ca71804124cb64e8cdc4c3efd3a"
+  accessToken: 'access_token$sandbox$rj2j597ky38jpzxw$a989259230886a8673902efb50950d14'
 });
 
-// const gateway = braintree.connect({
-//   accessToken: 'access_token$sandbox$rj2j597ky38jpzxw$a989259230886a8673902efb50950d14'
-// });
-
-module.exports.client_token = function(req, res) {
+module.exports.token = function(req, res) {
   gateway.clientToken.generate({}, function(err, response) {
     res.send(response.clientToken);
   });
 }
 
 module.exports.checkout = function(req, res) {
-  //var nonceFromTheClient = req.body.payment_method_nonce;
-  var nonceFromTheClient = 'fake-valid-nonce';
-  console.log('/checkout -> nonceFromTheClient = ', nonceFromTheClient);
+  console.log('\n/checkout -> req.body = \n', req.body);
   gateway.transaction.sale({
-    amount: "110.00", // change to req.body.amount
-    paymentMethodNonce: nonceFromTheClient,
-    //options: { submitForSettlement: true }
+    amount: req.body.amount,
+    paymentMethodNonce: req.body.payment.nonce,
+    options: { submitForSettlement: true }
   }, function(err, result) {
-    console.log('/checkout - > result = ', result );
+    console.log('\n/checkout - > result = \n', result );
+    res.send(result);
   });
 }
 

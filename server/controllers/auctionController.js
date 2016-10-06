@@ -16,9 +16,10 @@ module.exports = {
                                              new Date(startTime),
                                              new Date(eventDate) );
 
-    function createAuction() {
+    function createAuction(eventId, callback) {
+      console.log('\n\neventId = ', eventId);
       const newAuction = models.Auction.build({
-        eventId: auctionEventId,
+        eventId: eventId,
         sellerId: req.body.userId,
         startPrice: req.body.startPrice,
         currentPrice: req.body.startPrice,
@@ -43,9 +44,11 @@ module.exports = {
           console.log('  startTime:',  auction.dataValues.startTime);
           res.send(auction.dataValues);
         })
-        .catch(err => console.log('Error:', err))
+        .catch(err => {
+          console.log('Error:', err);
+          callback();
+        })
     }
-    let auctionEventId, numAuctions;
     /* look for event passed in */
     models.Event
       .findOne({
@@ -58,7 +61,7 @@ module.exports = {
       .then(event => {
         /* no event found, create it */
         if (!event) {
-          newEvent = models.Event.create({
+          models.Event.create({
               name: req.body.event.name,
               address: req.body.event.address,
               zip: req.body.event.zip,
@@ -74,21 +77,23 @@ module.exports = {
               longitude: req.body.event.longitude,
               numAuctions: 1
             })
-            .then((event) => {
-              console.log('New event created: ', event.dataValues);
-              auctionEventId = event.dataValues.id;
-              createAuction();
+            .then( (event) => {
+              createAuction(event.dataValues.id, ()=> {
+                event.destroy();
+              })
             })
-            .catch(err => console.log('Error:', err));
         }
         /* event found */
         else {
           console.log('Event found: ', event.dataValues);
-          auctionEventId = event.dataValues.id;
           event.numAuctions += 1;
-          event
-            .save()
-            .then( () => createAuction() )
+          event.save()
+            .then( () => {
+              createAuction(event.dataValues.id, () => {
+                event.numAuctions -= 1;
+                event.save();
+              })
+            })
         }
       })
       .catch(err => console.log('Error:', err));

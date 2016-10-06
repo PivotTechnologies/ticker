@@ -27,6 +27,7 @@
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "braintree": "^1.41.0",
+    "braintree-web": "^2.29.0",
     "cors": "^2.8.1",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",

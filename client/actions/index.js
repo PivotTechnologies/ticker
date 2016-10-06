@@ -17,6 +17,8 @@ export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
 export const CREATE_AUCTION = 'CREATE_AUCTION';
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 export const START_SPINNER = 'START_SPINNER';
+export const CHECKOUT = 'CHECKOUT';
+export const GET_CLIENT_TOKEN = 'GET_CLIENT_TOKEN';
 
 export function searchEvents(query, date, location) {
   const data = {
@@ -231,5 +233,30 @@ export function clearEvents() {
 export function startSpinner() {
   return {
     type: START_SPINNER,
+  };
+}
+
+export function checkout(payment, amount) {
+
+  const data = {
+    payment,
+    amount,
+  };
+
+  const request = axios.post('/api/payment/checkout', data);
+
+  return {
+    type: CHECKOUT,
+    payload: request,
+  };
+}
+
+export function getClientToken() {
+
+  const request = axios.get('/api/payment/token');
+
+  return {
+    type: GET_CLIENT_TOKEN,
+    payload: request,
   };
 }

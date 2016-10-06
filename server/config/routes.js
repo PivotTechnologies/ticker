@@ -27,7 +27,7 @@ const routes = (app, express) => {
   app.get('/api/auction/fetchTickets', auctionController.fetchTickets );
 
   /* Payment Endpoints */
-  app.get('/api/payment/client_token', paymentController.client_token);
+  app.get('/api/payment/token', paymentController.token);
   app.post('/api/payment/checkout', paymentController.checkout);
   app.post('/api/payment/payout', paymentController.payout);
 

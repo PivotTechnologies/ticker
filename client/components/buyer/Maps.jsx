@@ -1,55 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
-import  ScriptjsLoader from 'react-google-maps/lib/async/ScriptjsLoader';
+import { GoogleMap, Marker } from 'react-google-maps';
+import ScriptjsLoader from 'react-google-maps/lib/async/ScriptjsLoader';
 import moment from 'moment';
 import { browserHistory } from 'react-router';
-import { getLocation, selectEvent, fetchAuctions } from '../actions/index';
+//import { CircularProgress } from 'material-ui/CircularProgress';
+import { getLocation, selectEvent, fetchAuctions, selectMarker } from '../../actions/index';
 
 
 class Maps extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      userLat: this.props.userLocation.latitude,
-      userLong: this.props.userLocation.longitude,
-      mapLoaded: false,
-    };
-
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
   }
-
-  // componentWillMount() {
-  //   // console.log("user location before mount", this.props.userLocation);
-  //   // console.log("this.props.event[0]:", this.props.events[0]);
-  //
-  //   console.log("this.state:", this.state);
-  // }
-
-  componentWillMount() {
-    if (!this.props.userLocation) {
-      this.props.getLocation();
-    } else {
-      this.setState({
-        mapLoaded: true
-      });
-    }
+  componentWillUpdate() {
+    console.log('activemarker:', this.props.activeMarker);
   }
-// } else {
-//   if (!this.state.userLat) {
-//     this.setState({
-//       userLat: this.props.events[0].latitude,
-//       userLong: this.props.events[0].longitude,
-//       mapLoaded: true,
-//     });
-//   }
-// }
   handleMarkerClick(marker) {
-    console.log("inside handle marker click");
-    console.log("marker", marker);
-
+    console.log('marker.id', marker.id);
+    if (marker.id) {
+      this.props.selectMarker(marker);
+    }
     this.props.selectEvent(marker);
     this.props.fetchAuctions(marker.id);
     browserHistory.push(`/event/${marker.id}`);
@@ -60,47 +32,48 @@ class Maps extends React.Component {
     const loading = 'https://thomas.vanhoutte.be/miniblog/wp-content/uploads/light_blue_material_design_loading.gif';
 		const spinnerStyle = {
 			marginLeft: '40%',
-			marginTop: '15%'
+			marginTop: '15%',
 		};
 
-    if (!this.state.mapLoaded) {
-      return (<div>
-						    <img style={ spinnerStyle } src={ loading } />
-					   </div>);
+    if (!this.props.userLocation.latitude && !this.props.userLocation.longitude) {
+      return  (<div>
+      			    <img style={ spinnerStyle } src={ loading } />
+      		   </div>)
     }
 
     return (
       <ScriptjsLoader
-      hostname={"maps.googleapis.com"}
-      pathname={"/maps/api/js"}
+        hostname={"maps.googleapis.com"}
+        pathname={"/maps/api/js"}
 
+        query={{ key: "AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ", libraries: "geometry,drawing,places"}}
 
-      query={{ key: "AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ", libraries: "geometry,drawing,places"}}
-
-      loadingElement={
-        <div>
-						<img style={ spinnerStyle } src={ loading } />
-				</div>
-      }
+        loadingElement={
+          <div>
+          <img style={ spinnerStyle } src={ loading } />
+          </div>
+        }
 
       containerElement={
         <div
         style={{
           display: "flex",
-          height: "920px",
+          height: "30em",
           width: "920px",
         }}/>
       }
+
       googleMapElement={
         <GoogleMap
           ref={(map) => {
-            if(map === null) {
-              return <div> Loading </div>
-            }
             console.log("map:", map);
           }}
-          defaultZoom={13}
-          defaultCenter={{lat: +this.state.userLat, lng: +this.state.userLong}}
+          defaultZoom={12}
+          defaultCenter={
+            { lat: (!this.props.activeMarker.latitude ?  +this.props.userLocation.latitude : +this.props.activeMarker.latitude),
+              lng: (!this.props.activeMarker.longitude ?  +this.props.userLocation.longitude : +this.props.activeMarker.longitude),
+            }
+          }
           >
 
           <Marker
@@ -131,11 +104,12 @@ function mapStateToProps(state) {
   return {
     events: state.events,
     userLocation: state.userLocation,
+    activeMarker: state.activeMarker,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getLocation, selectEvent, fetchAuctions }, dispatch);
+  return bindActionCreators({ getLocation, selectEvent, fetchAuctions, selectMarker }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Maps);

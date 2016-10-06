@@ -41,10 +41,10 @@ class EventDetails extends React.Component {
               </div>
               <div>
               <div>
-                  {moment(activeEvent.eventDate).format('MMMM Do, YYYY')}
+                  {moment(this.props.activeEvent.eventDate).format('MMMM Do, YYYY')}
                 </div>
                 <div>
-                  {moment(activeEvent.eventDate).format('h:mma')}
+                  {moment(this.props.activeEvent.eventDate).format('h:mma')}
                 </div>
               </div>
             </div>

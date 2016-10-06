@@ -23,6 +23,8 @@ export const START_SPINNER = 'START_SPINNER';
 export const CHECKOUT = 'CHECKOUT';
 export const GET_CLIENT_TOKEN = 'GET_CLIENT_TOKEN';
 export const GET_LOCATION = 'GET_LOCATION';
+export const SELECT_MARKER = 'SELECT_MARKER';
+export const CLEAR_MARKER = 'CLEAR_MARKER';
 
 export function searchEvents(query, date, location) {
   const data = {
@@ -324,4 +326,17 @@ export function getLocation() {
       payload: userLocation,
     };
   })
+}
+
+export function selectMarker(activeMarker) {
+  return {
+    type: SELECT_MARKER,
+    payload: activeMarker,
+  };
+}
+
+export function clearMarker() {
+  return {
+    type: CLEAR_MARKER,
+  };
 }

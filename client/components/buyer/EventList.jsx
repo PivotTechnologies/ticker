@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import EventListItem from './EventListItem.jsx';
 import { bindActionCreators } from 'redux';
-import Maps from '../Maps.jsx';
+import Maps from './Maps.jsx';
 import { getLocation } from '../../actions/index';
 
 class EventList extends React.Component {
@@ -14,17 +14,10 @@ class EventList extends React.Component {
       value: 'a',
     };
 
-  this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentWillMount() {
-    if (!this.props.userLocation) {
-      this.props.getLocation();
-    }
+    this.handleChange = this.handleChange.bind(this);
   }
 
   renderEventList() {
-    console.log("this.props.events inside of event list:", this.props.events);
     if (this.props.events.length) {
       return (
         <Tabs

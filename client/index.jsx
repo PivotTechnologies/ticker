@@ -17,11 +17,9 @@ import SellerView from './components/seller/SellerView.jsx';
 import SellerForm from './components/seller/SellerForm.jsx';
 import Authentication from './components/hoc/Authentication.jsx';
 import SellerConfirmation from './components/seller/SellerConfirmation.jsx';
-<<<<<<< 12e3426ae04c0d61e6494fcecd770f47d48a5427
 import BuyerForm from './components/buyer/BuyerForm.jsx';
-=======
 import Maps from './components/Maps.jsx';
->>>>>>> [feature] - saves user geolocation into redux store
+import Maps from './components/buyer/Maps.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension(): f => f);

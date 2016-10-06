@@ -11,6 +11,7 @@ import isLoadingReducer from './reducer_is_loading';
 import WatchListReducer from './reducer_watch_list';
 import PaymentReducer from './reducer_payment';
 import userLocationReducer from './reducer_user_location';
+import ActiveMarkerReducer from './reducer_active_marker';
 
 const rootReducer = combineReducers({
   events: EventsReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   watchList: WatchListReducer,
   paymentToken: PaymentReducer,
   userLocation: userLocationReducer,
+  activeMarker: ActiveMarkerReducer,
 });
 
 export default rootReducer;

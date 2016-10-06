@@ -1,6 +1,7 @@
 const Event = require('../models/eventModel');
 const Auction = require('../models/auctionModel');
 const User = require('../models/userModel');
+const Watch = require('../models/watchModel');
 const connection = require('../config/db');
 
 Event.hasMany(Auction);
@@ -20,5 +21,6 @@ connection
 module.exports = {
   User: User,
   Event: Event,
-  Auction: Auction
+  Auction: Auction,
+  Watch: Watch
 }

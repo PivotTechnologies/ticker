@@ -11,12 +11,31 @@ body {
   flex-direction: column;
 }
 
+.app-content {
+  display: flex;
+}
+
 /**************** NAV ****************/
 
 .navbar-title {
   cursor: pointer;
   display: inline-block;
   font-size: 2em;
+}
+
+/**************** WATCHLIST ****************/
+
+.watch-list-item {
+  position: relative;
+  max-width: 256px;
+  padding: 10px;
+}
+
+.watch-list-event-name {
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /**************** MAIN CONTENT ****************/

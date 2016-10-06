@@ -1,6 +1,7 @@
 const userController = require('../controllers/userController');
 const eventController = require('../controllers/eventController');
 const auctionController = require('../controllers/auctionController');
+const watchController = require('../controllers/watchController');
 const path = require('path');
 
 const routes = (app, express) => {
@@ -24,6 +25,11 @@ const routes = (app, express) => {
   app.post('/api/auction/cancel', auctionController.cancel );
   app.post('/api/auction/buyTickets', auctionController.buyTickets );
   app.get('/api/auction/fetchTickets', auctionController.fetchTickets );
+
+  /* Watch Endpoints */
+  app.post('/api/watch/create', watchController.create );
+  app.post('/api/watch/remove', watchController.remove );
+  app.get('/api/watch/fetch', watchController.fetch );
 
   /* Other Endpoints */
   app.get('*', (req, res) => {

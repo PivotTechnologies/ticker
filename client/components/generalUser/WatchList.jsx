@@ -55,7 +55,7 @@ class WatchList extends React.Component {
               <GoIcon />
             </IconButton>
             <p className="watch-list-event-name">{watch.eventName}</p>
-            <p>{moment(watch.eventDate).format('MMM. DD, YYYY [@] h:mma')}</p>
+            <p>{moment(watch.eventDate).format('MMM. DD, YYYY')}</p>
             <p>${watch.currentPrice}</p>
           </div>
           <Divider />

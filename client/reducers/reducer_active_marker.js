@@ -1,9 +1,12 @@
-import { GET_LOCATION } from '../actions/index';
+import { SELECT_MARKER, CLEAR_MARKER } from '../actions/index';
 
 export default function (state = {}, action) {
   switch (action.type) {
-    case GET_LOCATION:
+    case SELECT_MARKER:
       return action.payload;
+
+    case CLEAR_MARKER:
+      return {};
 
     default:
       return state;

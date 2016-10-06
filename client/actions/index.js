@@ -18,6 +18,8 @@ export const CREATE_AUCTION = 'CREATE_AUCTION';
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 export const START_SPINNER = 'START_SPINNER';
 export const GET_LOCATION = 'GET_LOCATION';
+export const SELECT_MARKER = 'SELECT_MARKER';
+export const CLEAR_MARKER = 'CLEAR_MARKER';
 
 export function searchEvents(query, date, location) {
   const data = {
@@ -252,4 +254,17 @@ export function getLocation() {
       payload: userLocation,
     };
   })
+}
+
+export function selectMarker(activeMarker) {
+  return {
+    type: SELECT_MARKER,
+    payload: activeMarker,
+  };
+}
+
+export function clearMarker() {
+  return {
+    type: CLEAR_MARKER,
+  };
 }

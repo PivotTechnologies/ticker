@@ -17,7 +17,7 @@ import SellerView from './components/seller/SellerView.jsx';
 import SellerForm from './components/seller/SellerForm.jsx';
 import Authentication from './components/hoc/Authentication.jsx';
 import SellerConfirmation from './components/seller/SellerConfirmation.jsx';
-import Maps from './components/Maps.jsx';
+import Maps from './components/buyer/Maps.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension(): f => f);

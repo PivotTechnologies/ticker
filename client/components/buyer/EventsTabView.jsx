@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import {Tabs, Tab} from 'material-ui/Tabs';
 import EventList from './EventList.jsx';
-// import Maps from '../Maps.jsx';
-
 
 class EventsTabView extends React.Component {
   render() {

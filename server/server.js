@@ -48,7 +48,7 @@ const expireAuctions = schedule.scheduleJob('*/5 * * * * *', () => {
     events.forEach( event => {
       models.Auction.findAll({
         where: {
-          eventId: event.id,
+          eventId: event.dataValues.id,
           status: 'On Sale'
         },
         attributes: ['id', 'status']
@@ -56,18 +56,19 @@ const expireAuctions = schedule.scheduleJob('*/5 * * * * *', () => {
       .then( auctions => {
         auctions.forEach( auction => {
           auction.status = 'Expired';
-          auction.save();
-
-          models.Watch.findAll({
-            where: {
-              auctionId: auction.dataValues.id
-            }
-          })
-          .then( watches => {
-            watches.forEach( watch => {
-              watch.destroy();
-            });
-          })
+          auction.save()
+          .then( response => {
+            models.Watch.findAll({
+              where: {
+                auctionId: auction.dataValues.id
+              }
+            })
+            .then( watches => {
+              watches.forEach( watch => {
+                watch.destroy();
+              });
+            })
+          });
         })
       })
       event.numAuctions = 0;

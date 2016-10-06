@@ -60,7 +60,7 @@ const expireAuctions = schedule.scheduleJob('*/5 * * * * *', () => {
 
           models.Watch.findAll({
             where: {
-              auctionId: auction.id
+              auctionId: auction.dataValues.id
             }
           })
           .then( watches => {

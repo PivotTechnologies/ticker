@@ -19,8 +19,8 @@ class WatchList extends React.Component {
     this.renderWatchList = this.renderWatchList.bind(this);
   }
 
-  removeWatch(watchId) {
-    this.props.removeWatch(watchId)
+  removeWatch(auctionId) {
+    this.props.removeWatch(this.props.user.id, auctionId)
     .then(response => this.props.fetchWatchList(this.props.user.id));
   }
 

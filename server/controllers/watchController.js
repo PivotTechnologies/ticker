@@ -26,7 +26,8 @@ module.exports = {
   remove: (req, res) => {
     models.Watch.findOne({
       where: {
-        id: req.body.watchId
+        userId: req.body.userId,
+        auctionId: req.body.auctionId
       }
     })
     .then( watch => {

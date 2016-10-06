@@ -109,9 +109,10 @@ export function watchAuction(userId, auctionId) {
   };
 }
 
-export function removeWatch(watchId) {
+export function removeWatch(userId, auctionId) {
   const data = {
-    watchId,
+    userId,
+    auctionId,
   };
 
   const request = axios.post('/api/watch/remove', data);

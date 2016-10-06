@@ -22,9 +22,7 @@ class App extends React.Component {
     if (token) {
       this.props.reauthenticate(token);
     }
-  }
 
-  componentDidMount() {
     this.props.getLocation();
   }
 

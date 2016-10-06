@@ -1,65 +1,86 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import  ScriptjsLoader from 'react-google-maps/lib/async/ScriptjsLoader';
-import LinearProgress from 'material-ui/LinearProgress';
 import moment from 'moment';
-import { getLocation } from '../actions/index';
+import { browserHistory } from 'react-router';
+import { getLocation, selectEvent, fetchAuctions } from '../actions/index';
+
 
 class Maps extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   markers: [],
-    // }
+
+    this.state = {
+      userLat: this.props.userLocation.latitude,
+      userLong: this.props.userLocation.longitude,
+      mapLoaded: false,
+    };
+
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
   }
 
+  // componentWillMount() {
+  //   // console.log("user location before mount", this.props.userLocation);
+  //   // console.log("this.props.event[0]:", this.props.events[0]);
+  //
+  //   console.log("this.state:", this.state);
+  // }
+
   componentWillMount() {
-    // console.log("user location before mount", this.props.userLocation);
     if (!this.props.userLocation) {
       this.props.getLocation();
+    } else {
+      this.setState({
+        mapLoaded: true
+      });
     }
   }
-
-  handleMarkerClick() {
+// } else {
+//   if (!this.state.userLat) {
+//     this.setState({
+//       userLat: this.props.events[0].latitude,
+//       userLong: this.props.events[0].longitude,
+//       mapLoaded: true,
+//     });
+//   }
+// }
+  handleMarkerClick(marker) {
     console.log("inside handle marker click");
-    return
-      (<InfoWindow
-        title="hello eugene"
-        // onCloseClick={.noop}
-        // onDomReady={.noop}
-        // onZIndexChanged={.noop}
-      />
-    );
-  }
+    console.log("marker", marker);
 
-  renderSpinner() {
-    if (this.props.isLoading) {
-      return (
-        <div className="spinner">
-          <LinearProgress
-            style={{ height: '10px' }}
-            mode="indeterminate"
-          />
-        </div>
-      );
-    }
+    this.props.selectEvent(marker);
+    this.props.fetchAuctions(marker.id);
+    browserHistory.push(`/event/${marker.id}`);
   }
 
   render() {
-    return (
 
-    <ScriptjsLoader
+    const loading = 'https://thomas.vanhoutte.be/miniblog/wp-content/uploads/light_blue_material_design_loading.gif';
+		const spinnerStyle = {
+			marginLeft: '40%',
+			marginTop: '15%'
+		};
+
+    if (!this.state.mapLoaded) {
+      return (<div>
+						    <img style={ spinnerStyle } src={ loading } />
+					   </div>);
+    }
+
+    return (
+      <ScriptjsLoader
       hostname={"maps.googleapis.com"}
       pathname={"/maps/api/js"}
+
+
       query={{ key: "AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ", libraries: "geometry,drawing,places"}}
 
       loadingElement={
         <div>
-          {this.renderSpinner()}
-        </div>
+						<img style={ spinnerStyle } src={ loading } />
+				</div>
       }
 
       containerElement={
@@ -73,33 +94,29 @@ class Maps extends React.Component {
       googleMapElement={
         <GoogleMap
           ref={(map) => {
+            if(map === null) {
+              return <div> Loading </div>
+            }
             console.log("map:", map);
-            // if (!map) {
-            //   return;
-            // }
           }}
-          defaultZoom={14}
-          defaultCenter={{lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude}}
+          defaultZoom={13}
+          defaultCenter={{lat: +this.state.userLat, lng: +this.state.userLong}}
           >
+
           <Marker
             position={{lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude}}
             title="User Location"
             icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
           />
-            {this.props.events.map((event) => {
+            {this.props.events.map((marker) => {
               return (
                 <Marker
-                  position={{lat: +event.latitude, lng: +event.longitude}}
-                  key={event.id}
-                  title={event.name + '\n' + moment(event.eventDate).format('MMMM Do, YYYY [@] h:mma') + '\n' + 'Open Auctions: ' + event.numAuctions}
+                  position={{lat: +marker.latitude, lng: +marker.longitude}}
+                  key={marker.id}
+                  title={marker.name + '\n' + moment(marker.eventDate).format('MMMM Do, YYYY [@] h:mma') + '\n' + 'Open Auctions: ' + marker.numAuctions}
                   icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-                  onClick={this.handleMarkerClick}
+                  onClick={() => this.handleMarkerClick(marker)}
                 >
-                  {event.showInfo && (
-                  <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
-                    <div>{event.infoContent}</div>
-                  </InfoWindow>
-                  )}
                 </Marker>
               );
             })}
@@ -114,12 +131,11 @@ function mapStateToProps(state) {
   return {
     events: state.events,
     userLocation: state.userLocation,
-    isLoading: state.isLoading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getLocation }, dispatch);
+  return bindActionCreators({ getLocation, selectEvent, fetchAuctions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Maps);

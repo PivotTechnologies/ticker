@@ -37,7 +37,7 @@ const routes = (app, express) => {
   app.post('/api/payment/checkout', paymentController.checkout);
   app.post('/api/payment/payout', paymentController.payout);
 
-  /* Serve Client  Files */
+  /* Serve Client Files */
   app.get('*', (req, res) => {
     res.sendFile(path.resolve('./', 'client', 'index.html'))
   })

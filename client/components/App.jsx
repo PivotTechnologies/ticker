@@ -87,6 +87,7 @@ class App extends React.Component {
   }
 
   openWatchList() {
+    console.log('openWatchList!');
     this.setState({ open: true });
   }
 

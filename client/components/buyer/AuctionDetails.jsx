@@ -17,6 +17,7 @@ class AuctionDetails extends React.Component {
     this.state = {
       intervalId: null,
       open: false,
+      amount: null,
     };
 
     this.buyTickets = this.buyTickets.bind(this);
@@ -26,36 +27,42 @@ class AuctionDetails extends React.Component {
   }
 
   componentWillMount() {
+    console.log('mounting -> ', this.props.auctionId);
     if (!this.props.activeAuction || this.props.activeAuction.id !== this.props.auctionId) {
-      this.props.fetchAuctionById(this.props.auctionId);
+      this.props.fetchAuctionById(this.props.auctionId)
+        .then( () => {
+          this.setState({ amount: this.props.activeAuction.currentPrice });
+        });
     }
   }
 
   componentDidMount() {
     const id = setInterval(() => {
       console.log('updating active auction!')
-      this.props.fetchAuctionById(this.props.activeAuction.id);
+      this.props.fetchAuctionById(this.props.activeAuction.id)
+        .then( () => {
+          this.setState({ amount: this.props.activeAuction.currentPrice });
+        });
     }, 1000);
     this.setState({ intervalId: id });
 
-    const amount = this.props.activeAuction.currentPrice;
     this.props.getClientToken().then( () => {
         //console.log('this.props.payment', this.props.payment);
         braintree.setup(this.props.paymentToken, 'custom', {
           paypal: {
             container: 'dropin-container',
             singleUse: true,
-            amount: amount,
+            amount: this.state.amount,
             currency: 'USD',
             locale: 'en_us'
           },
           onPaymentMethodReceived: (payment) => {
             console.log('payment = ', payment);
-            this.props.isLoading = true;
-            this.props.checkout(payment, amount).then( (result) => {
+            //this.props.isLoading = true;
+            this.props.checkout(payment, this.state.amount).then( (result) => {
               console.log('/checkout -> then() ', result);
               if(result.payload.status === 200){
-                  this.props.isLoading = false;
+                  //this.props.isLoading = false;
               }
             });
           }
@@ -122,9 +129,7 @@ class AuctionDetails extends React.Component {
           <button onClick={this.buyTickets}>Buy Tickets</button>
           <button onClick={this.openWatchModal}>Watch Auction</button>
           <form>
-              <div id="">
-                <div id="dropin-container"></div>
-              </div>
+            <div id="dropin-container"></div>
           </form>
           <Dialog
             actions={actions}

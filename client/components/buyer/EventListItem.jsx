@@ -59,17 +59,17 @@ class EventListItem extends React.Component {
             }
           />
           <Chip
-            style={{position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer'}}
-          >
-            <Avatar icon={<ActionGavel />} />
-            {this.props.event.numAuctions} Open Auction{this.renderPlural()}
-          </Chip>
-        </Card>
-        <Card>
-          <CardMedia style={{width: '200px'}}>
-            <img src={this.props.event.image} />
-          </CardMedia>
-        </Card>
+             style={{position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer'}}
+           >
+             <Avatar icon={<ActionGavel />} />
+             {this.props.event.numAuctions} Open Auction{this.renderPlural()}
+           </Chip>
+         </Card>
+         <Card>
+           <CardMedia style={{width: '200px'}}>
+             <img src={this.props.event.image} />
+           </CardMedia>
+         </Card>
       </div>
     );
   }

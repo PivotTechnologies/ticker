@@ -75,9 +75,26 @@ class AuctionDetails extends React.Component {
     clearInterval(this.state.intervalId);
   }
 
+  componentDidMount() {
+    const id = setInterval(() => {
+      console.log('updating active auction!')
+      this.props.fetchAuctionById(this.props.activeAuction.id);
+    }, 1000);
+    this.setState({ intervalId: id });
+  }
+
+  componentWillUnmount() {
+    console.log('no longer updating active auction')
+    clearInterval(this.state.intervalId);
+  }
+
   buyTickets() {
-    this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
-      .then(response => browserHistory.push('/confirm'));
+    if (localStorage.getItem('token')) {
+      this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
+        .then(response => browserHistory.push('/confirm'));
+    } else {
+        browserHistory.push('/signin');
+    }
   }
 
   openWatchModal() {

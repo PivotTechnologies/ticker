@@ -23,6 +23,21 @@ body {
   font-size: 2em;
 }
 
+/**************** WATCHLIST ****************/
+
+.watch-list-item {
+  position: relative;
+  max-width: 256px;
+  padding: 10px;
+}
+
+.watch-list-event-name {
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 /**************** MAIN CONTENT ****************/
 
 .main-content {

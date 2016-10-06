@@ -1,6 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import EyeIcon from 'material-ui/svg-icons/image/remove-red-eye';
 import LinearProgress from 'material-ui/LinearProgress';
@@ -77,7 +78,8 @@ class App extends React.Component {
             onRequestChange={this.closeWatchList}
             containerStyle={{height: 'calc(100vh - 64px)', top: 64}}
           >
-            <WatchList />
+            <AppBar title="Watch List" showMenuIconButton={false} />
+            <WatchList closeWatchList={this.closeWatchList} />
           </Drawer>
         </div>
       );

@@ -1,8 +1,15 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui/svg-icons/content/clear';
+import GoIcon from 'material-ui/svg-icons/action/pageview';
+import Divider from 'material-ui/Divider';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchWatchList, removeWatch } from '../../actions/index';
+import { browserHistory } from 'react-router';
+import { fetchWatchList, removeWatch, fetchAuctionById } from '../../actions/index';
 
 class WatchList extends React.Component {
   constructor(props) {
@@ -12,9 +19,15 @@ class WatchList extends React.Component {
     this.renderWatchList = this.renderWatchList.bind(this);
   }
 
-  removeWatch() {
+  removeWatch(watchId) {
     this.props.removeWatch(watchId)
     .then(response => this.props.fetchWatchList(this.props.user.id));
+  }
+
+  routeToAuctionDetails(auctionId) {
+    this.props.closeWatchList();
+    this.props.fetchAuctionById(auctionId)
+    .then(() => browserHistory.push(`/auction/${auctionId}`));
   }
 
   renderWatchList() {
@@ -27,10 +40,25 @@ class WatchList extends React.Component {
     }
     return (
       this.props.watchList.map(watch => (
-        <div className="watch-list-item" key={watch.id}>
-          <p>{watch.eventName}</p>
-          <p>{watch.eventDate}</p>
-          <p>${watch.currentPrice}</p>
+        <div key={watch.id}>
+          <div className="watch-list-item">
+            <IconButton
+              onClick={() => this.removeWatch(watch.id)}
+              style={{position: 'absolute', top: 0, right: 0}}
+            >
+              <DeleteIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => this.routeToAuctionDetails(watch.id)}
+              style={{position: 'absolute', bottom: 0, right: 0}}
+            >
+              <GoIcon />
+            </IconButton>
+            <p className="watch-list-event-name">{watch.eventName}</p>
+            <p>{moment(watch.eventDate).format('MMM. DD, YYYY [@] h:mma')}</p>
+            <p>${watch.currentPrice}</p>
+          </div>
+          <Divider />
         </div>
       ))
     );
@@ -53,7 +81,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchWatchList, removeWatch }, dispatch);
+  return bindActionCreators({ fetchWatchList, removeWatch, fetchAuctionById }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WatchList);

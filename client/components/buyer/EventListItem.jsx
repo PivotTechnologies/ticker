@@ -45,31 +45,31 @@ class EventListItem extends React.Component {
           </div>
         </Card>
         <Card style={{flex: '1', position: 'relative', maxHeight: '150px'}}>
-        <CardTitle
-          title={this.props.event.name}
-          subtitle={
-            <div>
-              <div className="event-details-p">
-                {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
+          <CardTitle
+            title={this.props.event.name}
+            subtitle={
+              <div>
+                <div className="event-details-p">
+                  {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
+                </div>
+                <div className="event-details-p">
+                  {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
+                </div>
               </div>
-              <div className="event-details-p">
-                {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
-              </div>
-            </div>
-          }
-        />
+            }
+          />
         <Chip
-                  style={{position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer'}}
-                >
-                  <Avatar icon={<ActionGavel />} />
-                  {this.props.event.numAuctions} Open Auction{this.renderPlural()}
-                </Chip>
-              </Card>
-              <Card>
-                <CardMedia style={{width: '200px'}}>
-                  <img src={this.props.event.image} />
-                </CardMedia>
-              </Card>
+          style={{position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer'}}
+        >
+          <Avatar icon={<ActionGavel />} />
+          {this.props.event.numAuctions} Open Auction{this.renderPlural()}
+        </Chip>
+      </Card>
+      <Card>
+        <CardMedia style={{ width: '200px' }}>
+          <img src={this.props.event.image} role="presentation"/>
+        </CardMedia>
+      </Card>
       </div>
     );
   }

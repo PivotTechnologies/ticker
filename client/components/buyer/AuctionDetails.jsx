@@ -6,8 +6,9 @@ import FlatButton from 'material-ui/FlatButton';
 import LinearProgress from 'material-ui/LinearProgress';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { buyTickets, fetchAuctionById, watchAuction, fetchWatchList } from '../../actions/index';
+import { buyTickets, fetchAuctionById, checkout, getClientToken, watchAuction, fetchWatchList } from '../../actions/index';
 import { browserHistory } from 'react-router';
+import braintree from 'braintree-web';
 
 class AuctionDetails extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class AuctionDetails extends React.Component {
     this.state = {
       intervalId: null,
       open: false,
+      amount: null,
     };
 
     this.buyTickets = this.buyTickets.bind(this);
@@ -25,17 +27,47 @@ class AuctionDetails extends React.Component {
   }
 
   componentWillMount() {
+    console.log('mounting -> ', this.props.auctionId);
     if (!this.props.activeAuction || this.props.activeAuction.id !== this.props.auctionId) {
-      this.props.fetchAuctionById(this.props.auctionId);
+      this.props.fetchAuctionById(this.props.auctionId)
+        .then( () => {
+          this.setState({ amount: this.props.activeAuction.currentPrice });
+        });
     }
   }
 
   componentDidMount() {
     const id = setInterval(() => {
       console.log('updating active auction!')
-      this.props.fetchAuctionById(this.props.activeAuction.id);
+      this.props.fetchAuctionById(this.props.activeAuction.id)
+        .then( () => {
+          this.setState({ amount: this.props.activeAuction.currentPrice });
+        });
     }, 1000);
     this.setState({ intervalId: id });
+
+    this.props.getClientToken().then( () => {
+        //console.log('this.props.payment', this.props.payment);
+        braintree.setup(this.props.paymentToken, 'custom', {
+          paypal: {
+            container: 'dropin-container',
+            singleUse: true,
+            amount: this.state.amount,
+            currency: 'USD',
+            locale: 'en_us'
+          },
+          onPaymentMethodReceived: (payment) => {
+            console.log('payment = ', payment);
+            //this.props.isLoading = true;
+            this.props.checkout(payment, this.state.amount).then( (result) => {
+              console.log('/checkout -> then() ', result);
+              if(result.payload.status === 200){
+                  //this.props.isLoading = false;
+              }
+            });
+          }
+        });
+      })
   }
 
   componentWillUnmount() {
@@ -45,7 +77,7 @@ class AuctionDetails extends React.Component {
 
   buyTickets() {
     this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
-    .then(response => browserHistory.push('/confirm'));
+      .then(response => browserHistory.push('/confirm'));
   }
 
   openWatchModal() {
@@ -96,6 +128,9 @@ class AuctionDetails extends React.Component {
           You are viewing an auction for {this.props.activeAuction.numTickets} ticket(s) to {this.props.activeAuction.eventName} priced at {this.props.activeAuction.currentPrice}.
           <button onClick={this.buyTickets}>Buy Tickets</button>
           <button onClick={this.openWatchModal}>Watch Auction</button>
+          <form>
+            <div id="dropin-container"></div>
+          </form>
           <Dialog
             actions={actions}
             open={this.state.open}
@@ -122,11 +157,12 @@ function mapStateToProps(state) {
   return {
     user: state.user,
     activeAuction: state.activeAuction,
+    paymentToken: state.paymentToken,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ buyTickets, fetchAuctionById, watchAuction, fetchWatchList }, dispatch);
+  return bindActionCreators({ buyTickets, fetchAuctionById, checkout, getClientToken, watchAuction, fetchWatchList  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuctionDetails);

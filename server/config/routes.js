@@ -33,11 +33,11 @@ const routes = (app, express) => {
   app.get('/api/watch/fetch', watchController.fetch );
 
   /* Payment Endpoints */
-  app.get('/api/payment/client_token', paymentController.client_token);
+  app.get('/api/payment/token', paymentController.token);
   app.post('/api/payment/checkout', paymentController.checkout);
   app.post('/api/payment/payout', paymentController.payout);
 
-  /* Serve Client Files */
+  /* Serve Client  Files */
   app.get('*', (req, res) => {
     res.sendFile(path.resolve('./', 'client', 'index.html'))
   })

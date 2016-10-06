@@ -1,7 +1,12 @@
 import React from 'react';
+import Dialog from 'material-ui/Dialog';
+import Checkbox from 'material-ui/Checkbox';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import LinearProgress from 'material-ui/LinearProgress';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { buyTickets, fetchAuctionById } from '../../actions/index';
+import { buyTickets, fetchAuctionById, watchAuction, fetchWatchList } from '../../actions/index';
 import { browserHistory } from 'react-router';
 
 class AuctionDetails extends React.Component {
@@ -9,10 +14,20 @@ class AuctionDetails extends React.Component {
     super(props);
 
     this.state = {
-      intervalId: null
+      intervalId: null,
+      open: false,
     };
 
     this.buyTickets = this.buyTickets.bind(this);
+    this.openWatchModal = this.openWatchModal.bind(this);
+    this.closeWatchModal = this.closeWatchModal.bind(this);
+    this.watchAuction = this.watchAuction.bind(this);
+  }
+
+  componentWillMount() {
+    if (!this.props.activeAuction || this.props.activeAuction.id !== this.props.auctionId) {
+      this.props.fetchAuctionById(this.props.auctionId);
+    }
   }
 
   componentDidMount() {
@@ -33,11 +48,71 @@ class AuctionDetails extends React.Component {
     .then(response => browserHistory.push('/confirm'));
   }
 
+  openWatchModal() {
+    this.setState({ open: true });
+  }
+
+  closeWatchModal() {
+    this.setState({ open: false });
+  }
+
+  watchAuction() {
+    this.props.watchAuction(this.props.user.id, this.props.activeAuction.id)
+    .then(response => this.props.fetchWatchList(this.props.user.id));
+  }
+
   render() {
+    if (typeof this.props.activeAuction === 'string') {
+      return (
+        <div>{this.props.activeAuction}</div>
+      );
+    }
+
+    if (this.props.activeAuction && this.props.activeAuction.id == this.props.auctionId) {
+      if (this.props.activeAuction.status !== 'On Sale') {
+        return (
+          <div>This auction is no longer active.</div>
+        );
+      }
+
+      const actions = [
+        <FlatButton
+          label="Yes, Please"
+          primary={true}
+          onTouchTap={() => {
+            this.watchAuction();
+            this.closeWatchModal();
+          }}
+        />,
+        <FlatButton
+          label="Never Mind"
+          primary={true}
+          onTouchTap={this.closeWatchModal}
+        />,
+      ];
+
+      return (
+        <div>
+          You are viewing an auction for {this.props.activeAuction.numTickets} ticket(s) to {this.props.activeAuction.eventName} priced at {this.props.activeAuction.currentPrice}.
+          <button onClick={this.buyTickets}>Buy Tickets</button>
+          <button onClick={this.openWatchModal}>Watch Auction</button>
+          <Dialog
+            actions={actions}
+            open={this.state.open}
+            onRequestClose={this.closeWatchModal}
+            >
+            Add this auction to your Watch List?
+          </Dialog>
+        </div>
+      );
+    }
+
     return (
-      <div>
-        You are viewing an auction for {this.props.activeAuction.numTickets} ticket(s) to {this.props.activeAuction.eventName} priced at {this.props.activeAuction.currentPrice}.
-        <button onClick={this.buyTickets}>Buy Tickets</button>
+      <div className="spinner">
+        <LinearProgress
+          style={{ height: '10px' }}
+          mode="indeterminate"
+          />
       </div>
     );
   }
@@ -51,7 +126,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ buyTickets, fetchAuctionById }, dispatch);
+  return bindActionCreators({ buyTickets, fetchAuctionById, watchAuction, fetchWatchList }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuctionDetails);

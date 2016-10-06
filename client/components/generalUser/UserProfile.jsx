@@ -18,7 +18,9 @@ class UserProfile extends React.Component {
   }
 
   cancelAuction(auctionId) {
-    this.props.cancelAuction(auctionId);
+    this.props.cancelAuction(auctionId)
+    .then(() => this.props.fetchUserActivity(this.props.user.id));
+
   }
 
   renderBuyerHistory() {

@@ -100,7 +100,6 @@ export function cancelAuction(auctionId) {
   };
 }
 
-<<<<<<< HEAD
 export function watchAuction(userId, auctionId) {
   const data = {
     userId,
@@ -287,7 +286,6 @@ export function startSpinner() {
   };
 }
 
-<<<<<<< HEAD
 export function checkout(payment, amount) {
 
   const data = {

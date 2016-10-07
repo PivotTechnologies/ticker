@@ -6,10 +6,16 @@ import moment from 'moment';
 const EventDetails = ({ activeEvent }) => {
   return (
     <div className="event-details">
-      <Card>
-        <CardMedia>
-          <img src={activeEvent.image} />
-        </CardMedia>
+      <Card className="event-date" style={{width: '210px', background: '#E0E0E0'}}>
+        <div className="event-details-month">
+          {moment(activeEvent.eventDate).format('MMM').toUpperCase()}
+        </div>
+        <div className="event-details-day">
+          {moment(activeEvent.eventDate).format('DD').toUpperCase()}
+        </div>
+        <div className="event-details-weekday">
+          {moment(activeEvent.eventDate).format('ddd').toUpperCase()}
+        </div>
       </Card>
       <Card style={{flex: '1'}}>
         <CardTitle
@@ -38,6 +44,11 @@ const EventDetails = ({ activeEvent }) => {
             </div>
           }
         />
+      </Card>
+      <Card>
+        <CardMedia>
+          <img src={activeEvent.image} />
+        </CardMedia>
       </Card>
     </div>
   );

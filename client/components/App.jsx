@@ -33,6 +33,8 @@ class App extends React.Component {
     if (token) {
       this.props.reauthenticate(token);
     }
+
+    this.props.getLocation();
   }
 
   componentDidUpdate() {

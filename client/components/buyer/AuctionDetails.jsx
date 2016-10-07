@@ -17,7 +17,6 @@ class AuctionDetails extends React.Component {
     this.state = {
       intervalId: null,
       open: false,
-      amount: null,
     };
 
     this.buyTickets = this.buyTickets.bind(this);
@@ -46,28 +45,28 @@ class AuctionDetails extends React.Component {
     }, 1000);
     this.setState({ intervalId: id });
 
-    this.props.getClientToken().then( () => {
-        //console.log('this.props.payment', this.props.payment);
-        braintree.setup(this.props.paymentToken, 'custom', {
-          paypal: {
-            container: 'dropin-container',
-            singleUse: true,
-            amount: this.state.amount,
-            currency: 'USD',
-            locale: 'en_us'
-          },
-          onPaymentMethodReceived: (payment) => {
-            console.log('payment = ', payment);
-            //this.props.isLoading = true;
-            this.props.checkout(payment, this.state.amount).then( (result) => {
-              console.log('/checkout -> then() ', result);
-              if(result.payload.status === 200){
-                  //this.props.isLoading = false;
-              }
-            });
-          }
-        });
-      })
+    // this.props.getClientToken().then( () => {
+    //     //console.log('this.props.payment', this.props.payment);
+    //     braintree.setup(this.props.paymentToken, 'custom', {
+    //       paypal: {
+    //         container: 'dropin-container',
+    //         singleUse: true,
+    //         amount: this.state.amount,
+    //         currency: 'USD',
+    //         locale: 'en_us'
+    //       },
+    //       onPaymentMethodReceived: (payment) => {
+    //         console.log('payment = ', payment);
+    //         //this.props.isLoading = true;
+    //         this.props.checkout(payment, this.state.amount).then( (result) => {
+    //           console.log('/checkout -> then() ', result);
+    //           if(result.payload.status === 200){
+    //               //this.props.isLoading = false;
+    //           }
+    //         });
+    //       }
+    //     });
+    //   })
   }
 
   componentWillUnmount() {
@@ -76,8 +75,9 @@ class AuctionDetails extends React.Component {
   }
 
   buyTickets() {
-    this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
-      .then(response => browserHistory.push('/confirm'));
+    browserHistory.push('/buyerForm');
+    // this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
+    //   .then(response => browserHistory.push('/buyerForm'));
   }
 
   openWatchModal() {
@@ -128,9 +128,6 @@ class AuctionDetails extends React.Component {
           You are viewing an auction for {this.props.activeAuction.numTickets} ticket(s) to {this.props.activeAuction.eventName} priced at {this.props.activeAuction.currentPrice}.
           <button onClick={this.buyTickets}>Buy Tickets</button>
           <button onClick={this.openWatchModal}>Watch Auction</button>
-          <form>
-            <div id="dropin-container"></div>
-          </form>
           <Dialog
             actions={actions}
             open={this.state.open}

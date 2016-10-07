@@ -21,7 +21,6 @@ class EventDetails extends React.Component {
         <CardMedia>
           <img src={this.props.activeEvent.image} />
         </CardMedia>
-
       </Card>
       <Card style={{flex: '1'}}>
         <CardTitle

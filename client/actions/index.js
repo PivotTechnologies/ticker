@@ -308,6 +308,7 @@ export function getClientToken() {
     type: GET_CLIENT_TOKEN,
     payload: request,
   };
+}  
 
 export function getLocation() {
   return new Promise ((resolve, reject) => {

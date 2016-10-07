@@ -88,11 +88,7 @@ class AuctionDetails extends React.Component {
   }
 
   buyTickets() {
-    if (localStorage.getItem('token')) {
-      browserHistory.push('/buyerForm');
-    } else {
-      browserHistory.push('/signin');
-    }
+    browserHistory.push('/buyerForm');
   }
 
   openWatchModal() {

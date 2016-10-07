@@ -10,8 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { bindActionCreators } from 'redux';
 import NavBar from './NavBar.jsx';
 import WatchList from './generalUser/WatchList.jsx';
-import { reauthenticate, fetchWatchList } from '../actions/index';
-import { reauthenticate, getLocation } from '../actions/index';
+import { reauthenticate, fetchWatchList, getLocation } from '../actions/index';
 
 injectTapEventPlugin();
 
@@ -34,10 +33,11 @@ class App extends React.Component {
     if (token) {
       this.props.reauthenticate(token);
     }
+  }
 
   componentDidUpdate() {
-      setInterval(() => this.props.fetchWatchList(this.props.user.id), 1000);
-    }
+    setInterval(() => this.props.fetchWatchList(this.props.user.id), 1000);
+  }
 
   renderSpinner() {
     if (this.props.isLoading) {

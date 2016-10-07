@@ -127,7 +127,21 @@ module.exports = {
               sellerId: userId,
             }
           ]
-        }
+        },
+        attributes: [
+          'id',
+          'sellerId',
+          'buyerId',
+          'eventId',
+          'startPrice',
+          'currentPrice',
+          'minPrice',
+          'numTickets',
+          'sellDate',
+          'status',
+          'eventName',
+          'eventDate'
+        ]
       })
       .then( auctions => {
         auctions.forEach( auction => {

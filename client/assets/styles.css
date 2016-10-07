@@ -156,9 +156,9 @@ body {
   width: 300px;
 }
 
-/**************** EVENT DETAILS ****************/
+/**************** EVENT LIST ITEM ****************/
 
-.event-details {
+.event-list-item {
   display: flex;
 }
 
@@ -174,15 +174,30 @@ body {
   font-size: 3em;
 }
 
+.event-p {
+  padding-top: 10px;
+}
+
+/**************** EVENT DETAILS ****************/
+
+.event-details {
+  display: flex;
+  width: 100vw;
+}
+
 .event-details-text {
   display: flex;
   flex-direction: column;
   align-content: space-between;
 }
 
-.event-details-p {
-  padding-top: 10px;
-} event list items
+.event-details-day {
+  font-size: 4em;
+}
+
+.event-details-month, .event-details-weekday {
+  font-size: 2em;
+}
 
 /**************** USER PROFILE ****************/
 

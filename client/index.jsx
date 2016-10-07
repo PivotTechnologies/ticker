@@ -17,6 +17,7 @@ import SellerView from './components/seller/SellerView.jsx';
 import SellerForm from './components/seller/SellerForm.jsx';
 import Authentication from './components/hoc/Authentication.jsx';
 import SellerConfirmation from './components/seller/SellerConfirmation.jsx';
+import BuyerForm from './components/buyer/BuyerForm.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension(): f => f);
@@ -34,6 +35,7 @@ ReactDOM.render(
         <Route path="account" component={Authentication(UserProfile)} />
         <Route path="sell" component={Authentication(SellerView)} />
         <Route path="sell/form" component={Authentication(SellerForm)} />
+        <Route path="buyerForm" component={Authentication(BuyerForm)} />
         <Route path="sell/confirm" component={Authentication(SellerConfirmation)} />
       </Route>
     </Router>

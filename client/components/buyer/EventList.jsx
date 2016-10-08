@@ -4,7 +4,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import EventListItem from './EventListItem.jsx';
 import { bindActionCreators } from 'redux';
 import Maps from './Maps.jsx';
-import { getLocation } from '../../actions/index';
+import { getLocation, selectTab } from '../../actions/index';
 
 class EventList extends React.Component {
 
@@ -15,6 +15,22 @@ class EventList extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentWillMount() {
+  // console.log("activeTab.length", this.props.activeTab.length);
+    if (this.props.activeTab !== 'a') {
+      console.log("this.props.activeTab", this.props.activeTab);
+      this.setState({value: this.props.activeTab});
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.activeTab !== prevProps.activeTab) {
+      console.log("inside of componentDidUpdate in eventlist:", this.props.activeTab);
+      this.setState({value: this.props.activeTab});
+
+    }
   }
 
   renderEventList() {
@@ -45,9 +61,11 @@ class EventList extends React.Component {
   }
 
   handleChange(value) {
+    console.log("inside of handleChange in EventList:", value);
     this.setState({
       value: value,
     });
+    this.props.selectTab(value);
   }
 
   render() {
@@ -63,11 +81,12 @@ function mapStateToProps(state) {
   return {
     events: state.events,
     userLocation: state.userLocation,
+    activeTab: state.activeTab,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getLocation }, dispatch);
+  return bindActionCreators({ getLocation, selectTab }, dispatch);
 }
 
 

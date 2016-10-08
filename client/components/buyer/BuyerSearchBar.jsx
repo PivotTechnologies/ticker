@@ -7,7 +7,7 @@ import ActionSearch from 'material-ui/svg-icons/action/search';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { searchEvents, startSpinner, clearMarker } from '../../actions/index';
+import { searchEvents, startSpinner, clearMarker, clearTab } from '../../actions/index';
 
 class BuyerSearchBar extends React.Component {
   constructor(props) {
@@ -46,6 +46,7 @@ class BuyerSearchBar extends React.Component {
     event.preventDefault();
     this.props.startSpinner();
     this.props.clearMarker();
+    this.props.clearTab();
     const dateString = this.state.date ?
                        moment(this.state.date).format('YYYY-MM-DD') : '';
     this.props.searchEvents(this.state.query, dateString, this.state.location);
@@ -92,7 +93,7 @@ class BuyerSearchBar extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ searchEvents, startSpinner, clearMarker }, dispatch);
+  return bindActionCreators({ searchEvents, startSpinner, clearMarker, clearTab }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(BuyerSearchBar);

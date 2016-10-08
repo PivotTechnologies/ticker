@@ -20,35 +20,25 @@ class Maps extends React.Component {
 
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleDefaultCenterZoom = this.handleDefaultCenterZoom.bind(this);
-    // this.onZoomChange = this.onZoomChange.bind(this);
   }
 
   componentWillMount() {
     this.handleDefaultCenterZoom();
   }
 
-  // componentWillUpdate() {
-  //   console.log("this.state.zoom:", this.state.zoom);
-  // }
-  //
-  // // onZoomChange(map) {
-  //     // this.props.onZoomChange(this.ref.map.getZoom());
-  //     console.log("inside of zoom changed", map.getZoom());
-  //     // console.log("zoom leve:", map.getZoom());
-  // }
-
   handleDefaultCenterZoom() {
     if (this.props.activeMarker.latitude) {
       this.setState({
         latitude: +this.props.activeMarker.latitude,
         longitude: +this.props.activeMarker.longitude,
-        zoom: 11,
+        zoom: 10,
       });
-    }  else if (this.props.userLocation.latitude) {
+    }
+    else if (this.props.userLocation.latitude) {
       this.setState({
         latitude: +this.props.userLocation.latitude,
         longitude: +this.props.userLocation.longitude,
-        zoom: 11,
+        zoom: 10,
       });
     }
   }

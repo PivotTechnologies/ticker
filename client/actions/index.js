@@ -27,6 +27,8 @@ export const GET_CLIENT_TOKEN = 'GET_CLIENT_TOKEN';
 export const GET_LOCATION = 'GET_LOCATION';
 export const SELECT_MARKER = 'SELECT_MARKER';
 export const CLEAR_MARKER = 'CLEAR_MARKER';
+export const SELECT_TAB = 'SELECT_TAB';
+export const CLEAR_TAB = 'CLEAR_TAB';
 
 export function searchEvents(query, date, location) {
   const data = {
@@ -334,7 +336,39 @@ export function getClientToken() {
     type: GET_CLIENT_TOKEN,
     payload: request,
   };
-}  
+}
+
+export function getLocation() {
+  return new Promise ((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      if (position) {
+        resolve(position.coords);
+      } else {
+        reject(position);
+      }
+    });
+  })
+  .then((userLocation)=> {
+    console.log("user location: ", userLocation);
+    return {
+      type: GET_LOCATION,
+      payload: userLocation,
+    };
+  })
+}
+
+export function selectMarker(activeMarker) {
+  return {
+    type: SELECT_MARKER,
+    payload: activeMarker,
+  };
+}
+
+export function clearMarker() {
+  return {
+    type: CLEAR_MARKER,
+  };
+}
 
 export function getLocation() {
   return new Promise ((resolve, reject) => {
@@ -368,34 +402,15 @@ export function clearMarker() {
   };
 }
 
-export function getLocation() {
-  return new Promise ((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      if (position) {
-        resolve(position.coords);
-      } else {
-        reject(position);
-      }
-    });
-  })
-  .then((userLocation)=> {
-    console.log("user location: ", userLocation);
-    return {
-      type: GET_LOCATION,
-      payload: userLocation,
-    };
-  })
-}
-
-export function selectMarker(activeMarker) {
+export function selectTab(activeTab) {
   return {
-    type: SELECT_MARKER,
-    payload: activeMarker,
+    type: SELECT_TAB,
+    payload: activeTab,
   };
 }
 
-export function clearMarker() {
+export function clearTab() {
   return {
-    type: CLEAR_MARKER,
+    type: CLEAR_TAB,
   };
 }

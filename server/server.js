@@ -11,6 +11,7 @@ require('./config/middleware')(app, express);
 require('./config/routes')(app, express);
 
 const decrementPrice = schedule.scheduleJob('*/5 * * * * *', () => {
+
   models.Auction.findAll({
     where: {
       status: 'On Sale'

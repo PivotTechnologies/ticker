@@ -261,9 +261,34 @@ body {
 
 /**************** SELLER FORM ****************/
 
+.sellerform {
+  display: flex;
+  flex-direction: column;
+  width: 37em;
+  height: 42em;
+  /*border: 1px solid black;*/
+  margin: auto;
+  margin-top: 2em;
+  /*align-items: center;*/
+
+}
+.sellerformbutton {
+  height: 2em;
+  width 3em;
+  margin: 1em;
+  text-align: center;
+}
+.sellerinputform {
+  display: flex;
+  flex-direction: column;
+  /*padding: 10em 5em 10em 5em;*/
+  margin: 2em 3em 2em 3em;
+}
+
 .file-upload-container {
   display: flex;
   align-items: center;
+  padding-top: 10%;
 }
 
 #file-upload {

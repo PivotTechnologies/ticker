@@ -144,9 +144,9 @@ class SellerForm extends React.Component {
 
   render() {
     return (
-      <Paper zDepth={0}>
+      <Paper className="sellerform" zDepth={2}>
+      <RaisedButton className="sellerformbutton" onClick={this.onClick} label="Go back to search" />
           <Card className="list-item">
-            <button onClick={this.onClick}> Go back to search </button>
             <CardTitle
               title={this.props.activeEvent.name}
               subtitle={
@@ -162,7 +162,7 @@ class SellerForm extends React.Component {
             />
           </Card>
 
-        <form className="auth" onSubmit={this.onFormSubmit}>
+        <form className="sellerinputform"  onSubmit={this.onFormSubmit}>
           <TextField
             type="number"
             step="0.01"
@@ -196,7 +196,7 @@ class SellerForm extends React.Component {
             />
             {this.renderFilePreview()}
           </div>
-          <button type="submit">Submit</button>
+          <RaisedButton className="sellerformbutton" type="submit" label="Submit" />
         </form>
       </Paper>
     );

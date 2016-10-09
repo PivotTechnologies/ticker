@@ -54,7 +54,6 @@ class Maps extends React.Component {
   }
 
   handleMarkerClick(marker) {
-    console.log('marker.timezone', marker.timezone);
     if (marker.timezone) {
       this.props.selectMarker(marker);
     }

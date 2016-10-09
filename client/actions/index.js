@@ -342,51 +342,19 @@ export function getLocation() {
   return new Promise ((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((position) => {
       if (position) {
-        resolve(position.coords);
+        resolve(position);
       } else {
         reject(position);
       }
     });
   })
-  .then((userLocation)=> {
-    console.log("user location: ", userLocation);
+  .then((userLocation) => {
+    console.log('user location: ', userLocation);
     return {
       type: GET_LOCATION,
       payload: userLocation,
     };
-  })
-}
-
-export function selectMarker(activeMarker) {
-  return {
-    type: SELECT_MARKER,
-    payload: activeMarker,
-  };
-}
-
-export function clearMarker() {
-  return {
-    type: CLEAR_MARKER,
-  };
-}
-
-export function getLocation() {
-  return new Promise ((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      if (position) {
-        resolve(position.coords);
-      } else {
-        reject(position);
-      }
-    });
-  })
-  .then((userLocation)=> {
-    console.log("user location: ", userLocation);
-    return {
-      type: GET_LOCATION,
-      payload: userLocation,
-    };
-  })
+  });
 }
 
 export function selectMarker(activeMarker) {

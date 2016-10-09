@@ -26,32 +26,6 @@ class AuctionDetails extends React.Component {
     this.renderPlural = this.renderPlural.bind(this);
   }
 
-  componentDidMount() {
-    const id = setInterval(() => {
-      console.log('updating active auction!')
-      this.props.fetchAuctionById(this.props.activeAuction.id);
-    }, 1000);
-    this.setState({ intervalId: id });
-  }
-
-  componentWillUnmount() {
-    console.log('no longer updating active auction')
-    clearInterval(this.state.intervalId);
-  }
-
-  componentDidMount() {
-    const id = setInterval(() => {
-      console.log('updating active auction!')
-      this.props.fetchAuctionById(this.props.activeAuction.id);
-    }, 1000);
-    this.setState({ intervalId: id });
-  }
-
-  componentWillUnmount() {
-    console.log('no longer updating active auction')
-    clearInterval(this.state.intervalId);
-  }
-
   buyTickets() {
     browserHistory.push(
       `/event/${this.props.params.eventId}/auction/${this.props.params.auctionId}/buyerForm`

@@ -19,18 +19,18 @@ class EventList extends React.Component {
 
   renderEventList() {
     if (this.props.events) {
-      console.log("inside renderEventList:", this.props.events);
       return (
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
+          style={{marginTop: '20px'}}
         >
-          <Tab label="Events" value="a" >
+          <Tab label="List View" value="a" >
             <div className="list">
             {this.props.events.map((event, idx) => {return <EventListItem key={idx} event={event} />})}
             </div>
           </Tab>
-          <Tab label="Map" value="b">
+          <Tab label="Map View" value="b">
             <div className="map">
               <Maps />
             </div>

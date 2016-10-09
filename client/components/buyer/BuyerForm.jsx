@@ -25,7 +25,7 @@ class BuyerForm extends React.Component {
         braintree.setup(this.props.paymentToken, 'custom', {
           paypal: {
             container: 'dropin-container',
-            singleUse: true,
+            //singleUse: true,
             amount: this.props.activeAuction.currentPrice,
             currency: 'USD',
             locale: 'en_us'

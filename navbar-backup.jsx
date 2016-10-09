@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import { ToolbarGroup } from 'material-ui/Toolbar';
@@ -11,7 +22,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { clearEvents, signout } from '../actions/index';
 import { browserHistory } from 'react-router';
-
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -93,18 +103,46 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <div className="nav-bar">
-          <img className="logo" src="tickerLogo.png" />
-          <ul className="links">
-            <li><a onClick={browserHistory.push('/search')}>Buy</a></li>
-            <li onClick={browserHistory.push('/sell')}>Sell</li>
-            <li onClick={this.state.menuOpen}>Watch</li>
-            <li onClick={browserHistory.push('/signin')}>Sign-in</li>
-          </ul>
-        </div>
+        <AppBar
+          className="nav-bar"
+          title={
+            <div className="navbar-title">
+              ticker
+            </div>
+          }
+          onTitleTouchTap={this.routeToBuyerSearch}
+          onLeftIconButtonTouchTap={this.openMenu}
+          iconElementRight={this.renderRightElement()}
+        />
+        <Drawer
+          docked={false}
+          width={200}
+          open={this.state.menuOpen}
+          onRequestChange={this.closeMenu}
+        >
+          <AppBar
+            title="Actions"
+            showMenuIconButton={false}
+          />
+          <MenuItem
+            primaryText="Find Tickets"
+            onTouchTap={(event) => {
+              this.closeMenu();
+              this.routeToBuyerSearch();
+            }}
+          />
+          <MenuItem
+            primaryText="Sell Tickets"
+            onTouchTap={(event) => {
+              this.closeMenu();
+              this.routeToSellerSearch();
+            }}
+          />
+        </Drawer>
       </div>
     );
   }
+
 }
 
 function mapStateToProps(state) {

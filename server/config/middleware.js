@@ -8,7 +8,7 @@ const middleware = (app, express) => {
   app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json());
   app.use('/', express.static('./client'));
-  // app.use(morgan('dev'));
+  app.use(morgan('dev'));
 };
 
 module.exports = middleware;

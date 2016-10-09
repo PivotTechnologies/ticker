@@ -56,7 +56,8 @@ module.exports = {
         where: {
           id: {$in: auctionIds}
         },
-        attributes: ['id', 'eventId', 'eventName', 'eventDate', 'currentPrice']
+        attributes: ['id', 'eventName', 'eventDate', 'currentPrice'],
+        order: [ ['eventDate'] ]
       })
       .then( auctions => {
         res.json(auctions);

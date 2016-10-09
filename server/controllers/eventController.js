@@ -61,7 +61,8 @@ module.exports = {
             locationQuery,
             { numAuctions: { $gt: 0 } }
           ]
-        }
+        },
+        order: [ ['eventDate'] ]
       })
       .then( events => {
         events.forEach( event => {

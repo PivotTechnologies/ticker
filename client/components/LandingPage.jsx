@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //import {  } from './../actions/index';
+import LandingPageMaps from './buyer/LandingPageMaps.jsx'
 import { browserHistory } from 'react-router';
 
 class LandingPage extends React.Component {
@@ -49,7 +50,7 @@ class LandingPage extends React.Component {
             <img className="introImg" src="searchList.png" />
             <p className="introText">Sell your tickets easily using our automated auction system.</p>
           </div>
-          
+
           <div className="introBox">
             <img className="introImg" src="searchList.png" />
             <p className="introText">Sell your tickets easily using our automated auction system.</p>
@@ -57,6 +58,7 @@ class LandingPage extends React.Component {
         </div>
 
         <div className="map">
+          <LandingPageMaps />
         </div>
 
         <div className="footer">

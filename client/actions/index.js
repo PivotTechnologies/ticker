@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const SEARCH_EVENTS = 'SEARCH_EVENTS';
 export const SELECT_EVENT = 'SELECT_EVENT';
+export const FETCH_EVENT_BY_ID = 'FETCH_EVENT_BY_ID';
 export const FETCH_AUCTIONS = 'FETCH_AUCTIONS';
 export const SELECT_AUCTION = 'SELECT_AUCTION';
 export const FETCH_AUCTION_BY_ID = 'FETCH_AUCTION_BY_ID';
@@ -20,6 +21,7 @@ export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
 export const CREATE_AUCTION = 'CREATE_AUCTION';
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 export const START_SPINNER = 'START_SPINNER';
+export const STOP_SPINNER = 'STOP_SPINNER';
 export const CHECKOUT = 'CHECKOUT';
 export const GET_CLIENT_TOKEN = 'GET_CLIENT_TOKEN';
 export const GET_LOCATION = 'GET_LOCATION';
@@ -50,6 +52,21 @@ export function selectEvent(event) {
   };
 }
 
+export function fetchEventById(eventId) {
+  const data = {
+    params: {
+      eventId,
+    },
+  };
+
+  const request = axios.get('/api/event/fetchById', data);
+
+  return {
+    type: FETCH_EVENT_BY_ID,
+    payload: request,
+  };
+}
+
 export function fetchAuctions(eventId) {
   const data = {
     params: {
@@ -72,10 +89,11 @@ export function selectAuction(auction) {
   };
 }
 
-export function fetchAuctionById(auctionId) {
+export function fetchAuctionById(auctionId, eventId) {
   const data = {
     params: {
       auctionId,
+      eventId,
     },
   };
 
@@ -165,7 +183,7 @@ export function fetchTickets(userId, auctionId) {
       auctionId,
     },
   };
-
+console.log(data.params)
   const request = axios.get('/api/auction/fetchTickets', data);
 
   return {
@@ -174,13 +192,14 @@ export function fetchTickets(userId, auctionId) {
   };
 }
 
-export function createAuction(event, startPrice, minPrice, numTickets, userId, tickets) {
+export function createAuction(event, startPrice, minPrice, numTickets, userId, username, tickets) {
   const data = {
     event,
     startPrice,
     minPrice,
     numTickets,
     userId,
+    username,
     tickets,
   };
 
@@ -283,6 +302,12 @@ export function clearEvents() {
 export function startSpinner() {
   return {
     type: START_SPINNER,
+  };
+}
+
+export function stopSpinner() {
+  return {
+    type: STOP_SPINNER,
   };
 }
 

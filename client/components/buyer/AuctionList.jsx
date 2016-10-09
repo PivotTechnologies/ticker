@@ -1,32 +1,21 @@
 import React from 'react';
+import LinearProgress from 'material-ui/LinearProgress';
 import { connect } from 'react-redux';
-import { fetchAuctions } from '../../actions/index.js';
-import { bindActionCreators } from 'redux';
 import AuctionListItem from './AuctionListItem.jsx';
 
 class AuctionList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      intervalId: null
-    };
-  }
-
-  componentDidMount() {
-    const id = setInterval(() => {
-      console.log('updating auctions!')
-      this.props.fetchAuctions(this.props.activeEvent.id);
-    }, 1000);
-    this.setState({ intervalId: id });
-  }
-
-  componentWillUnmount() {
-    console.log('no longer updating auctions')
-    clearInterval(this.state.intervalId);
-  }
-
   renderAuctionList() {
+    if (!this.props.auctions.length) {
+      return (
+        <div>
+          <LinearProgress
+            style={{ height: '10px' }}
+            mode="indeterminate"
+            />
+        </div>
+      );
+    }
+
     return this.props.auctions.map((auction, idx) =>
       <AuctionListItem key={idx} auction={auction} />
     );
@@ -35,7 +24,7 @@ class AuctionList extends React.Component {
   render() {
     return (
       <div>
-        { this.renderAuctionList() }
+        {this.renderAuctionList()}
       </div>
     );
   }
@@ -43,13 +32,8 @@ class AuctionList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    activeEvent: state.activeEvent,
     auctions: state.auctions,
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchAuctions }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuctionList);
+export default connect(mapStateToProps)(AuctionList);

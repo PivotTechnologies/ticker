@@ -6,7 +6,7 @@ import moment from 'moment';
 const EventDetails = ({ activeEvent }) => {
   return (
     <div className="event-details">
-      <Card className="event-date" style={{width: '210px', background: '#E0E0E0'}}>
+      <Card className="event-date" style={{height: '210px', width: '210px', background: '#E0E0E0'}}>
         <div className="event-details-month">
           {moment(activeEvent.eventDate).format('MMM').toUpperCase()}
         </div>
@@ -17,7 +17,7 @@ const EventDetails = ({ activeEvent }) => {
           {moment(activeEvent.eventDate).format('ddd').toUpperCase()}
         </div>
       </Card>
-      <Card style={{flex: '1'}}>
+      <Card style={{flex: '1', height: '210px'}}>
         <CardTitle
           title={activeEvent.name}
           subtitle={

@@ -15,7 +15,7 @@ class AuctionListItem extends React.Component {
 
   handleClick() {
     this.props.selectAuction(this.props.auction);
-    browserHistory.push(`/auction/${this.props.auction.id}`);
+    browserHistory.push(`/event/${this.props.auction.eventId}/auction/${this.props.auction.id}/`);
   }
 
   renderPlural() {
@@ -27,7 +27,7 @@ class AuctionListItem extends React.Component {
 
   render() {
     return (
-      <Card className="list-item auction-list-item" onClick={this.handleClick}>
+      <Card className="auction-list-item" onClick={this.handleClick}>
         <CardHeader title="sellerUsername" />
         <CardTitle
           title={

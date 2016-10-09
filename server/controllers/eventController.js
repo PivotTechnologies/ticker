@@ -87,7 +87,7 @@ module.exports = {
       });
     },
 
-    fetch: (req, res) => {
+    fetchById: (req, res) => {
       models.Event
         .findOne({
           where: {

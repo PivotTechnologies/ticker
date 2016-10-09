@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const SEARCH_EVENTS = 'SEARCH_EVENTS';
 export const SELECT_EVENT = 'SELECT_EVENT';
+export const FETCH_EVENT_BY_ID = 'FETCH_EVENT_BY_ID';
 export const FETCH_AUCTIONS = 'FETCH_AUCTIONS';
 export const SELECT_AUCTION = 'SELECT_AUCTION';
 export const FETCH_AUCTION_BY_ID = 'FETCH_AUCTION_BY_ID';
@@ -47,6 +48,21 @@ export function selectEvent(event) {
   };
 }
 
+export function fetchEventById(eventId) {
+  const data = {
+    params: {
+      eventId,
+    },
+  };
+
+  const request = axios.get('/api/event/fetchById', data);
+
+  return {
+    type: FETCH_EVENT_BY_ID,
+    payload: request,
+  };
+}
+
 export function fetchAuctions(eventId) {
   const data = {
     params: {
@@ -69,10 +85,11 @@ export function selectAuction(auction) {
   };
 }
 
-export function fetchAuctionById(auctionId) {
+export function fetchAuctionById(auctionId, eventId) {
   const data = {
     params: {
       auctionId,
+      eventId,
     },
   };
 

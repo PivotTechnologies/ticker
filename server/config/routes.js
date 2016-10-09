@@ -16,7 +16,7 @@ const routes = (app, express) => {
   /* Event Endpoints */
   app.get('/api/event/buyerSearch', eventController.buyerSearch );
   app.get('/api/event/sellerSearch', eventController.sellerSearch );
-  app.get('/api/event/fetch', eventController.fetch);
+  app.get('/api/event/fetchById', eventController.fetchById);
 
   /* Auction Endpoints */
   app.post('/api/auction/create', auctionController.create );

@@ -27,12 +27,6 @@ class BuyerForm extends React.Component {
   }
 
   componentWillMount() {
-    const id = setInterval(() => {
-      console.log('updating active auction!')
-      this.props.fetchAuctionById(this.props.activeAuction.id)
-    }, 1000);
-    this.setState({ intervalId: id });
-
     this.props.getClientToken().then( () => {
         braintree.setup(this.props.paymentToken, 'custom', {
           paypal: {

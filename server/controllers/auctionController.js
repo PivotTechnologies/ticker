@@ -37,11 +37,6 @@ module.exports = {
       newAuction
         .save()
         .then(auction => {
-          console.log('New auction created: ');
-          console.log('  id:',  auction.dataValues.id);
-          console.log('  name:',  auction.dataValues.eventName);
-          console.log('  eventDate:',  auction.dataValues.eventDate);
-          console.log('  startTime:',  auction.dataValues.startTime);
           res.send(auction.dataValues);
         })
         .catch(err => {
@@ -49,7 +44,7 @@ module.exports = {
           callback();
         })
     }
-    /* look for event passed in */
+
     models.Event
       .findOne({
         where: {
@@ -59,7 +54,6 @@ module.exports = {
         }
       })
       .then(event => {
-        /* no event found, create it */
         if (!event) {
           models.Event.create({
               name: req.body.event.name,
@@ -83,9 +77,7 @@ module.exports = {
               })
             })
         }
-        /* event found */
         else {
-          console.log('Event found: ', event.dataValues);
           event.numAuctions += 1;
           event.save()
             .then( () => {
@@ -132,6 +124,7 @@ module.exports = {
     models.Auction.findAll({
       where: {
         eventId: req.query.eventId,
+        status: 'On Sale',
       },
       attributes: [
         'id',
@@ -150,7 +143,6 @@ module.exports = {
     })
     .then(auctions => {
       auctions.forEach(auction => results.push(auction.dataValues));
-      console.log('\033[34mSending data: \033[0m');
       res.json(results);
     })
     .catch(err => {
@@ -162,7 +154,8 @@ module.exports = {
   fetchById: (req, res) => {
     models.Auction.findOne({
       where: {
-        id: req.query.auctionId
+        id: req.query.auctionId,
+        eventId: req.query.eventId,
       },
       attributes: [
         'id',
@@ -196,7 +189,6 @@ module.exports = {
         where: { id: req.body.auctionId }
       })
       .then(auction => {
-        console.log('auction found:', auction)
         if(auction) {
           models.Event.findOne({
             where: {
@@ -212,7 +204,6 @@ module.exports = {
           auction.sellDate = Date.now();
           auction.buyerId = req.body.userId;
           auction.save();
-          //console.log('Sold: \n', auction.dataValues)
           res.sendStatus(200);
         }
         else {
@@ -229,7 +220,6 @@ module.exports = {
       }
     })
     .then( auction => {
-      //console.log(auction.dataValues.tickets)
       res.json({ tickets: auction.dataValues.tickets });
     })
     .catch( err => {

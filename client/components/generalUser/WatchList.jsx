@@ -9,7 +9,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import { fetchWatchList, removeWatch, fetchAuctionById } from '../../actions/index';
+import { fetchWatchList, removeWatch, fetchEventById, fetchAuctionById } from '../../actions/index';
 
 class WatchList extends React.Component {
   constructor(props) {
@@ -21,13 +21,16 @@ class WatchList extends React.Component {
 
   removeWatch(auctionId) {
     this.props.removeWatch(this.props.user.id, auctionId)
-    .then(response => this.props.fetchWatchList(this.props.user.id));
+      .then(response => this.props.fetchWatchList(this.props.user.id));
   }
 
-  routeToAuctionDetails(auctionId) {
+  routeToAuctionDetails(auctionId, eventId) {
     this.props.closeWatchList();
-    this.props.fetchAuctionById(auctionId)
-    .then(() => browserHistory.push(`/auction/${auctionId}`));
+    this.props.fetchEventById(eventId)
+      .then(() => {
+        this.props.fetchAuctionById(auctionId, eventId)
+          .then(() => browserHistory.push(`/event/${eventId}/auction/${auctionId}/`));
+      });
   }
 
   renderWatchList() {
@@ -49,7 +52,7 @@ class WatchList extends React.Component {
               <DeleteIcon />
             </IconButton>
             <IconButton
-              onClick={() => this.routeToAuctionDetails(watch.id)}
+              onClick={() => this.routeToAuctionDetails(watch.id, watch.eventId)}
               style={{position: 'absolute', bottom: 0, right: 0}}
             >
               <GoIcon />
@@ -81,7 +84,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchWatchList, removeWatch, fetchAuctionById }, dispatch);
+  return bindActionCreators({ fetchWatchList, removeWatch, fetchEventById, fetchAuctionById }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WatchList);

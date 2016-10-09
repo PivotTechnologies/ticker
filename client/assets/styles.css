@@ -48,6 +48,13 @@ body {
   flex: 1;
 }
 
+.auction-container {
+  width: 1000px;
+  display: flex;
+  height: calc(100vh - 374px);
+  margin-top: 20px;
+}
+
 /**************** AUTH ****************/
 
 .auth {
@@ -142,7 +149,7 @@ body {
   margin: 10px;
 }
 
-.list-item:hover {
+.list-item:hover, .auction-list-item:hover {
   cursor: pointer;
 }
 
@@ -150,10 +157,6 @@ body {
   .list {
     width: 500px;
   }
-}
-
-.auction-list {
-  width: 300px;
 }
 
 /**************** EVENT LIST ITEM ****************/
@@ -182,7 +185,8 @@ body {
 
 .event-details {
   display: flex;
-  width: 100vw;
+  width: 1000px;
+  margin-top: 40px;
 }
 
 .event-details-text {
@@ -197,6 +201,27 @@ body {
 
 .event-details-month, .event-details-weekday {
   font-size: 2em;
+}
+
+.event-map {
+  width: calc(100vh - 274px);
+}
+
+/**************** AUCTION VIEW ****************/
+
+.auction-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 374px);
+}
+
+/**************** AUCTION DETAILS ****************/
+
+.buy-tickets-container, .watch-auction-container {
+  text-align: center;
+  margin: 20px;
 }
 
 /**************** USER PROFILE ****************/
@@ -236,7 +261,8 @@ body {
   text-indent: 10px;
 }
 
-/**************** AUCTION DETAILS ****************/
+/**************** BUYER FORM ****************/
+
 #dropin-container {
   width: 500px;
   height: 200px;

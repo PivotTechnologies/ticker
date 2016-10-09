@@ -20,14 +20,12 @@ class EventList extends React.Component {
   componentWillMount() {
   // console.log("activeTab.length", this.props.activeTab.length);
     if (this.props.activeTab !== 'a') {
-      console.log("this.props.activeTab", this.props.activeTab);
       this.setState({value: this.props.activeTab});
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.activeTab !== prevProps.activeTab) {
-      console.log("inside of componentDidUpdate in eventlist:", this.props.activeTab);
       this.setState({value: this.props.activeTab});
 
     }

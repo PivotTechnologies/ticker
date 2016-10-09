@@ -1,12 +1,14 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import moment from 'moment';
 import TextField from 'material-ui/TextField';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import Dialog from 'material-ui/Dialog';
 import { createAuction } from '../../actions/index.js';
 
 class SellerForm extends React.Component {
@@ -22,6 +24,7 @@ class SellerForm extends React.Component {
       errorStartPrice: '',
       errorMinPrice: '',
       errorNumTickets: '',
+      open: false,
     };
 
     this.onStartPriceChange = this.onStartPriceChange.bind(this);
@@ -31,6 +34,8 @@ class SellerForm extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
     this.renderFilePreview = this.renderFilePreview.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   onFormSubmit(event) {
@@ -125,6 +130,14 @@ class SellerForm extends React.Component {
     browserHistory.push(`/sell`);
   }
 
+  handleOpen() {
+     this.setState({open: true});
+   }
+
+  handleClose() {
+     this.setState({open: false});
+  }
+
   openFileUpload() {
     document.getElementById('file-upload').click();
   }
@@ -143,6 +156,21 @@ class SellerForm extends React.Component {
   }
 
   render() {
+    const actions = [
+       <FlatButton
+         label="Cancel"
+         primary={true}
+         onTouchTap={this.handleClose}
+       />,
+       <FlatButton
+         label="Submit"
+         type="Submit"
+         primary={true}
+         onClick={this.onFormSubmit}
+         onTouchTap={this.handleClose}
+       />,
+     ];
+
     return (
       <Paper className="sellerform" zDepth={2}>
       <RaisedButton className="sellerformbutton" onClick={this.onClick} label="Go back to search" />
@@ -162,7 +190,7 @@ class SellerForm extends React.Component {
             />
           </Card>
 
-        <form className="sellerinputform"  onSubmit={this.onFormSubmit}>
+        <form className="sellerinputform" >
           <TextField
             type="number"
             step="0.01"
@@ -196,9 +224,19 @@ class SellerForm extends React.Component {
             />
             {this.renderFilePreview()}
           </div>
-          <RaisedButton className="sellerformbutton" type="submit" label="Submit" />
+          <RaisedButton className="sellerformbutton" onTouchTap={this.handleOpen} label="Create" />
         </form>
+        <div>
+          <Dialog
+            title="Please confirm auction creation"
+            actions={actions}
+            modal={true}
+            open={this.state.open}
+          >
+          </Dialog>
+        </div>
       </Paper>
+
     );
   }
 }

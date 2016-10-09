@@ -15,7 +15,6 @@ class Maps extends React.Component {
       latitude: 39.095499,
       longitude: -98.705225,
       zoom: 4,
-
     };
 
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
@@ -25,6 +24,17 @@ class Maps extends React.Component {
   componentWillMount() {
     this.handleDefaultCenterZoom();
   }
+
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.activeMarker.latitude !== prevProps.activeMarker.latitude) {
+  //     console.log("this.props.activeMarker:", this.props.activeMarker);
+  //     this.setState({
+  //       latitude: +this.props.userLocation.latitude,
+  //       longitude: +this.props.userLocation.longitude,
+  //       zoom: 10,
+  //     });
+  //   }
+  // }
 
   handleDefaultCenterZoom() {
     if (this.props.activeMarker.latitude) {

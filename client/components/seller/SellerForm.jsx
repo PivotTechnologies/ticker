@@ -47,6 +47,7 @@ class SellerForm extends React.Component {
             this.state.minPrice,
             this.state.numTickets,
             this.state.userId,
+            this.props.user.username,
             dataUrl
           );
         }

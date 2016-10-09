@@ -23,6 +23,7 @@ const EventDetails = ({ activeEvent }) => {
           subtitle={
             <div className="event-details-text">
               <div>
+                <br />
                 <div>
                   {activeEvent.venue}
                 </div>
@@ -33,6 +34,7 @@ const EventDetails = ({ activeEvent }) => {
                   {activeEvent.city}, {activeEvent.state} {activeEvent.zip}
                 </div>
               </div>
+              <br />
               <div>
                 <div>
                   {moment(activeEvent.eventDate).format('MMMM Do, YYYY')}

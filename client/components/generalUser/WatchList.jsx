@@ -9,7 +9,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import { fetchWatchList, removeWatch, fetchEventById, fetchAuctionById } from '../../actions/index';
+import { fetchWatchList, removeWatch, fetchEventById, fetchAuctionById, fetchAuctions, startSpinner, stopSpinner } from '../../actions/index';
 
 class WatchList extends React.Component {
   constructor(props) {
@@ -26,10 +26,18 @@ class WatchList extends React.Component {
 
   routeToAuctionDetails(auctionId, eventId) {
     this.props.closeWatchList();
+    this.props.startSpinner();
     this.props.fetchEventById(eventId)
       .then(() => {
         this.props.fetchAuctionById(auctionId, eventId)
-          .then(() => browserHistory.push(`/event/${eventId}/auction/${auctionId}/`));
+          .then(() => {
+            console.log('fetching auctions')
+            this.props.fetchAuctions(eventId)
+              .then(() => {
+                browserHistory.push(`/event/${eventId}/auction/${auctionId}/`);
+                this.props.stopSpinner();
+              });
+          });
       });
   }
 
@@ -84,7 +92,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchWatchList, removeWatch, fetchEventById, fetchAuctionById }, dispatch);
+  return bindActionCreators({ fetchWatchList, removeWatch, fetchEventById, fetchAuctionById, fetchAuctions, startSpinner, stopSpinner }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WatchList);

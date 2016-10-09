@@ -214,13 +214,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   height: calc(100vh - 374px);
 }
 
 /**************** AUCTION DETAILS ****************/
 
-.buy-tickets-container, .watch-auction-container {
-  text-align: center;
+.buy-tickets-container, .watch-auction-container  {
   margin: 20px;
 }
 
@@ -264,6 +264,7 @@ body {
 /**************** BUYER FORM ****************/
 
 #dropin-container {
-  width: 500px;
-  height: 200px;
+  display: flex;
+  justify-content: center;
+  height: 50px;
 }

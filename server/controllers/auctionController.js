@@ -21,6 +21,7 @@ module.exports = {
       const newAuction = models.Auction.build({
         eventId: eventId,
         sellerId: req.body.userId,
+        sellerName: req.body.username,
         startPrice: req.body.startPrice,
         currentPrice: req.body.startPrice,
         minPrice: req.body.minPrice,
@@ -129,6 +130,7 @@ module.exports = {
       attributes: [
         'id',
         'sellerId',
+        'sellerName',
         'buyerId',
         'eventId',
         'startPrice',
@@ -160,6 +162,7 @@ module.exports = {
       attributes: [
         'id',
         'sellerId',
+        'sellerName',
         'buyerId',
         'eventId',
         'startPrice',

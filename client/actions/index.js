@@ -21,6 +21,7 @@ export const SEARCH_SEATGEEK = 'SEARCH_SEATGEEK';
 export const CREATE_AUCTION = 'CREATE_AUCTION';
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
 export const START_SPINNER = 'START_SPINNER';
+export const STOP_SPINNER = 'STOP_SPINNER';
 export const CHECKOUT = 'CHECKOUT';
 export const GET_CLIENT_TOKEN = 'GET_CLIENT_TOKEN';
 
@@ -178,7 +179,7 @@ export function fetchTickets(userId, auctionId) {
       auctionId,
     },
   };
-
+console.log(data.params)
   const request = axios.get('/api/auction/fetchTickets', data);
 
   return {
@@ -187,13 +188,14 @@ export function fetchTickets(userId, auctionId) {
   };
 }
 
-export function createAuction(event, startPrice, minPrice, numTickets, userId, tickets) {
+export function createAuction(event, startPrice, minPrice, numTickets, userId, username, tickets) {
   const data = {
     event,
     startPrice,
     minPrice,
     numTickets,
     userId,
+    username,
     tickets,
   };
 
@@ -296,6 +298,12 @@ export function clearEvents() {
 export function startSpinner() {
   return {
     type: START_SPINNER,
+  };
+}
+
+export function stopSpinner() {
+  return {
+    type: STOP_SPINNER,
   };
 }
 

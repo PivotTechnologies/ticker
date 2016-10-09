@@ -26,9 +26,10 @@ class AuctionListItem extends React.Component {
   }
 
   render() {
+    console.log(this.props.auction)
     return (
       <Card className="auction-list-item" onClick={this.handleClick}>
-        <CardHeader title="sellerUsername" />
+        <CardHeader title={`Sold by: ${this.props.auction.sellerName}`} />
         <CardTitle
           title={
             `${this.props.auction.numTickets} Ticket${this.renderPlural()} -

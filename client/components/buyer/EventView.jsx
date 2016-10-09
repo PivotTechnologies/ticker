@@ -32,7 +32,9 @@ class EventView extends React.Component {
                   this.props.fetchAuctionById(this.props.params.auctionId, this.props.params.eventId);
                 }
               })
-                .then(() => this.setState({ isLoading: false }));
+                .then(() => {
+                  this.setState({ isLoading: false })
+                });
           }
         })
         .catch(() => browserHistory.push('/oops'));
@@ -58,7 +60,7 @@ class EventView extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) {
+    if (this.state.isLoading || this.props.isLoading) {
       return (
         <div className="spinner">
           <LinearProgress
@@ -87,6 +89,7 @@ class EventView extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    isLoading: state.isLoading,
     activeEvent: state.activeEvent,
   };
 }

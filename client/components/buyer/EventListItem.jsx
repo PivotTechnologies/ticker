@@ -20,7 +20,7 @@ class EventListItem extends React.Component {
   handleClick() {
     this.props.selectEvent(this.props.event);
     this.props.fetchAuctions(this.props.event.id);
-    browserHistory.push(`/event/${this.props.event.id}`);
+    browserHistory.push(`/event/${this.props.event.id}/`);
   }
 
   renderPlural() {

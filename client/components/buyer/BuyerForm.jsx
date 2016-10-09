@@ -5,12 +5,6 @@ import { buyTickets, getClientToken, fetchAuctionById, checkout } from '../../ac
 import { browserHistory } from 'react-router';
 import braintree from 'braintree-web';
 
-import Dialog from 'material-ui/Dialog';
-import Checkbox from 'material-ui/Checkbox';
-import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
-import LinearProgress from 'material-ui/LinearProgress';
-
 class BuyerForm extends React.Component {
   constructor(props) {
     super(props);
@@ -27,12 +21,6 @@ class BuyerForm extends React.Component {
   }
 
   componentWillMount() {
-    const id = setInterval(() => {
-      console.log('updating active auction!')
-      this.props.fetchAuctionById(this.props.activeAuction.id)
-    }, 1000);
-    this.setState({ intervalId: id });
-
     this.props.getClientToken().then( () => {
         braintree.setup(this.props.paymentToken, 'custom', {
           paypal: {
@@ -52,7 +40,7 @@ class BuyerForm extends React.Component {
               }
             });
           }
-        });
+        })
       })
   }
 
@@ -63,9 +51,8 @@ class BuyerForm extends React.Component {
 
   render() {
       return (
-        <div>
-          <h1>Buyer Form</h1>
-            You are buying {this.props.activeAuction.numTickets} ticket(s) to {this.props.activeAuction.eventName} priced at {this.props.activeAuction.currentPrice}.
+        <div className="auction-view">
+          <p>Continue to PayPal to complete the checkout process:</p>
           <form>
             <div id="dropin-container"></div>
           </form>

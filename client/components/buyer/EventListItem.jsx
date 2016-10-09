@@ -20,7 +20,7 @@ class EventListItem extends React.Component {
   handleClick() {
     this.props.selectEvent(this.props.event);
     this.props.fetchAuctions(this.props.event.id);
-    browserHistory.push(`/event/${this.props.event.id}`);
+    browserHistory.push(`/event/${this.props.event.id}/`);
   }
 
   renderPlural() {
@@ -32,7 +32,7 @@ class EventListItem extends React.Component {
 
   render() {
     return (
-      <div className="event-details list-item" onClick={this.handleClick} >
+      <div className="event-list-item list-item" onClick={this.handleClick} >
         <Card className="event-date" style={{width: '125px', background: '#E0E0E0'}}>
           <div>
             {moment(this.props.event.eventDate).format('MMM').toUpperCase()}
@@ -49,10 +49,10 @@ class EventListItem extends React.Component {
             title={this.props.event.name}
             subtitle={
               <div>
-                <div className="event-details-p">
+                <div className="event-p">
                   {this.props.event.venue} - {this.props.event.city}, {this.props.event.state}
                 </div>
-                <div className="event-details-p">
+                <div className="event-p">
                   {moment(this.props.event.eventDate).format('MMMM Do, YYYY [@] h:mma')}
                 </div>
               </div>

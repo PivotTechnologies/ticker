@@ -7,8 +7,6 @@ import moment from 'moment';
 import { browserHistory } from 'react-router';
 import { getLocation, selectEvent, fetchAuctions, selectMarker } from '../../actions/index';
 
-
-
 class Maps extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +24,6 @@ class Maps extends React.Component {
   }
 
   componentWillMount() {
-    console.log('activemarker:', this.props.activeMarker);
     this.handleDefaultCenterZoom();
   }
 
@@ -63,7 +60,7 @@ class Maps extends React.Component {
     }
     this.props.selectEvent(marker);
     this.props.fetchAuctions(marker.id);
-    browserHistory.push(`/event/${marker.id}`);
+    browserHistory.push(`/event/${marker.id}/`);
   }
 
   renderIcon(marker) {
@@ -102,31 +99,27 @@ class Maps extends React.Component {
           </div>
         }
 
-      containerElement={
-        <div
-        style={{
-          display: "flex",
-          height: "30em",
-          width: "920px",
-        }}/>
-      }
-
-      googleMapElement={
-        <GoogleMap
-          ref={(map) => { console.log("map:", map);}}
-
-          defaultZoom={this.state.zoom}
-          defaultCenter={{ lat: +this.state.latitude,
-              lng: +this.state.longitude,
-          }}
-          >
-
-          <Marker
-            position={{lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude}}
-            title="User Location"
-            icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-
+        containerElement={
+          <div
+            style={{
+              display: "flex",
+              height: "30em",
+              width: "920px",
+            }}
           />
+        }
+
+        googleMapElement={
+          <GoogleMap
+            ref={(map) => console.log("map:", map)}
+            defaultZoom={this.state.zoom}
+            defaultCenter={{ lat: +this.state.latitude, lng: +this.state.longitude }}
+          >
+            <Marker
+              position={{lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude}}
+              title="User Location"
+              icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+            />
             {this.props.events.map((marker) => {
               return (
                 <Marker
@@ -135,13 +128,12 @@ class Maps extends React.Component {
                   title={marker.name + '\n' + moment(marker.eventDate).format('MMMM Do, YYYY [@] h:mma') + '\n' + 'Open Auctions: ' + marker.numAuctions}
                   icon={ this.renderIcon(marker) }
                   onClick={() => this.handleMarkerClick(marker)}
-                >
-                </Marker>
+                />
               );
             })}
-        </GoogleMap>
-      }
-    />
+          </GoogleMap>
+        }
+      />
     );
   }
 }

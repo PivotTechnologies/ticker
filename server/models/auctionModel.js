@@ -5,6 +5,9 @@ const Auction = connection.define('auction', {
   sellerId: {
     type: Sequelize.INTEGER
   },
+  sellerName: {
+    type: Sequelize.STRING
+  },
   buyerId: {
     type: Sequelize.INTEGER
   },

@@ -17,15 +17,16 @@ class BuyerForm extends React.Component {
 
   buyTickets() {
     this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
-      .then(response => browserHistory.push('/confirm'));
+      .then(response => browserHistory.push('/auction/:auctionId/confirm/'));
   }
 
   componentWillMount() {
     this.props.getClientToken().then( () => {
+        console.log('current price=', this.props.activeAuction.currentPrice);
         braintree.setup(this.props.paymentToken, 'custom', {
           paypal: {
             container: 'dropin-container',
-            singleUse: true,
+            //singleUse: true,
             amount: this.props.activeAuction.currentPrice,
             currency: 'USD',
             locale: 'en_us'
@@ -37,6 +38,7 @@ class BuyerForm extends React.Component {
               if(result.payload.status === 200){
                   console.log('success!!');
                   this.buyTickets();
+
               }
             });
           }

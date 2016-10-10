@@ -22,6 +22,7 @@ import Authentication from './components/hoc/Authentication.jsx';
 import SellerConfirmation from './components/seller/SellerConfirmation.jsx';
 import Maps from './components/buyer/Maps.jsx';
 import Error from './components/Error.jsx';
+import LandingPage from './components/LandingPage.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension(): f => f);
@@ -30,7 +31,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={BuyerView} />
+        <IndexRoute component={LandingPage} />
         <Route path="event/:eventId/" component={EventView}>
           <IndexRoute component={ChooseAuctionView} />
           <Route path="auction/:auctionId/" component={AuctionView}>
@@ -39,6 +40,7 @@ ReactDOM.render(
             <Route path="confirm" component={BuyerConfirmation} />
           </Route>
         </Route>
+        <Route path="search" component={BuyerView} />
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
         <Route path="maps" component={Maps} />

@@ -255,7 +255,7 @@ body {
 
 .spinner {
   position: absolute;
-  top: 64px;
+  top: 0;
   width: 100%;
 }
 
@@ -293,10 +293,11 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 6px;
-  display: block;
+  display: flex;
+  align-items: center;
   /*background-color: #252839;*/
   background:rgba(30, 24, 38, .7);
-  width: 1000px;
+  width: 99%;
   height: 60px;
   border-radius: 8px;
   border: 1px solid rgb(36, 36, 36, .9);
@@ -340,7 +341,8 @@ body {
   margin: 0 auto;
 }
 .links {
-   color: white;
+  position: absolute;
+  right: 10px;
 }
 
 ul {

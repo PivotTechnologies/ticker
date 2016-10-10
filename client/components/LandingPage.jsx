@@ -29,7 +29,7 @@ class LandingPage extends React.Component {
 
         <div className="marketing">
           <p>Selling tickets simplified</p>
-          <iframe frameborder="0"
+          <iframe frameBorder="0"
             src="https://youtube.com/v/FuwzZDvuERc?autoplay=1&controls=0&loop=1&playlist=FuwzZDvuERc&showinfo=0&autohide=1&start=15&end=55&modestbranding=1&frameborder=0">
           </iframe>
         </div>

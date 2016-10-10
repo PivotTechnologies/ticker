@@ -9,7 +9,7 @@ class AuctionList extends React.Component {
       return (
         <div>
           <LinearProgress
-            style={{ height: '10px' }}
+            style={{ height: '4px' }}
             mode="indeterminate"
             />
         </div>

@@ -4,7 +4,6 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import LinearProgress from 'material-ui/LinearProgress';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { watchAuction, fetchWatchList } from '../../actions/index';

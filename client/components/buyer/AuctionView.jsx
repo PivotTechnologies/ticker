@@ -29,7 +29,7 @@ class AuctionView extends React.Component {
       return (
         <div className="spinner">
           <LinearProgress
-            style={{ height: '10px' }}
+            style={{ height: '4px' }}
             mode="indeterminate"
             />
         </div>

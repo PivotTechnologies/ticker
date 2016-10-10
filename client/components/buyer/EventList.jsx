@@ -32,18 +32,27 @@ class EventList extends React.Component {
 
   renderEventList() {
     if (this.props.events) {
+      const tabStyle = {
+        background: '#2a2c43',
+        color: 'white',
+      };
+      const inkBarStyle = {
+        background: '#f2b632',
+      };
+
       return (
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
           style={{marginTop: '20px'}}
+          inkBarStyle={inkBarStyle}
         >
-          <Tab label="List View" value="a" >
+          <Tab label="List View" value="a" style={tabStyle}>
             <div className="list">
             {this.props.events.map((event, idx) => {return <EventListItem key={idx} event={event} />})}
             </div>
           </Tab>
-          <Tab label="Map View" value="b">
+          <Tab label="Map View" value="b" style={tabStyle}>
             <div className="map">
               <Maps />
             </div>

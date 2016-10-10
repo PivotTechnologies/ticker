@@ -51,7 +51,7 @@ class EventListItem extends React.Component {
   render() {
     return (
       <div className="event-list-item list-item" onClick={this.handleClick} >
-        <Card className="event-date" style={{width: '125px', background: '#f2b632'}}>
+        <Card className="event-date" style={{width: '125px', background: '#2a2c43', color: '#f2b632'}}>
           <div>
             {moment(this.props.event.eventDate).format('MMM').toUpperCase()}
           </div>

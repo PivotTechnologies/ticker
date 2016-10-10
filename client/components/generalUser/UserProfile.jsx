@@ -124,11 +124,11 @@ class UserProfile extends React.Component {
 
   render() {
     const tabStyle = {
-      background: 'white',
-      color: 'black',
+      background: '#677077',
+      color: 'white',
     };
     const inkBarStyle = {
-      background: 'black',
+      background: '#f2b632',
     };
 
     if (this.props.userActivity.buyerActivity) {

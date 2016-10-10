@@ -31,7 +31,6 @@ class SellerForm extends React.Component {
     this.onMinPriceChange = this.onMinPriceChange.bind(this);
     this.onNumTicketsChange = this.onNumTicketsChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onClick = this.onClick.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
     this.renderFilePreview = this.renderFilePreview.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
@@ -126,10 +125,6 @@ class SellerForm extends React.Component {
     }
   }
 
-  onClick() {
-    browserHistory.push(`/sell`);
-  }
-
   handleOpen() {
      this.setState({ open: true });
    }
@@ -172,15 +167,9 @@ class SellerForm extends React.Component {
      ];
 
     return (
-      <Paper className="sellerform" zDepth={2} style={{background: '#e1e3e4'}}>
-        <RaisedButton
-          className="sellerformbutton"
-          onClick={this.onClick}
-          label="Go back to search"
-          labelStyle={{color: 'white'}}
-          backgroundColor='#677077'
-        />
-          <Card className="list-item">
+      <div className="seller-form-container">
+        <Paper zDepth={0} style={{marginTop: '40px', width: '500px', padding: '20px', borderRadius: '8px'}}>
+          <Card style={{borderRadius: '8px'}}>
             <CardTitle
               title={this.props.activeEvent.name}
               subtitle={
@@ -196,54 +185,53 @@ class SellerForm extends React.Component {
             />
           </Card>
 
-        <form className="sellerinputform" >
-          <TextField
-            type="number"
-            step="0.01"
-            onChange={this.onStartPriceChange}
-            value={this.state.startPrice}
-            floatingLabelText="Start Price $"
-            errorText={this.state.errorStartPrice}
-          />
-          <TextField
-            type="number"
-            step="0.01"
-            onChange={this.onMinPriceChange}
-            value={this.state.minPrice}
-            floatingLabelText="Minimum Price $"
-            errorText={this.state.errorMinPrice}
-          />
-          <TextField
-            type="integer"
-            onChange={this.onNumTicketsChange}
-            value={this.state.numTickets}
-            floatingLabelText="Number of Tickets"
-            errorText={this.state.errorNumTickets}
-          />
-          <div className="file-upload-container">
+          <form className="seller-form">
+            <TextField
+              type="number"
+              step="0.01"
+              onChange={this.onStartPriceChange}
+              value={this.state.startPrice}
+              floatingLabelText="Starting Price"
+              errorText={this.state.errorStartPrice}
+            />
+            <TextField
+              type="number"
+              step="0.01"
+              onChange={this.onMinPriceChange}
+              value={this.state.minPrice}
+              floatingLabelText="Minimum Price"
+              errorText={this.state.errorMinPrice}
+            />
+            <TextField
+              type="integer"
+              onChange={this.onNumTicketsChange}
+              value={this.state.numTickets}
+              floatingLabelText="Number of Tickets"
+              errorText={this.state.errorNumTickets}
+            />
+            <div className="file-upload-container">
+              <RaisedButton
+                label="Upload Tickets"
+                onClick={this.openFileUpload}
+                labelStyle={{color: 'white'}}
+                backgroundColor='#677077'
+                />
+              <input
+                type="file"
+                accept="application/pdf"
+                id="file-upload"
+                onChange={this.handleFileUpload}
+                />
+              {this.renderFilePreview()}
+            </div>
             <RaisedButton
-              label="Upload Tickets"
-              onClick={this.openFileUpload}
-              labelStyle={{color: 'white'}}
+              className="sellerformbutton"
+              onTouchTap={this.handleOpen}
+              label="Create Auction"
+              labelStyle={{color: 'white', width: '100%'}}
               backgroundColor='#677077'
             />
-            <input
-              type="file"
-              accept="application/pdf"
-              id="file-upload"
-              onChange={this.handleFileUpload}
-            />
-            {this.renderFilePreview()}
-          </div>
-          <RaisedButton
-            className="sellerformbutton"
-            onTouchTap={this.handleOpen}
-            label="Create"
-            labelStyle={{color: 'white'}}
-            backgroundColor='#677077'
-          />
-        </form>
-        <div>
+          </form>
           <Dialog
             title="Please confirm auction creation"
             actions={actions}
@@ -251,9 +239,8 @@ class SellerForm extends React.Component {
             open={this.state.open}
           >
           </Dialog>
-        </div>
-      </Paper>
-
+        </Paper>
+      </div>
     );
   }
 }

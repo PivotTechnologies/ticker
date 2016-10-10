@@ -1,5 +1,6 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -11,6 +12,12 @@ import { bindActionCreators } from 'redux';
 import NavBar from './NavBar.jsx';
 import WatchList from './generalUser/WatchList.jsx';
 import { reauthenticate, fetchWatchList, getLocation } from '../actions/index';
+
+const muiTheme = getMuiTheme({
+  datePicker: {
+    selectColor: '#f2b632',
+  },
+});
 
 injectTapEventPlugin();
 
@@ -48,6 +55,7 @@ class App extends React.Component {
           <LinearProgress
             style={{ height: '4px' }}
             mode="indeterminate"
+            color="#f2b632"
           />
         </div>
       );
@@ -100,7 +108,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div className="app">
           <NavBar />
           {this.renderSpinner()}

@@ -74,7 +74,7 @@ class NavBar extends React.Component {
               <FlatButton
                 style={{color: 'white'}}
                 labelStyle={navTextStyle}
-                icon={<FaceIcon />}
+                icon={<FaceIcon style={{fill: '#f2b632'}}/>}
                 label={`Welcome, ${localStorage.getItem('firstName')}`}
               />
             }
@@ -99,7 +99,7 @@ class NavBar extends React.Component {
       <FlatButton
         style={{color: 'white'}}
         labelStyle={navTextStyle}
-        icon={<FaceIcon />}
+        icon={<FaceIcon style={{fill: '#f2b632'}}/>}
         label=" Sign In"
         onClick={this.routeToAuth}
       />
@@ -115,20 +115,20 @@ class NavBar extends React.Component {
     };
 
     return (
-      <div className="nav-bar">
-        <img className="logo" src="tickerLogo.png" />
+      <div className="nav-bar" id="nav-bar">
+        <a href="/"><img className="logo" src="./tickerLogo.png" /></a>
         <div className="links">
           <FlatButton
             style={{color: 'white'}}
             labelStyle={navTextStyle}
-            icon={<BuyIcon />}
+            icon={<BuyIcon style={{fill: '#f2b632'}}/>}
             label=" Buy"
             onClick={this.routeToBuyerSearch}
           />
           <FlatButton
             style={{color: 'white'}}
             labelStyle={navTextStyle}
-            icon={<SellIcon />}
+            icon={<SellIcon style={{fill: '#f2b632'}}/>}
             label="Sell"
             onClick={this.routeToSellerSearch}
           />

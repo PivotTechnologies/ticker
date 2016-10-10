@@ -13,14 +13,14 @@ class LandingPage extends React.Component {
     };
   }
 
-  componentWillMount() {
-  }
-
   componentDidMount() {
-    console.log("landing page");
+    document.getElementById('nav-bar').classList.add('nav-bar-landing');
+    document.getElementById('watch-button').style.visibility = 'hidden';
   }
 
   componentWillUnmount() {
+    document.getElementById('nav-bar').classList.remove('nav-bar-landing');
+    document.getElementById('watch-button').style.visibility = 'visible';
   }
 
   render() {

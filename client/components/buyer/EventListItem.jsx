@@ -51,7 +51,7 @@ class EventListItem extends React.Component {
   render() {
     return (
       <div className="event-list-item list-item" onClick={this.handleClick} >
-        <Card className="event-date" style={{width: '125px', background: '#E0E0E0'}}>
+        <Card className="event-date" style={{width: '125px', background: '#2a2c43', color: '#f2b632', borderRadius: '8px 0px 0px 8px'}}>
           <div>
             {moment(this.props.event.eventDate).format('MMM').toUpperCase()}
           </div>
@@ -83,9 +83,9 @@ class EventListItem extends React.Component {
           {this.props.event.numAuctions} Open Auction{this.renderPlural()}
         </Chip>
       </Card>
-      <Card>
+      <Card style={{ borderRadius: '0px 8px 8px 0px' }}>
         <CardMedia style={{ width: '200px' }}>
-          <img src={this.renderEventImage(this.props.event)} role="presentation"/>
+          <img className="event-list-item-image" src={this.renderEventImage(this.props.event)} role="presentation"/>
         </CardMedia>
       </Card>
       </div>

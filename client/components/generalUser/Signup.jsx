@@ -226,7 +226,12 @@ class Signup extends React.Component {
               underlineShow={false}
             />
           </Paper>
-          <RaisedButton type="submit">Sign Up</RaisedButton>
+          <RaisedButton
+            type="submit"
+            label="Sign Up"
+            labelStyle={{color: 'white'}}
+            backgroundColor='#677077'
+          />
           <p className="auth-message">
             Already have an account? <a href="/signin">Sign In</a>
           </p>

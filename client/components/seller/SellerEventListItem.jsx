@@ -20,7 +20,7 @@ class SellerEventListItem extends React.Component {
 
   render() {
     return (
-      <Card className="list-item" onClick={this.handleClick}>
+      <Card className="list-item" onClick={this.handleClick} style={{borderRadius: '8px'}}>
         <CardTitle
           title={this.props.event.name}
           subtitle={

@@ -172,8 +172,14 @@ class SellerForm extends React.Component {
      ];
 
     return (
-      <Paper className="sellerform" zDepth={2}>
-      <RaisedButton className="sellerformbutton" onClick={this.onClick} label="Go back to search" />
+      <Paper className="sellerform" zDepth={2} style={{background: '#e1e3e4'}}>
+        <RaisedButton
+          className="sellerformbutton"
+          onClick={this.onClick}
+          label="Go back to search"
+          labelStyle={{color: 'white'}}
+          backgroundColor='#677077'
+        />
           <Card className="list-item">
             <CardTitle
               title={this.props.activeEvent.name}
@@ -215,7 +221,12 @@ class SellerForm extends React.Component {
             errorText={this.state.errorNumTickets}
           />
           <div className="file-upload-container">
-            <RaisedButton label="Upload Tickets" onClick={this.openFileUpload} />
+            <RaisedButton
+              label="Upload Tickets"
+              onClick={this.openFileUpload}
+              labelStyle={{color: 'white'}}
+              backgroundColor='#677077'
+            />
             <input
               type="file"
               accept="application/pdf"
@@ -224,7 +235,13 @@ class SellerForm extends React.Component {
             />
             {this.renderFilePreview()}
           </div>
-          <RaisedButton className="sellerformbutton" onTouchTap={this.handleOpen} label="Create" />
+          <RaisedButton
+            className="sellerformbutton"
+            onTouchTap={this.handleOpen}
+            label="Create"
+            labelStyle={{color: 'white'}}
+            backgroundColor='#677077'
+          />
         </form>
         <div>
           <Dialog

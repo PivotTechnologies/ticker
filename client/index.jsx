@@ -32,6 +32,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={LandingPage} />
+        <Route path="search" component={BuyerView} />
         <Route path="event/:eventId/" component={EventView}>
           <IndexRoute component={ChooseAuctionView} />
           <Route path="auction/:auctionId/" component={AuctionView}>
@@ -40,7 +41,6 @@ ReactDOM.render(
             <Route path="confirm" component={BuyerConfirmation} />
           </Route>
         </Route>
-        <Route path="search" component={BuyerView} />
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
         <Route path="maps" component={Maps} />

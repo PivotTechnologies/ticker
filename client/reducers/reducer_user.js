@@ -7,6 +7,7 @@ export default function (state = {}, action) {
         return action.payload.response.data;
       }
       localStorage.setItem('token', action.payload.data.token);
+      localStorage.setItem('firstName', action.payload.data.firstName);
       return action.payload.data;
 
     case SIGNUP:
@@ -14,6 +15,7 @@ export default function (state = {}, action) {
         return action.payload.response.data;
       }
       localStorage.setItem('token', action.payload.data.token);
+      localStorage.setItem('firstName', action.payload.data.firstName);
       return action.payload.data;
 
     case REAUTHENTICATE:

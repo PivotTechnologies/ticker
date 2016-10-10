@@ -4,6 +4,8 @@ import { ToolbarGroup } from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import BuyIcon from 'material-ui/svg-icons/action/shopping-cart';
+import SellIcon from 'material-ui/svg-icons/editor/attach-money';
 import FaceIcon from 'material-ui/svg-icons/action/face';
 import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
@@ -36,7 +38,7 @@ class NavBar extends React.Component {
 
   routeToBuyerSearch(event) {
     this.props.clearEvents();
-    browserHistory.push('/');
+    browserHistory.push('/search');
   }
 
   routeToSellerSearch(event) {
@@ -58,76 +60,80 @@ class NavBar extends React.Component {
   }
 
   renderRightElement() {
+    const navTextStyle = {
+      fontFamily: 'HelveticaNeue-UltraLight',
+      letterSpacing: '1px',
+      textTransform: 'none',
+      fontSize: '1em',
+    };
+
     if (localStorage.getItem('token')) {
       return (
-        <IconMenu
-          iconButtonElement={
-            <IconButton><FaceIcon /></IconButton>
-          }
-          targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-          anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-        >
-          <MenuItem
-            primaryText="My Account"
-            onTouchTap={this.routeToUserProfile}
-          />
-          <MenuItem
-            primaryText="Sign Out"
-            onTouchTap={(event) => {
-              this.signOut();
-            }}
-          />
-        </IconMenu>
+          <IconMenu
+            iconButtonElement={
+              <FlatButton
+                style={{color: 'white'}}
+                labelStyle={navTextStyle}
+                icon={<FaceIcon />}
+                label={`Welcome, ${localStorage.getItem('firstName')}`}
+              />
+            }
+            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          >
+            <MenuItem
+              primaryText="My Account"
+              onTouchTap={this.routeToUserProfile}
+            />
+            <MenuItem
+              primaryText="Sign Out"
+              onTouchTap={(event) => {
+                this.signOut();
+              }}
+            />
+          </IconMenu>
       );
     }
 
     return (
       <FlatButton
-        label="Sign In"
+        style={{color: 'white'}}
+        labelStyle={navTextStyle}
+        icon={<FaceIcon />}
+        label=" Sign In"
         onClick={this.routeToAuth}
       />
     );
   }
 
   render() {
+    const navTextStyle = {
+      fontFamily: 'HelveticaNeue-UltraLight',
+      letterSpacing: '1px',
+      textTransform: 'none',
+      fontSize: '1em',
+    };
+
     return (
-      <div>
-        <AppBar
-          className="nav-bar"
-          title={
-            <div className="navbar-title">
-              ticker
-            </div>
-          }
-          onTitleTouchTap={this.routeToBuyerSearch}
-          onLeftIconButtonTouchTap={this.openMenu}
-          iconElementRight={this.renderRightElement()}
-        />
-        <Drawer
-          docked={false}
-          width={200}
-          open={this.state.menuOpen}
-          onRequestChange={this.closeMenu}
-        >
-          <AppBar
-            title="Actions"
-            showMenuIconButton={false}
+      <div className="nav-bar">
+        <img className="logo" src="tickerLogo.png" />
+        <div className="links">
+          <FlatButton
+            style={{color: 'white'}}
+            labelStyle={navTextStyle}
+            icon={<BuyIcon />}
+            label=" Buy"
+            onClick={this.routeToBuyerSearch}
           />
-          <MenuItem
-            primaryText="Find Tickets"
-            onTouchTap={(event) => {
-              this.closeMenu();
-              this.routeToBuyerSearch();
-            }}
+          <FlatButton
+            style={{color: 'white'}}
+            labelStyle={navTextStyle}
+            icon={<SellIcon />}
+            label="Sell"
+            onClick={this.routeToSellerSearch}
           />
-          <MenuItem
-            primaryText="Sell Tickets"
-            onTouchTap={(event) => {
-              this.closeMenu();
-              this.routeToSellerSearch();
-            }}
-          />
-        </Drawer>
+          {this.renderRightElement()}
+        </div>
       </div>
     );
   }

@@ -17,7 +17,7 @@ class BuyerForm extends React.Component {
 
   buyTickets() {
     this.props.buyTickets(this.props.user.id, this.props.activeAuction.id)
-      .then(response => browserHistory.push('/auction/:auctionId/confirm/'));
+      .then(response => browserHistory.push('event/:eventId/auction/:auctionId/confirm'));
   }
 
   componentWillMount() {

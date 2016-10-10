@@ -49,25 +49,26 @@ class WatchList extends React.Component {
         </div>
       );
     }
+    console.log(this.props.watchList)
     return (
-      this.props.watchList.map(watch => (
-        <div key={watch.id}>
+      this.props.watchList.map(auction => (
+        <div key={auction.id}>
           <div className="watch-list-item">
             <IconButton
-              onClick={() => this.removeWatch(watch.id)}
+              onClick={() => this.removeWatch(auction.id)}
               style={{position: 'absolute', top: 0, right: 0}}
             >
               <DeleteIcon />
             </IconButton>
             <IconButton
-              onClick={() => this.routeToAuctionDetails(watch.id, watch.eventId)}
+              onClick={() => this.routeToAuctionDetails(auction.id, auction.eventId)}
               style={{position: 'absolute', bottom: 0, right: 0}}
             >
               <GoIcon />
             </IconButton>
-            <p className="watch-list-event-name">{watch.eventName}</p>
-            <p>{moment(watch.eventDate).format('MMM. DD, YYYY')}</p>
-            <p>${watch.currentPrice}</p>
+            <p className="watch-list-event-name">{auction.eventName}</p>
+            <p>{moment(auction.eventDate).format('MMM. DD, YYYY')}</p>
+            <p>${auction.currentPrice}</p>
           </div>
           <Divider />
         </div>

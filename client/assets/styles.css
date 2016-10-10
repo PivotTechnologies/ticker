@@ -1,4 +1,5 @@
 /**************** GLOBAL ****************/
+
 body {
   top: 0px;
   left: 0px;
@@ -262,9 +263,30 @@ body {
 
 /**************** SELLER FORM ****************/
 
+.sellerform {
+  display: flex;
+  flex-direction: column;
+  width: 37em;
+  height: 42em;
+  margin: auto;
+  margin-top: 2em;
+}
+.sellerformbutton {
+  height: 2em;
+  width 3em;
+  margin: 1em;
+  text-align: center;
+}
+.sellerinputform {
+  display: flex;
+  flex-direction: column;
+  margin: 2em 3em 2em 3em;
+}
+
 .file-upload-container {
   display: flex;
   align-items: center;
+  padding-top: 10%;
 }
 
 #file-upload {
@@ -273,6 +295,39 @@ body {
 
 .file-name {
   text-indent: 10px;
+}
+
+/**************** SELLER CONFIRMATION *********/
+
+.sellerConfirmation {
+  width: 500px;
+  margin: auto;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.sellerConfirmation img {
+  width: 55px;
+  margin: auto;
+  margin-bottom: 30px;
+  display: block;
+}
+
+/**************** NO EVENTS FOUND MESSAGE *****/
+
+.notFound {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.notFound img {
+  width: 55px;
+  margin: auto;
+  margin-bottom: 30px;
+  display: block;
 }
 
 /**************** BUYER FORM ****************/

@@ -1,12 +1,14 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import moment from 'moment';
 import TextField from 'material-ui/TextField';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import Dialog from 'material-ui/Dialog';
 import { createAuction } from '../../actions/index.js';
 
 class SellerForm extends React.Component {
@@ -22,6 +24,7 @@ class SellerForm extends React.Component {
       errorStartPrice: '',
       errorMinPrice: '',
       errorNumTickets: '',
+      open: false,
     };
 
     this.onStartPriceChange = this.onStartPriceChange.bind(this);
@@ -31,6 +34,8 @@ class SellerForm extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
     this.renderFilePreview = this.renderFilePreview.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   onFormSubmit(event) {
@@ -39,7 +44,7 @@ class SellerForm extends React.Component {
     if (this.state.errorStartPrice.length === 0 && this.state.errorMinPrice.length === 0 && this.state.errorNumTickets.length === 0) {
       if (this.state.file) {
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = () => {
           let dataUrl = reader.result;
           this.props.createAuction(
             this.props.activeEvent,
@@ -50,7 +55,7 @@ class SellerForm extends React.Component {
             this.props.user.username,
             dataUrl
           );
-        }
+        };
         reader.readAsDataURL(this.state.file);
 
         this.setState({
@@ -66,7 +71,7 @@ class SellerForm extends React.Component {
 
         browserHistory.push('/sell/confirm');
 
-      }
+    }
     else {
       console.log('error File Upload');
       this.setState({ errorFileUpload: 'Please upload your tickets.' });
@@ -121,8 +126,16 @@ class SellerForm extends React.Component {
     }
   }
 
-  onClick(event) {
+  onClick() {
     browserHistory.push(`/sell`);
+  }
+
+  handleOpen() {
+     this.setState({ open: true });
+   }
+
+  handleClose() {
+     this.setState({ open: false });
   }
 
   openFileUpload() {
@@ -143,10 +156,25 @@ class SellerForm extends React.Component {
   }
 
   render() {
+    const actions = [
+       <FlatButton
+         label="Cancel"
+         primary={true}
+         onTouchTap={this.handleClose}
+       />,
+       <FlatButton
+         label="Create"
+         type="Submit"
+         primary={true}
+         onClick={this.onFormSubmit}
+         onTouchTap={this.handleClose}
+       />,
+     ];
+
     return (
-      <Paper zDepth={0}>
+      <Paper className="sellerform" zDepth={2}>
+      <RaisedButton className="sellerformbutton" onClick={this.onClick} label="Go back to search" />
           <Card className="list-item">
-            <button onClick={this.onClick}> Go back to search </button>
             <CardTitle
               title={this.props.activeEvent.name}
               subtitle={
@@ -162,7 +190,7 @@ class SellerForm extends React.Component {
             />
           </Card>
 
-        <form className="auth" onSubmit={this.onFormSubmit}>
+        <form className="sellerinputform" >
           <TextField
             type="number"
             step="0.01"
@@ -196,9 +224,19 @@ class SellerForm extends React.Component {
             />
             {this.renderFilePreview()}
           </div>
-          <button type="submit">Submit</button>
+          <RaisedButton className="sellerformbutton" onTouchTap={this.handleOpen} label="Create" />
         </form>
+        <div>
+          <Dialog
+            title="Please confirm auction creation"
+            actions={actions}
+            modal={true}
+            open={this.state.open}
+          >
+          </Dialog>
+        </div>
       </Paper>
+
     );
   }
 }

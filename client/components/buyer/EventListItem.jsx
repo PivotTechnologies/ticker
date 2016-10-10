@@ -15,6 +15,7 @@ class EventListItem extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.renderPlural = this.renderPlural.bind(this);
+    this.renderEventImage = this.renderEventImage.bind(this);
   }
 
   handleClick() {
@@ -28,6 +29,22 @@ class EventListItem extends React.Component {
       return 's';
     }
     return '';
+  }
+
+  renderEventImage(event) {
+    if(event.image) {
+      return event.image;
+    }
+      switch(event.category) {
+        case 'sports':
+          return '../../assets/images/sportsEvent.png';
+
+        case 'concert':
+          return '../../assets/images/musicEvent.png';
+
+        case 'theater':
+          return '../../assets/images/theaterEvent.png';
+      }
   }
 
   render() {
@@ -67,7 +84,7 @@ class EventListItem extends React.Component {
       </Card>
       <Card>
         <CardMedia style={{ width: '200px' }}>
-          <img src={this.props.event.image} role="presentation"/>
+          <img src={this.renderEventImage(this.props.event)} role="presentation"/>
         </CardMedia>
       </Card>
       </div>

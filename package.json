@@ -1,7 +1,7 @@
 {
   "name": "ticker",
   "version": "1.0.0",
-  "description": "",
+  "description": "Dutch auction app for deals on event tickets",
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -19,22 +19,12 @@ class Maps extends React.Component {
 
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleDefaultCenterZoom = this.handleDefaultCenterZoom.bind(this);
+    this.renderIcon = this.renderIcon.bind(this);
   }
 
   componentWillMount() {
     this.handleDefaultCenterZoom();
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.activeMarker.latitude !== prevProps.activeMarker.latitude) {
-  //     console.log("this.props.activeMarker:", this.props.activeMarker);
-  //     this.setState({
-  //       latitude: +this.props.userLocation.latitude,
-  //       longitude: +this.props.userLocation.longitude,
-  //       zoom: 10,
-  //     });
-  //   }
-  // }
 
   handleDefaultCenterZoom() {
     if (this.props.activeMarker.latitude) {
@@ -71,10 +61,10 @@ class Maps extends React.Component {
         return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
       case 'theater':
-        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
       default:
-          return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
     }
   }
 
@@ -88,23 +78,23 @@ class Maps extends React.Component {
 
     return (
       <ScriptjsLoader
-        hostname={"maps.googleapis.com"}
-        pathname={"/maps/api/js"}
-        query={{ key: "AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ", libraries: "geometry,drawing,places"}}
+        hostname={'maps.googleapis.com'}
+        pathname={'/maps/api/js'}
+        query={{ key: 'AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ', libraries: 'geometry,drawing,places'}}
 
         loadingElement={
           <div>
-            <img style={ spinnerStyle } src={ loading } />
+            <img style={spinnerStyle} src={loading} />
           </div>
         }
 
       containerElement={
         <div
         style={{
-          display: "flex",
-          height: "30em",
-          width: "920px",
-        }}/>
+          display: 'flex',
+          height: '30em',
+          width: '920px',
+        }} />
       }
 
       googleMapElement={
@@ -116,7 +106,7 @@ class Maps extends React.Component {
               lng: +this.state.longitude,
           }}
           defaultOptions={{
-          styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#2d2b2c"},{"lightness":50}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":27}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":15}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":15}]}],
+          styles: [{'featureType': 'all', 'elementType': 'labels.text.fill', 'stylers': [{ 'saturation': 36}, {"color":"#2d2b2c"},{"lightness":50}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":27}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":15}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":15}]}],
         }}
           >
             <Marker

@@ -44,7 +44,7 @@ class SellerForm extends React.Component {
     if (this.state.errorStartPrice.length === 0 && this.state.errorMinPrice.length === 0 && this.state.errorNumTickets.length === 0) {
       if (this.state.file) {
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = () => {
           let dataUrl = reader.result;
           this.props.createAuction(
             this.props.activeEvent,
@@ -55,7 +55,7 @@ class SellerForm extends React.Component {
             this.props.user.username,
             dataUrl
           );
-        }
+        };
         reader.readAsDataURL(this.state.file);
 
         this.setState({
@@ -71,7 +71,7 @@ class SellerForm extends React.Component {
 
         browserHistory.push('/sell/confirm');
 
-      }
+    }
     else {
       console.log('error File Upload');
       this.setState({ errorFileUpload: 'Please upload your tickets.' });
@@ -126,16 +126,16 @@ class SellerForm extends React.Component {
     }
   }
 
-  onClick(event) {
+  onClick() {
     browserHistory.push(`/sell`);
   }
 
   handleOpen() {
-     this.setState({open: true});
+     this.setState({ open: true });
    }
 
   handleClose() {
-     this.setState({open: false});
+     this.setState({ open: false });
   }
 
   openFileUpload() {
@@ -163,7 +163,7 @@ class SellerForm extends React.Component {
          onTouchTap={this.handleClose}
        />,
        <FlatButton
-         label="Submit"
+         label="Create"
          type="Submit"
          primary={true}
          onClick={this.onFormSubmit}

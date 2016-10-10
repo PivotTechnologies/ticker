@@ -18,7 +18,6 @@ class EventList extends React.Component {
   }
 
   componentWillMount() {
-  // console.log("activeTab.length", this.props.activeTab.length);
     if (this.props.activeTab !== 'a') {
       this.setState({value: this.props.activeTab});
     }
@@ -59,7 +58,6 @@ class EventList extends React.Component {
   }
 
   handleChange(value) {
-    console.log("inside of handleChange in EventList:", value);
     this.setState({
       value: value,
     });

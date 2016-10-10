@@ -342,14 +342,15 @@ export function getLocation() {
   return new Promise ((resolve, reject) => {
     navigator.geolocation.getCurrentPosition((position) => {
       if (position) {
-        resolve(position);
+        resolve(position.coords);
       } else {
         reject(position);
       }
     });
   })
   .then((userLocation) => {
-    console.log('user location: ', userLocation);
+    console.log("userLocation:", userLocation);
+    
     return {
       type: GET_LOCATION,
       payload: userLocation,

@@ -68,8 +68,10 @@ class App extends React.Component {
               top: '50vh',
               right: 15,
               width: 'auto',
-              height: 'auto'
+              height: 'auto',
             }}
+            backgroundColor="#2a2c43"
+            iconStyle={{fill: '#f2b632'}}
           >
             <EyeIcon />
           </FloatingActionButton>

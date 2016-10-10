@@ -15,46 +15,35 @@ class Maps extends React.Component {
       latitude: 39.095499,
       longitude: -98.705225,
       zoom: 4,
-
     };
 
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleDefaultCenterZoom = this.handleDefaultCenterZoom.bind(this);
-    // this.onZoomChange = this.onZoomChange.bind(this);
+    this.renderIcon = this.renderIcon.bind(this);
   }
 
   componentWillMount() {
     this.handleDefaultCenterZoom();
   }
 
-  // componentWillUpdate() {
-  //   console.log("this.state.zoom:", this.state.zoom);
-  // }
-  //
-  // // onZoomChange(map) {
-  //     // this.props.onZoomChange(this.ref.map.getZoom());
-  //     console.log("inside of zoom changed", map.getZoom());
-  //     // console.log("zoom leve:", map.getZoom());
-  // }
-
   handleDefaultCenterZoom() {
     if (this.props.activeMarker.latitude) {
       this.setState({
         latitude: +this.props.activeMarker.latitude,
         longitude: +this.props.activeMarker.longitude,
-        zoom: 11,
+        zoom: 10,
       });
-    }  else if (this.props.userLocation.latitude) {
+    }
+    else if (this.props.userLocation.latitude) {
       this.setState({
         latitude: +this.props.userLocation.latitude,
         longitude: +this.props.userLocation.longitude,
-        zoom: 11,
+        zoom: 10,
       });
     }
   }
 
   handleMarkerClick(marker) {
-    console.log('marker.timezone', marker.timezone);
     if (marker.timezone) {
       this.props.selectMarker(marker);
     }
@@ -66,16 +55,16 @@ class Maps extends React.Component {
   renderIcon(marker) {
     switch(marker.category) {
       case 'sports':
-        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        return '../../assets/images/sportsMarker.png';
 
       case 'concert':
-        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        return '../../assets/images/concertMarker.png';
 
       case 'theater':
-        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+        return '../../assets/images/theaterMarker.png';
 
       default:
-          return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
     }
   }
 
@@ -89,36 +78,41 @@ class Maps extends React.Component {
 
     return (
       <ScriptjsLoader
-        hostname={"maps.googleapis.com"}
-        pathname={"/maps/api/js"}
-        query={{ key: "AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ", libraries: "geometry,drawing,places"}}
+        hostname={'maps.googleapis.com'}
+        pathname={'/maps/api/js'}
+        query={{ key: 'AIzaSyD_aFRTN7kGiUwefzVelUXLLMfhlXlpPvQ', libraries: 'geometry,drawing,places'}}
 
         loadingElement={
           <div>
-            <img style={ spinnerStyle } src={ loading } />
+            <img style={spinnerStyle} src={loading} />
           </div>
         }
 
-        containerElement={
-          <div
-            style={{
-              display: "flex",
-              height: "30em",
-              width: "920px",
-            }}
-          />
-        }
+      containerElement={
+        <div
+        style={{
+          display: 'flex',
+          height: '600px',
+          width: '920px',
+        }} />
+      }
 
-        googleMapElement={
-          <GoogleMap
-            ref={(map) => console.log("map:", map)}
-            defaultZoom={this.state.zoom}
-            defaultCenter={{ lat: +this.state.latitude, lng: +this.state.longitude }}
+      googleMapElement={
+        <GoogleMap
+          ref={(map) => { console.log("map:", map);}}
+
+          defaultZoom={this.state.zoom}
+          defaultCenter={{ lat: +this.state.latitude,
+              lng: +this.state.longitude,
+          }}
+          defaultOptions={{
+          styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
+        }}
           >
             <Marker
               position={{lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude}}
               title="User Location"
-              icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+              icon="../../assets/images/userMarker.png"
             />
             {this.props.events.map((marker) => {
               return (

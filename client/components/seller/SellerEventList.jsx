@@ -13,7 +13,10 @@ class SellerEventList extends React.Component {
   render() {
     if (!this.props.events) {
       return (
-        <div>No events match this search.</div>
+        <div className="notFound">
+          <img src="../../assets/images/notFound.png" />
+          No events match this search
+        </div>
       );
     }
 

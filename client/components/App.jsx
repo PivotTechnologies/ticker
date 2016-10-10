@@ -48,6 +48,7 @@ class App extends React.Component {
           <LinearProgress
             style={{ height: '4px' }}
             mode="indeterminate"
+            color="#f2b632"
           />
         </div>
       );

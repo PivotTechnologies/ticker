@@ -92,7 +92,7 @@ class Maps extends React.Component {
         <div
         style={{
           display: 'flex',
-          height: '30em',
+          height: '600px',
           width: '920px',
         }} />
       }

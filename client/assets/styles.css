@@ -302,13 +302,14 @@ body {
 
 /**************** SELLER CONFIRMATION *********/
 
-.sellerconfirmation {
+.sellerConfirmation {
   width: 500px;
   margin: auto;
   text-align: center;
+  margin-top: 10px;
 }
 
-.sellerconfirmation img {
+.sellerConfirmation img {
   width: 55px;
   margin: auto;
   margin-bottom: 30px;

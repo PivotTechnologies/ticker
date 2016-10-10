@@ -267,11 +267,8 @@ body {
   flex-direction: column;
   width: 37em;
   height: 42em;
-  /*border: 1px solid black;*/
   margin: auto;
   margin-top: 2em;
-  /*align-items: center;*/
-
 }
 .sellerformbutton {
   height: 2em;
@@ -282,7 +279,6 @@ body {
 .sellerinputform {
   display: flex;
   flex-direction: column;
-  /*padding: 10em 5em 10em 5em;*/
   margin: 2em 3em 2em 3em;
 }
 

@@ -32,6 +32,7 @@ class EventListItem extends React.Component {
   }
 
   renderEventImage(event) {
+    console.log("event images:", event.image);
     if(event.image) {
       return event.image;
     }

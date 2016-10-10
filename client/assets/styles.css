@@ -369,7 +369,8 @@ body {
   z-index: 1200;
 }
 .nav-bar-landing {
-  opacity: 0.7;
+  /*opacity: 0.7;*/
+  background-color: rgba(42, 44, 67, .7);
 }
 .top{
   height: 500px;

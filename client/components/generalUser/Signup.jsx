@@ -166,7 +166,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Paper zDepth={0} className="main-content">
+      <Paper zDepth={0} className="main-content" style={{backgroundColor: '#e1e3e4'}}>
         <h1>Sign Up</h1>
         <form className="auth" onSubmit={this.onFormSubmit}>
           <Paper zDepth={2} className="auth-input">

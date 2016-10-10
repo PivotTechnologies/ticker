@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchUserActivity, cancelAuction } from '../../actions/index';
@@ -35,6 +36,8 @@ class UserProfile extends React.Component {
     return (
       this.props.userActivity.buyerActivity.map(auction => (
         <div className="activity-item" key={auction.id}>
+          <p>{auction.eventName}</p>
+          <p>{moment(auction.eventDate).format('MMMM Do, YYYY [@] h:mma')}</p>
           <p>Number of Tickets: {auction.numTickets}</p>
           <p>Sale Price: {auction.currentPrice}</p>
         </div>
@@ -57,6 +60,8 @@ class UserProfile extends React.Component {
         <h3>Currently Selling:</h3>
         {this.props.userActivity.sellerActivity.on_sale.map(auction => (
           <div className="activity-item" key={auction.id}>
+            <p>{auction.eventName}</p>
+            <p>{moment(auction.eventDate).format('MMMM Do, YYYY [@] h:mma')}</p>
             <p>Number of Tickets: {auction.numTickets}</p>
             <p>Sale Price: {auction.currentPrice}</p>
             <RaisedButton

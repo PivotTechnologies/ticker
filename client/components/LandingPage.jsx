@@ -37,7 +37,7 @@ class LandingPage extends React.Component {
         <div className="intro">
 
           <div className="introBox">
-            <img className="introImg" src="searchList.png" />
+            <img className="introImg" src="auction.png" />
             <p className="introText">Ticker is an ticket auction site that makes it easy to buy or sell tickets.</p>
           </div>
 
@@ -47,13 +47,13 @@ class LandingPage extends React.Component {
           </div>
 
           <div className="introBox">
-            <img className="introImg" src="searchList.png" />
+            <img className="introImg" src="cash.png" />
             <p className="introText">Sell your tickets easily using our automated auction system.</p>
           </div>
 
           <div className="introBox">
-            <img className="introImg" src="searchList.png" />
-            <p className="introText">Sell your tickets easily using our automated auction system.</p>
+            <img className="introImg" src="paypal.png" />
+            <p className="introText">Get paid hassle-free using Paypal.</p>
           </div>
         </div>
 

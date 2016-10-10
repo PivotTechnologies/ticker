@@ -308,7 +308,8 @@ body {
   width: 500px;
   margin: auto;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 50px;
+  border-radius: 8px;
 }
 
 .sellerConfirmation img {

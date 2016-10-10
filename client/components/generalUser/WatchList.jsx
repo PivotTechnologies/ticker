@@ -45,7 +45,7 @@ class WatchList extends React.Component {
     if (!this.props.watchList) {
       return (
         <div>
-          <span>You are not watching any auctions.</span>
+          <span>You are not watching any auctions</span>
         </div>
       );
     }

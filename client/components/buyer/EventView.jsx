@@ -72,7 +72,7 @@ class EventView extends React.Component {
     }
 
     return (
-      <Paper zDepth={0} className="main-content">
+      <Paper zDepth={0} style={{background: '#e1e3e4'}} className="main-content">
         <EventDetails />
         <div className="auction-container">
           <Paper zDepth={1} style={{flex: 1, overflow: 'scroll'}}>

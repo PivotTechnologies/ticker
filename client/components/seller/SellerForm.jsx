@@ -172,8 +172,8 @@ class SellerForm extends React.Component {
      ];
 
     return (
-      <Paper className="sellerform" zDepth={2}>
-      <RaisedButton className="sellerformbutton" onClick={this.onClick} label="Go back to search" />
+      <Paper className="sellerform" zDepth={2} style={{background: '#e1e3e4'}}>
+        <RaisedButton className="sellerformbutton" onClick={this.onClick} label="Go back to search" />
           <Card className="list-item">
             <CardTitle
               title={this.props.activeEvent.name}

@@ -1,4 +1,5 @@
 /**************** GLOBAL ****************/
+
 body {
   top: 0px;
   left: 0px;
@@ -297,6 +298,38 @@ body {
 
 .file-name {
   text-indent: 10px;
+}
+
+/**************** SELLER CONFIRMATION *********/
+
+.sellerconfirmation {
+  width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+.sellerconfirmation img {
+  width: 55px;
+  margin: auto;
+  margin-bottom: 30px;
+  display: block;
+}
+
+/**************** NO EVENTS FOUND MESSAGE *****/
+
+.notFound {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.notFound img {
+  width: 55px;
+  margin: auto;
+  margin-bottom: 30px;
+  display: block;
 }
 
 /**************** BUYER FORM ****************/

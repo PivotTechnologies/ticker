@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import moment from 'moment';
 // import {GridList, GridTile} from 'material-ui/GridList';
 // import IconButton from 'material-ui/IconButton';
 // import StarBorder from 'material-ui/svg-icons/toggle/star-border';
@@ -101,21 +102,21 @@ class SellerConfirmation extends React.Component {
     //     author: 'BkrmadtyaKarki',
     //   },
     // ];
+    // <img src="images/nature-600-337.jpg" />
 
     const auction = this.props.newAuction;
     // IF this.props.events return below , else
     return (
       <Card className="sellerconfirmation">
-        <CardHeader title="Confirmed"
+        <CardHeader
         />
-        <CardMedia
-          overlay={<CardTitle title="Thank You!" subtitle="Sit back and relax, we'll take care of the rest" />}
-        >
-        </CardMedia>
+
+        <img src='../../assets/images/confirm.png' />
+        <CardTitle title="Thank You!" subtitle="Sit back and relax, we'll take care of the rest" />
         <CardTitle  />
         <CardText>
           <div>Event: {auction.eventName}</div>
-          <div>Date: {auction.evenDate}</div>
+          <div>Date: {moment(auction.eventDate).format('MMMM Do, YYYY [@] h:mma')}</div>
           <div>Number of tickets: {auction.numTickets}</div>
           <div>Start Price: ${auction.startPrice}</div>
           <div>Min Price: ${auction.minPrice}</div>

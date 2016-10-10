@@ -52,7 +52,10 @@ class EventList extends React.Component {
       );
     } else {
       return (
-        <div>No events match this search.</div>
+        <div className="notFound">
+          <img src='../../assets/images/notFound.png' />
+          No events match this search
+        </div>
       );
     }
   }

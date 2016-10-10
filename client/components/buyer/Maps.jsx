@@ -55,13 +55,13 @@ class Maps extends React.Component {
   renderIcon(marker) {
     switch(marker.category) {
       case 'sports':
-        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        return '../../assets/images/sportsMarker.png';
 
       case 'concert':
-        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        return '../../assets/images/concertMarker.png';
 
       case 'theater':
-        return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        return '../../assets/images/theaterMarker.png';
 
       default:
         return 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
@@ -106,13 +106,13 @@ class Maps extends React.Component {
               lng: +this.state.longitude,
           }}
           defaultOptions={{
-          styles: [{'featureType': 'all', 'elementType': 'labels.text.fill', 'stylers': [{ 'saturation': 36}, {"color":"#2d2b2c"},{"lightness":50}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":27}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":15}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":15}]}],
+          styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
         }}
           >
             <Marker
               position={{lat: +this.props.userLocation.latitude, lng: +this.props.userLocation.longitude}}
               title="User Location"
-              icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+              icon="../../assets/images/userMarker.png"
             />
             {this.props.events.map((marker) => {
               return (

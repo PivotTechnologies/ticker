@@ -180,6 +180,10 @@ body {
   display: flex;
 }
 
+.event-list-item-image {
+  border-radius: 0px 8px 8px 0px;
+}
+
 .event-date {
   display: flex;
   flex-direction: column;
@@ -353,7 +357,7 @@ body {
   display: flex;
   align-items: center;
   /*background-color: #252839;*/
-  background: #252839;
+  background: #2a2c43;
   width: 99%;
   height: 60px;
   border-radius: 8px;
@@ -362,6 +366,9 @@ body {
   top: 0;
   left: 0;
   z-index: 1200;
+}
+.nav-bar-landing {
+  opacity: 0.7;
 }
 .top{
   height: 500px;

@@ -11,3 +11,5 @@ node_modules
 
 # Webpack bundle
 /client/bundle.js
+
+.DS_Store

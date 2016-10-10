@@ -124,7 +124,7 @@ class UserProfile extends React.Component {
 
   render() {
     const tabStyle = {
-      background: '#677077',
+      background: '#2a2c43',
       color: 'white',
     };
     const inkBarStyle = {

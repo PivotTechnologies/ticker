@@ -82,7 +82,12 @@ class Signin extends React.Component {
             />
             <Divider />
           </Paper>
-          <RaisedButton type="submit">Sign In</RaisedButton>
+          <RaisedButton
+            type="submit"
+            label="Sign In"
+            labelStyle={{color: 'white'}}
+            backgroundColor='#677077'
+          />
           <p className="auth-message">
             Don't have an account? <a href="/signup">Sign Up</a>
           </p>

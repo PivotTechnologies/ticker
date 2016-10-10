@@ -85,11 +85,23 @@ class AuctionDetails extends React.Component {
         <h1>{this.props.activeAuction.numTickets} Ticket{this.renderPlural()} for ${this.props.activeAuction.currentPrice}</h1>
         <div className="buy-tickets-container">
           <div>Grab these tickets now before it's too late!</div>
-          <RaisedButton label="Buy Tickets" onClick={this.buyTickets} style={{margin: '10px'}} />
+          <RaisedButton
+            label="Buy Tickets"
+            onClick={this.buyTickets}
+            style={{margin: '10px'}}
+            labelStyle={{color: 'white'}}
+            backgroundColor='#677077'
+          />
         </div>
         <div className="watch-auction-container">
           <div>Waiting for a lower price? <br /> Keep tabs on this auction by adding it to your Watch List.</div>
-          <RaisedButton label="Watch Auction" onClick={this.openWatchModal} style={{margin: '10px'}} />
+          <RaisedButton
+            label="Watch Auction"
+            onClick={this.openWatchModal}
+            style={{margin: '10px'}}
+            labelStyle={{color: 'white'}}
+            backgroundColor='#677077'
+          />
         </div>
         <Dialog
           actions={actions}

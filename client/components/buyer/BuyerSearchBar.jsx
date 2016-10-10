@@ -55,7 +55,7 @@ class BuyerSearchBar extends React.Component {
 
   render() {
     return (
-      <Paper zDepth={2} className="search-bar">
+      <Paper zDepth={2} className="search-bar" style={{borderRadius: '8px'}}>
         <form className="search-bar-form" onSubmit={this.onFormSubmit}>
           <TextField
             className="event-field search-field-border search-field-text"

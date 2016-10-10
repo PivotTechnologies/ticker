@@ -115,8 +115,8 @@ class NavBar extends React.Component {
     };
 
     return (
-      <div className="nav-bar">
-        <a href="/"><img className="logo" src="tickerLogo.png" /></a>
+      <div className="nav-bar" id="nav-bar">
+        <a href="/"><img className="logo" src="./tickerLogo.png" /></a>
         <div className="links">
           <FlatButton
             style={{color: 'white'}}

@@ -59,7 +59,7 @@ class App extends React.Component {
   renderWatchList() {
     if (localStorage.getItem('token')) {
       return (
-        <div>
+        <div id="watch-button">
           <FloatingActionButton
             mini={true}
             onClick={this.openWatchList}
@@ -80,9 +80,9 @@ class App extends React.Component {
             open={this.state.open}
             openSecondary={true}
             onRequestChange={this.closeWatchList}
-            containerStyle={{height: 'calc(100vh - 64px)', top: 64}}
+            containerStyle={{height: 'calc(100vh - 72px)', top: 72, borderRadius: '8px'}}
           >
-            <AppBar title="Watch List" showMenuIconButton={false} />
+            <AppBar title="Watch List" showMenuIconButton={false} style={{backgroundColor: '#2a2c43'}}/>
             <WatchList closeWatchList={this.closeWatchList} />
           </Drawer>
         </div>

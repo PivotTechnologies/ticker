@@ -306,7 +306,6 @@ body {
   margin: auto;
   text-align: center;
   margin-top: 50px;
-  border-radius: 8px;
 }
 
 .sellerConfirmation img {
@@ -505,4 +504,9 @@ li:hover {
   width: 100%;
   height: 600px;
   background-color: black;
+}
+
+/************ ABOUT **********/
+.about {
+  cursor: pointer;
 }

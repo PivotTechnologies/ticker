@@ -10,7 +10,7 @@ class SellerConfirmation extends React.Component {
     const auction = this.props.newAuction;
 
     return (
-      <Card className="sellerConfirmation" zDepth={0}>
+      <Card className="sellerConfirmation" zDepth={0} style={{borderRadius: '8px'}}>
         <CardHeader
         />
         <img src='../../assets/images/confirm.png' />

@@ -23,6 +23,7 @@ import SellerConfirmation from './components/seller/SellerConfirmation.jsx';
 import Maps from './components/buyer/Maps.jsx';
 import Error from './components/Error.jsx';
 import LandingPage from './components/LandingPage.jsx';
+import About from './components/About.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension(): f => f);
@@ -48,6 +49,7 @@ ReactDOM.render(
         <Route path="sell" component={Authentication(SellerView)} />
         <Route path="sell/form" component={Authentication(SellerForm)} />
         <Route path="sell/confirm" component={Authentication(SellerConfirmation)} />
+        <Route path="about" component={About} />
         <Route path="oops" component={Error}/>
       </Route>
     </Router>

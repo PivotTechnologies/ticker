@@ -37,22 +37,22 @@ class LandingPage extends React.Component {
         <div className="intro">
 
           <div className="introBox">
-            <img className="introImg" src="auction.png" />
+            <img className="introImg" src="../assets/images/auction.png" />
             <p className="introText">Ticker is an ticket auction site that makes it easy to buy or sell tickets.</p>
           </div>
 
           <div className="introBox">
-            <img className="introImg" src="searchList.png" />
+            <img className="introImg" src="../assets/images/searchList.png" />
             <p className="introText">Find cheap tickets to events in your area.</p>
           </div>
 
           <div className="introBox">
-            <img className="introImg" src="cash.png" />
+            <img className="introImg" src="../assets/images/cash.png" />
             <p className="introText">Sell your tickets easily using our automated auction system.</p>
           </div>
 
           <div className="introBox">
-            <img className="introImg" src="paypal.png" />
+            <img className="introImg" src="../assets/images/paypal.png" />
             <p className="introText">Get paid hassle-free using Paypal.</p>
           </div>
         </div>
@@ -62,7 +62,9 @@ class LandingPage extends React.Component {
         </div>
 
         <div className="footer">
-          <img className="logoFooter" src="pivotLogo.png" />
+          <a className="about" onClick={ () => browserHistory.push('/about') }>
+            <img className="logoFooter" src="../assets/images/pivotLogo.png" />
+          </a>
         </div>
 
       </div>

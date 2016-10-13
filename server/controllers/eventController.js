@@ -6,7 +6,7 @@ module.exports = {
 
     buyerSearch: (req, res) => {
       const results = [];
-      let keywordQuery, dateQuery, locationQuery;
+      var keywordQuery, dateQuery, locationQuery;
 
       if (req.query.query){
         keywordQuery = {

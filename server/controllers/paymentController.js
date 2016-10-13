@@ -1,31 +1,9 @@
 const braintree = require('braintree');
 const request   = require('request');
-
-// const gateway = braintree.connect({
-//   environment: braintree.Environment.Sandbox,
-//   merchantId: "yhthgck3p6q25b7z", // move these to .env file
-//   publicKey: "54szbjxs9j7d7fb8",
-//   privateKey: "f0039ca71804124cb64e8cdc4c3efd3a"
-// });
-//
-// { nonce:
-//   { nonce: '18fa6f87-525c-4e7b-ac96-7e05471eea15',
-//     details:
-//      { email: 'kinjalchatterjee-buyer@gmail.com',
-//        firstName: 'test',
-//        lastName: 'buyer',
-//        payerId: '27TZ6G4YWQYBY',
-//        countryCode: 'US',
-//        billingAddress: [Object],
-//        shippingAddress: {}
-//      },
-//     type: 'PayPalAccount'
-//   },
-//  amount: '104.03'
-// }
+require('dotenv').config();
 
 const gateway = braintree.connect({
-  accessToken: 'access_token$sandbox$rj2j597ky38jpzxw$a989259230886a8673902efb50950d14'
+  accessToken: process.env.accessToken
 });
 
 module.exports.token = function(req, res) {
@@ -54,7 +32,7 @@ module.exports.payout = function(req, res){
     url: 'https://api.sandbox.paypal.com/v1/oauth2/token',
     headers: {
       'Content-Type'  : 'application/x-www-form-urlencoded',
-       'Authorization': 'Basic QVdwVUlpSmFfZS02TnlVNFl6d1dSZTNlLVI0ZS1zdktUVXRTd3FWLW9sd29aMk1QV2l2MHd0WG1iOGNXbmJSNmpRQ0s4eU1WZHR4Y0JvakU6RURVNGdlMUJfLVdFR2kxX082OUI3ekFza3JBSE1Fbm1UU3BQSHo1UzZrVkJrYU5YWFk1bWZObVZYcHBhcmo5YVdUZFJoRGlLZ1E4QXE1WVc='
+       'Authorization': process.env.header_authorization
      },
     form: { grant_type: 'client_credentials' }
   };

@@ -1,6 +1,7 @@
 const models = require('../models/models');
 const password = require('../config/passwordHelper');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = {
 
@@ -20,7 +21,7 @@ module.exports = {
             .then( hash => {
               newUser.update({ password: hash });
               console.log("\033[34mNew user created. \033[0m");
-              const token = jwt.sign(user.dataValues , 'tickerticker');
+              const token = jwt.sign(user.dataValues , process.env.token_secret);
               res.json({
                 id: user.id,
                 firstName: user.firstName,
@@ -58,7 +59,7 @@ module.exports = {
             password.compare(req.body.password, user.password)
               .then( result => {
                 console.log('\033[34mUser logged in. \033[0m');
-                const token = jwt.sign(user.dataValues, 'tickerticker');
+                const token = jwt.sign(user.dataValues, process.env.token_secret);
                 res.json({
                   id: user.id,
                   firstName: user.firstName,
@@ -83,7 +84,7 @@ module.exports = {
       if (!req.body.token) {
         res.status(500).send('Token not found');
       } else {
-        var decoded = jwt.verify(req.body.token, 'tickerticker');
+        var decoded = jwt.verify(req.body.token, process.env.token_secret);
         models.User.findOne({
           where: {
             email: decoded.email,

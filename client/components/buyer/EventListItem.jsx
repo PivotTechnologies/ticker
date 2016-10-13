@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import ActionGavel from 'material-ui/svg-icons/action/gavel';
@@ -32,26 +32,26 @@ class EventListItem extends React.Component {
   }
 
   renderEventImage(event) {
-    console.log("event images:", event.image);
-    if(event.image) {
+    if (event.image) {
       return event.image;
     }
-      switch(event.category) {
-        case 'sports':
-          return '../../assets/images/sportsEvent.png';
 
-        case 'concert':
-          return '../../assets/images/musicEvent.png';
+    switch (event.category) {
+      case 'sports':
+        return '../../assets/images/sportsEvent.png';
 
-        case 'theater':
-          return '../../assets/images/theaterEvent.png';
-      }
+      case 'concert':
+        return '../../assets/images/musicEvent.png';
+
+      case 'theater':
+        return '../../assets/images/theaterEvent.png';
+    }
   }
 
   render() {
     return (
       <div className="event-list-item list-item" onClick={this.handleClick} >
-        <Card className="event-date" style={{width: '125px', background: '#2a2c43', color: '#f2b632', borderRadius: '8px 0px 0px 8px'}}>
+        <Card className="event-date" style={{ width: '125px', background: '#2a2c43', color: '#f2b632', borderRadius: '8px 0px 0px 8px' }}>
           <div>
             {moment(this.props.event.eventDate).format('MMM').toUpperCase()}
           </div>
@@ -62,7 +62,7 @@ class EventListItem extends React.Component {
             {moment(this.props.event.eventDate).format('ddd').toUpperCase()}
           </div>
         </Card>
-        <Card style={{flex: '1', position: 'relative', maxHeight: '150px'}}>
+        <Card style={{ flex: '1', position: 'relative', maxHeight: '150px' }}>
           <CardTitle
             title={this.props.event.name}
             subtitle={
@@ -77,7 +77,7 @@ class EventListItem extends React.Component {
             }
           />
         <Chip
-          style={{position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer'}}
+          style={{ position: 'absolute', bottom: '20px', right: '20px', cursor: 'pointer' }}
         >
           <Avatar icon={<ActionGavel />} />
           {this.props.event.numAuctions} Open Auction{this.renderPlural()}

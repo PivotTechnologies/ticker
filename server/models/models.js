@@ -7,12 +7,6 @@ const connection = require('../config/db');
 Event.hasMany(Auction);
 Auction.belongsTo(Event);
 
-// Auction.hasOne(User, { as: 'seller'} );
-// Auction.hasOne(User, { as: 'buyer' });
-
-// line below is the opposite of line above
-// User.hasOne(Auction);
-
 connection
   .sync()
   .then( err => console.log('\033[34mModels sync() successful. \033[0m') )

@@ -255,7 +255,6 @@ body {
 }
 
 .activity-item {
-  /*border: 1px solid black;*/
   padding: 20px;
 }
 
@@ -347,25 +346,22 @@ body {
   width: 100%;
 }
 .nav-bar {
-  /* background-color: #173e43; */
   margin-left: auto;
   margin-right: auto;
   margin-top: 6px;
   display: flex;
   align-items: center;
-  /*background-color: #252839;*/
   background: #2a2c43;
   width: 99%;
   height: 60px;
   border-radius: 8px;
-  /*border: 1px solid rgb(36, 36, 36, .9);*/
   position: relative;
   top: 0;
   left: 0;
   z-index: 1200;
 }
+
 .nav-bar-landing {
-  /*opacity: 0.7;*/
   background-color: rgba(42, 44, 67, .7);
 }
 .top{
@@ -471,7 +467,6 @@ li:hover {
   width: 100%;
   height: 400px;
   background-color: black;
-  /*background:rgba(0,0,0,0.2);*/
   z-index: 2;
   text-align: center;
 }
@@ -505,8 +500,48 @@ li:hover {
   height: 600px;
   background-color: black;
 }
-
 /************ ABOUT **********/
-.about {
-  cursor: pointer;
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.pivotLogo {
+  display: inline;
+  padding-top: 10px;
+  width: 400px;
+  margin: auto;
+  margin-top: 25px;
+}
+
+.groupPhoto {
+  margin: 0 auto;
+  width: 400px;
+  padding-top: 20px;
+  padding-bottom: : 20px;
+  align-items: center;
+}
+
+.profileContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 100px;
+  text-align:center;
+}
+
+.profilePhoto {
+  width: 300px;
+  position:relative;
+  display: inline-block;;
+  float: center;
+  margin: 10px;
+}
+
+.profileIcons img{
+  width: 50px;
+  padding: 10px;
 }

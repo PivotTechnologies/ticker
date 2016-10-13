@@ -20,7 +20,6 @@ const User = connection.define('user', {
   password: {
     type: Sequelize.STRING,
     allowNull: false,
-    //set: value => setDataValue('password', password.hash(value) )
   },
   firstName: {
     type: Sequelize.STRING,

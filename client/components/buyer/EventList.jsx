@@ -19,7 +19,7 @@ class EventList extends React.Component {
 
   componentWillMount() {
     if (this.props.activeTab !== 'a') {
-      this.setState({value: this.props.activeTab});
+      this.setState({ value: this.props.activeTab });
     }
   }
 
@@ -44,7 +44,7 @@ class EventList extends React.Component {
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
-          style={{marginTop: '20px'}}
+          style={{ marginTop: '20px' }}
           inkBarStyle={inkBarStyle}
         >
           <Tab label="List View" value="a" style={tabStyle}>

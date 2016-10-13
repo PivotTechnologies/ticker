@@ -185,7 +185,7 @@ export function fetchTickets(userId, auctionId) {
       auctionId,
     },
   };
-console.log(data.params)
+
   const request = axios.get('/api/auction/fetchTickets', data);
 
   return {
@@ -349,8 +349,6 @@ export function getLocation() {
     });
   })
   .then((userLocation) => {
-    console.log("userLocation:", userLocation);
-    
     return {
       type: GET_LOCATION,
       payload: userLocation,

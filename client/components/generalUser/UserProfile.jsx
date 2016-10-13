@@ -39,7 +39,7 @@ class UserProfile extends React.Component {
           <p>{auction.eventName}</p>
           <p>{moment(auction.eventDate).format('MMMM Do, YYYY [@] h:mma')}</p>
           <p>Number of Tickets: {auction.numTickets}</p>
-          <p>Sale Price: {auction.currentPrice}</p>
+          <p>Sale Price: ${auction.currentPrice}</p>
         </div>
       ))
     );
@@ -63,7 +63,7 @@ class UserProfile extends React.Component {
             <p>{auction.eventName}</p>
             <p>{moment(auction.eventDate).format('MMMM Do, YYYY [@] h:mma')}</p>
             <p>Number of Tickets: {auction.numTickets}</p>
-            <p>Sale Price: {auction.currentPrice}</p>
+            <p>Sale Price: ${auction.currentPrice}</p>
             <RaisedButton
               label="Cancel Auction"
               onClick={() => {
@@ -91,8 +91,10 @@ class UserProfile extends React.Component {
         <h3>Sold:</h3>
         {this.props.userActivity.sellerActivity.sold.map(auction => (
           <div className="activity-item" key={auction.id}>
+            <p>{auction.eventName}</p>
+            <p>{moment(auction.eventDate).format('MMMM Do, YYYY [@] h:mma')}</p>
             <p>Number of Tickets: {auction.numTickets}</p>
-            <p>Sale Price: {auction.currentPrice}</p>
+            <p>Sale Price: ${auction.currentPrice}</p>
           </div>
         ))}
       </div>
@@ -114,8 +116,10 @@ class UserProfile extends React.Component {
         <h3>Expired:</h3>
         {this.props.userActivity.sellerActivity.expired.map(auction => (
           <div className="activity-item" key={auction.id}>
+            <p>{auction.eventName}</p>
+            <p>{moment(auction.eventDate).format('MMMM Do, YYYY [@] h:mma')}</p>
             <p>Number of Tickets: {auction.numTickets}</p>
-            <p>Sale Price: {auction.currentPrice}</p>
+            <p>Sale Price: ${auction.currentPrice}</p>
           </div>
         ))}
       </div>

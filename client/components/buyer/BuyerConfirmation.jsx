@@ -9,20 +9,19 @@ class BuyerConfirmation extends React.Component {
     super(props);
 
     this.state = {
-      error: false
+      error: false,
     };
   }
 
   componentWillMount() {
     if (typeof this.props.auction === 'string') {
-      this.setState({ error: true });
+      this.setState({ error: true, });
     } else {
       this.props.fetchTickets(this.props.user.id, this.props.auction.id);
     }
   }
 
   render() {
-    console.log(this.state.error)
     if (this.state.error) {
       return (
         <div className="auction-view">

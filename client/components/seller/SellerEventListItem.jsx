@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardTitle } from 'material-ui/Card';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -20,7 +20,7 @@ class SellerEventListItem extends React.Component {
 
   render() {
     return (
-      <Card className="list-item" onClick={this.handleClick} style={{borderRadius: '8px'}}>
+      <Card className="list-item" onClick={this.handleClick} style={{ borderRadius: '8px' }}>
         <CardTitle
           title={this.props.event.name}
           subtitle={

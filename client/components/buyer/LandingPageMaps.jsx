@@ -52,12 +52,6 @@ class Maps extends React.Component {
 			marginLeft: '40%',
 			marginTop: '15%',
 		};
-    // if (!this.props.userLocation.latitude) {
-    //   return
-    //   <div>
-    //     <img style={ spinnerStyle } src={ loading } />
-    //   </div>;
-    // }
     const zoomOptions = [{
       "draggable": "false",
       "zoomControl": "false",

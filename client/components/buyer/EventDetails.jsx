@@ -10,8 +10,6 @@ import moment from 'moment';
      this.renderEventImage = this.renderEventImage.bind(this);
    }
 
-
-
   renderEventImage(event) {
     console.log("event images:", event.image);
     if(event.image) {

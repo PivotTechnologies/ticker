@@ -1,16 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-//import {  } from './../actions/index';
 import LandingPageMaps from './buyer/LandingPageMaps.jsx'
 import { browserHistory } from 'react-router';
 
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-    };
   }
 
   componentDidMount() {
@@ -62,7 +58,7 @@ class LandingPage extends React.Component {
         </div>
 
         <div className="footer">
-          <a className="about" onClick={ () => browserHistory.push('/about') }>
+          <a className="about" href="/about">
             <img className="logoFooter" src="../assets/images/pivotLogo.png" />
           </a>
         </div>

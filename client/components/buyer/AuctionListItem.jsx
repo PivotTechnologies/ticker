@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardHeader, CardTitle } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
@@ -26,7 +26,6 @@ class AuctionListItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.auction)
     return (
       <Card className="auction-list-item" onClick={this.handleClick}>
         <CardHeader title={`Sold by: ${this.props.auction.sellerName}`} />

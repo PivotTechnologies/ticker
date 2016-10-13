@@ -115,7 +115,7 @@ class UserProfile extends React.Component {
         <h3>Expired:</h3>
         {this.props.userActivity.sellerActivity.expired.map(auction => (
           <div className="activity-item" key={auction.id}>
-            <p>{auction.EventName}</p>
+            <p>{auction.eventName}</p>
             <p>Number of Tickets: {auction.numTickets}</p>
             <p>Sale Price: ${auction.currentPrice}</p>
           </div>

@@ -8,19 +8,19 @@ module.exports = {
   },
 
   module: {
-    loaders: [
-      {
-        test: /\.jsx$|\.js$/,
-        exclude: /node_modules/,
-        loaders: [
-          'babel-loader?presets[]=es2015&presets[]=react',
-          'eslint-loader'
-        ]
-      }
-    ]
+    // loaders: [
+    //   {
+    //     test: /\.jsx$|\.js$/,
+    //     exclude: /node_modules/,
+    //     loaders: [
+    //       'babel-loader?presets[]=es2015&presets[]=react',
+    //       'eslint-loader'
+    //     ]
+    //   }
+    // ]
   },
 
-  eslint: {
-    configFile: './.eslintrc.js'
-  }
+  // eslint: {
+  //   configFile: './.eslintrc.js'
+  // }
 }

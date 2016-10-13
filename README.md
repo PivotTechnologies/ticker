@@ -8,7 +8,7 @@
 * Need to have Node installed
 * Need to have a SQL compatible database
 
-### To Install or Contribute to ticker:
+### To install or contribute to ticker:
 
 * Fork the repo
 * Clone down locally to your machine
@@ -18,7 +18,7 @@
 npm install
 ```
 
-* Rename the .sample-env file to .env and fill out the required keys
+* Rename the .env.example file to .env and fill out required keys
 
 * Run the server from project root folder
 

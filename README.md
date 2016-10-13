@@ -2,7 +2,7 @@
 
 [ticker](http://www.ticker.herokuapp.com/) is a ticket resale platform based on the Dutch auction system, a method of selling in which the price is reduced until a buyer is found. Our app simplifies and automates the selling process for the ticket holder, while providing last minute deals on tickets for buyers.
 
-![Screenshot](/client/assets/images/ticker.jpg?raw=true "Optional Title")
+![Screenshot](/client/assets/images/ticker.png?raw=true "Optional Title")
 
 ###Prerequisites
 * Need to have Node installed

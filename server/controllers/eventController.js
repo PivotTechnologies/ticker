@@ -6,7 +6,7 @@ module.exports = {
 
     buyerSearch: (req, res) => {
       const results = [];
-      let keywordQuery, dateQuery, locationQuery;
+      var keywordQuery, dateQuery, locationQuery;
 
       if (req.query.query){
         keywordQuery = {
@@ -33,7 +33,7 @@ module.exports = {
       if (req.query.location){
         var city, state;
         if(req.query.location.includes(',')) {
-          let arr = req.query.location.split(',');
+          var arr = req.query.location.split(',');
           city = arr[0]; console.log('city = ', city);
           state = arr[1]; console.log('state', state);
           locationQuery = {
